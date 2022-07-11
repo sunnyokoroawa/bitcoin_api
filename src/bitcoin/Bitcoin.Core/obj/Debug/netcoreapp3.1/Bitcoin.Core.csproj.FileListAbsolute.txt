@@ -1,0 +1,10 @@
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\bin\Debug\netcoreapp3.1\Bitcoin.Core.deps.json
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\bin\Debug\netcoreapp3.1\Bitcoin.Core.dll
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\bin\Debug\netcoreapp3.1\Bitcoin.Core.pdb
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\obj\Debug\netcoreapp3.1\Bitcoin.Core.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\obj\Debug\netcoreapp3.1\Bitcoin.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\obj\Debug\netcoreapp3.1\Bitcoin.Core.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\obj\Debug\netcoreapp3.1\Bitcoin.Core.AssemblyInfo.cs
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\obj\Debug\netcoreapp3.1\Bitcoin.Core.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\obj\Debug\netcoreapp3.1\Bitcoin.Core.dll
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Core\obj\Debug\netcoreapp3.1\Bitcoin.Core.pdb

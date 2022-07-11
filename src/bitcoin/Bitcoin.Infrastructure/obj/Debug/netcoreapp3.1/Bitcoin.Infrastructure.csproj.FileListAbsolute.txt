@@ -1,0 +1,13 @@
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Infrastructure.deps.json
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Infrastructure.dll
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Infrastructure.pdb
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.AssemblyInfo.cs
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.dll
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.pdb
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Core.dll
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Core.pdb
+C:\Users\Admin\Documents\projects\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.csproj.CopyComplete
