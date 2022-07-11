@@ -1,6 +1,8 @@
 # bitcoin_api
 A Bitcoin Restful API 
 
+NOTE: I am still learning #BitcoinCoding, a lot might change as I progress on the bitcoin development journey.
+
 This is a Restful API built on ASP.NET Core.
 
 This is for educational purpose, it assumes you are running your own node.
