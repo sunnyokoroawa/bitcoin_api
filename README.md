@@ -17,5 +17,9 @@ https://twitter.com/NicolasDorier
 
 https://twitter.com/bernard_parah
 
+Anyone is free to contribute to this project as you deem fit.
+
+More editing to follow.
+
 
 
