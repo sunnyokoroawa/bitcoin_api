@@ -1145,5 +1145,77 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
+
+        public async Task<ListWalletsResponse> ListWalletsAsync()
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.listwallets, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ListWalletsResponse>(result.Content);
+             
+            if (response.Error != null)
+                return await Task.FromResult(new ListWalletsResponse
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<LoadWalletResponse>> LoadWalletAsync(LoadWalletRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.Name };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.loadwallet, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<LoadWalletResponse>>(result.Content);
+              
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<LoadWalletResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
     }
 }

@@ -282,5 +282,23 @@ namespace Bitcoin.API.Controller
             Log.Information($"GetBlockchainInfo response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
+
+        [HttpPost]
+        [Route("listWallets")]
+        public async Task<IActionResult> ListWallets()
+        {
+            var response = await client.ListWalletsAsync();
+            Log.Information($"ListWallets response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("loadWallet")]
+        public async Task<IActionResult> LoadWallet(LoadWalletRequest model)
+        {
+            var response = await client.LoadWalletAsync(model);
+            Log.Information($"LoadWallet response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
     }
 }

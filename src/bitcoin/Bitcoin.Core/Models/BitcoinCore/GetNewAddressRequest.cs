@@ -132,6 +132,9 @@ namespace Bitcoin.Core.Models.BitcoinCore
         unloadwallet,
         addpeeraddress,
         savemempool,
+
+        listwallets,
+
     }
 
     public class RPCRequest
