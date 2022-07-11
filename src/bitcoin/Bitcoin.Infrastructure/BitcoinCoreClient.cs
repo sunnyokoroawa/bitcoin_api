@@ -1102,7 +1102,7 @@ namespace Bitcoin.Infrastructure
         }
 
         public async Task<ResponseBTC<GetBlockchainInfoResponse>> GetBlockchainInfoAsync()
-        {
+        { 
             var client = new RestClient(_config["Bitcoin:URL"]);
             var request = new RestRequest();
             request.Method = Method.Post;
