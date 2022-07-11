@@ -1100,6 +1100,50 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
-         
+
+        public async Task<ResponseBTC<GetBlockchainInfoResponse>> GetBlockchainInfoAsync()
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = {   };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.getblockchaininfo, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+             
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<GetBlockchainInfoResponse>>(result.Content);
+
+            if(result.StatusCode != HttpStatusCode.OK)
+                return await Task.FromResult(new ResponseBTC<GetBlockchainInfoResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = result.StatusDescription, 
+                    }
+                });
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<GetBlockchainInfoResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
     }
 }

@@ -43,5 +43,6 @@ namespace Bitcoin.Core.Interfaces
         Task<ResponseBTC<string>> SendRawTransactionAsync(SendRawTransactionRequest model);
         Task<ResponseBTC<string>> CreateSignAndSendRawTransactAsync(CreateSignAndSendRawTransactionViaTxIdRequest model);
         Task<ResponseBTC<string>> DumpPrivKeyAsync(DumpPrivKeyRequest model);
+        Task<ResponseBTC<GetBlockchainInfoResponse>> GetBlockchainInfoAsync();
     }
 }

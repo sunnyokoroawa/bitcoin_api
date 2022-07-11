@@ -273,5 +273,14 @@ namespace Bitcoin.API.Controller
             Log.Information($"DumpPrivKey response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
+
+        [HttpPost]
+        [Route("getBlockchainInfo")]
+        public async Task<IActionResult> GetBlockchainInfo()
+        {
+            var response = await client.GetBlockchainInfoAsync();
+            Log.Information($"GetBlockchainInfo response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
     }
 }
