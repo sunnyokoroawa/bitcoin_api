@@ -776,17 +776,14 @@ namespace Bitcoin.Infrastructure
             request.AddHeader("Content-Type", "text/plain");
 
             //build the objects
-            object[] @params = { model.Hex, JsonConvert.SerializeObject(model.SendAddressPrivateKeys) };
+            object[] @params = { model.Hex, JsonConvert.SerializeObject(model.SendAddressPrivateKeys) }; 
 
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.signrawtransactionwithkey, @params).WriteJSON(writer);
             writer.Flush();
 
-            var body = writer.ToString();
-
-            body = body.Replace(@"\", "");
-            body = body.Replace("\"[", "[");
-            body = body.Replace("]\"", "]");
+            //to remopve unwanted characters in the string 
+            var body = RemoveQuotesFromString(writer.ToString()); 
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -803,7 +800,27 @@ namespace Bitcoin.Infrastructure
                     }
                 });
 
+            if (response.Result.errors.Count > 0)
+                return await Task.FromResult(new ResponseBTC<SignRawTransactionWithKeysResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = $"Declined - There was an error in signning transaction. Kindly confirm the PrivateKeys are correct.",
+                        Code = response.Error.Code
+                    }
+                });
+
             return await Task.FromResult(response);
+        }
+
+
+        private string RemoveQuotesFromString(string body)
+        {
+            body = body.Replace(@"\", "");
+            body = body.Replace("\"[", "[");
+            body = body.Replace("]\"", "]");
+
+            return body;
         }
 
 
@@ -821,8 +838,8 @@ namespace Bitcoin.Infrastructure
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.sendrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
-
-            var body = writer.ToString();
+             
+            var body = RemoveQuotesFromString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -876,7 +893,7 @@ namespace Bitcoin.Infrastructure
                         Error = getRawTransactionResponse.Error
                     });
 
-                //get the address at the index of the txn
+                //get the address at the index of the txn to confirm if it exists
                 var getRawJSONTransactionResponseVout = getRawTransactionResponse.Result.vout.FirstOrDefault(x => x.n == item.vout);
 
                 if (getRawJSONTransactionResponseVout == null)
@@ -891,7 +908,7 @@ namespace Bitcoin.Infrastructure
                 sendAddresses.Add(getRawJSONTransactionResponseVout.scriptPubKey.address);
             }
 
-            //create change address
+            //create change address where the change will be dumped
             var createChangeNewAddressResponse = await GetNewAddressAsync(new GetNewAddressRequest
             { });
 
@@ -901,7 +918,7 @@ namespace Bitcoin.Infrastructure
                     Error = createChangeNewAddressResponse.Error
                 });
 
-            //get the balances of addresses to be spent from 
+            //get all unsoent txns on your node and filter by addresses you want to send from
             var listUnspentResponse = await ListUnspentAsync(new ListUnspentRequest
             {
                 Addresses = sendAddresses,
@@ -921,22 +938,31 @@ namespace Bitcoin.Infrastructure
                     {
                         Message = "Declined - Insufficient funds in address"
                     }
+                }); 
+
+            //to get all the txns
+            var unspentTransactions = listUnspentResponse.Result.Where(u => model.FromTransactions.Select(x=>x.txid).Contains(u.txid)).ToList();
+
+            var totalUnspentAmount = unspentTransactions.Sum(t=>t.amount);
+
+            if(totalUnspentAmount <= 0)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "Declined - Insufficient balance "
+                    }
                 });
 
-            //response.Result = response.Result.Where(x => model.Addresses.Contains(x.address))
-            //     .ToList();
-             
-            //the txns/wallets with the txids
-            var unspentAddresses = listUnspentResponse.Result.Where(u => model.FromTransactions.Select(x=>x.txid).Contains(u.txid)).ToList();
-
-            var totalUnspentAmount = unspentAddresses.Sum(t=>t.amount);
             var sendAmount = model.ToAddress.Amount;
             var changeAndMiningFeeAmount = totalUnspentAmount - sendAmount;
 
+            //calculating fees
             //in * 146 + out * 33 + 10
-            var miningFeeInSATs = (model.FromTransactions.Count * 146) + ((1 + 1) * 33) + 10;
-            var miningFeeInBTC = miningFeeInSATs / 100000000m;
-            var changeAmount = changeAndMiningFeeAmount - miningFeeInBTC;
+            //in - number of inputs
+            //out - number of outputs
+            var txnFeeInBTC = ((model.FromTransactions.Count * 146) + (2 * 33) + 10)/ 100000000m; 
+            var changeAmount = changeAndMiningFeeAmount - txnFeeInBTC;
 
             if (totalUnspentAmount < (sendAmount + changeAmount))
                 return await Task.FromResult(new ResponseBTC<string>
@@ -974,23 +1000,24 @@ namespace Bitcoin.Infrastructure
                         { model.ToAddress.Address , sendAmount },
                     });
 
+            //add the change address
             jArrayReceive.Add(new JObject
                     {
                         { createChangeNewAddressResponse.Result, changeAmount }
                     });
 
             //build the objects
-            object[] @params = { JsonConvert.SerializeObject(jArrayInput), JsonConvert.SerializeObject(jArrayReceive) };
+            //object[] @params = { JsonConvert.SerializeObject(jArrayInput), JsonConvert.SerializeObject(jArrayReceive) };
+
+            //the string manipulation as below may not be need if the objects are just added without JsonConvert.SerializeObject them
+            object[] @params = { jArrayInput, jArrayReceive };
 
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
-
-            var body = writer.ToString();
-            body = body.Replace(@"\", "");
-            body = body.Replace("\"[", "[");
-            body = body.Replace("]\"", "]");
-
+             
+            var body = RemoveQuotesFromString(writer.ToString());
+              
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
 
@@ -1047,9 +1074,9 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
-            body = body.Replace(@"\", "");
-            body = body.Replace("\"[", "[");
-            body = body.Replace("]\"", "]");
+            //body = body.Replace(@"\", "");
+            //body = body.Replace("\"[", "[");
+            //body = body.Replace("]\"", "]");
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -1068,110 +1095,6 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
-
-
-
-
-
-        /*
-        public void Test()
-        {
-            JContainer jArray = new JArray();
-
-            JObject jFromTx = new JObject
-            {
-                { "txid", "0c8a5c69be9689ee5bf70e45d3ae2a1de03ba985eeb3a0e11a55ac69ff99c751" },
-                { "vout", 0 }
-            };
-
-            jArray.Add(jFromTx);
-
-            JObject jToTx = new JObject
-            {
-                { "tb1qwmf682s0qgwt409ts64392p5zh0ljcperhluwl", 0.0001 }
-            };
-
-            JContainer jArray2 = new JArray
-            {
-                jToTx
-            };
-
-            string strFrom = JsonConvert.SerializeObject(jArray);
-            string strTo = JsonConvert.SerializeObject(jArray2);
-
-            var data = JObject.Parse(RequestServer("createrawtransaction", new List<string>() { strFrom, strTo }));
-        }
-
-        public static string RequestServer(string methodName, List<JToken> parameters)
-        {
-            string ServerIp = "http://127.0.0.1:38332";
-            string UserName = "sunfarms.btc";
-            string Password = "password10$";
-
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(ServerIp);
-            webRequest.Credentials = new NetworkCredential(UserName, Password);
-
-            webRequest.ContentType = "application/json-rpc";
-            webRequest.Method = "POST";
-
-            string respVal = string.Empty;
-
-            JObject joe = new JObject();
-            joe.Add(new JProperty("jsonrpc", "1.0"));
-            joe.Add(new JProperty("id", "1"));
-            joe.Add(new JProperty("method", "createrawtransaction"));
-
-            JArray props = new JArray();
-            foreach (var parameter in parameters)
-            {
-                props.Add(parameter);
-            }
-
-            joe.Add(new JProperty("params", props));
-
-            var paramsToString = props.ToString();
-            var paramsToString2 = JsonConvert.SerializeObject(props);
-
-            // serialize json for the request
-            string s = JsonConvert.SerializeObject(joe);
-            byte[] byteArray = Encoding.UTF8.GetBytes(s);
-            webRequest.ContentLength = byteArray.Length;
-
-            Stream dataStream = webRequest.GetRequestStream();
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            dataStream.Close();
-
-            StreamReader streamReader = null;
-            try
-            {
-                WebResponse webResponse = webRequest.GetResponse();
-
-                streamReader = new StreamReader(webResponse.GetResponseStream(), true);
-
-                respVal = streamReader.ReadToEnd();
-                var data = JsonConvert.DeserializeObject(respVal).ToString();
-                return data;
-            }
-            catch (Exception exp)
-            {
-                throw (exp);
-            }
-            finally
-            {
-                if (streamReader != null)
-                {
-                    streamReader.Close();
-                }
-            }
-
-            return string.Empty;
-        }
-
-        public static string RequestServer(string methodName, List<string> parameters)
-        {
-            return RequestServer(methodName, parameters.Select(p => new JValue(p)).ToList<JToken>());
-        }
-        */
-
+         
     }
 }
