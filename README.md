@@ -1,4 +1,4 @@
-# bitcoin_api
+# bitcoin api (swagger enabled)
 A Bitcoin Restful API 
 
 NOTE: I am still learning #BitcoinCoding, a lot might change as I progress on the bitcoin development journey.
