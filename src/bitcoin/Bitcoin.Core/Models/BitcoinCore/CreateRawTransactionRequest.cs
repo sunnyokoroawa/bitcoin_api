@@ -19,8 +19,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         /// </summary>
         //public List<Dictionary<string, decimal>> Outputs { get; set; }
 
-        public List<ReceiveAddressRequest> ReceiveAddresses { get; set; } 
-        public decimal? Fee { get; set; }
+        public List<ReceiveAddressRequest> ReceiveAddresses { get; set; }  
     }
 
     public class ReceiveAddressRequest

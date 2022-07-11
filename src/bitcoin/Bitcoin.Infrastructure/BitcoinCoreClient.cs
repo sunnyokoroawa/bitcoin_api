@@ -698,22 +698,18 @@ namespace Bitcoin.Infrastructure
                 JObject jToTx = new JObject
                     {
                         { outputs.Address, outputs.Amount }
-                    };
-
+                    }; 
                 jArrayReceive.Add(jToTx);
             }
 
             //build the objects
-            object[] @params = { JsonConvert.SerializeObject(jArrayInput), JsonConvert.SerializeObject(jArrayReceive) };
+            object[] @params = { jArrayInput, jArrayReceive };
 
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
-            var body = writer.ToString();
-            body = body.Replace(@"\", "");
-            body = body.Replace("\"[", "[");
-            body = body.Replace("]\"", "]");
+            var body = RemoveQuotesFromString(writer.ToString()); 
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -822,8 +818,7 @@ namespace Bitcoin.Infrastructure
 
             return body;
         }
-
-
+         
         public async Task<ResponseBTC<string>> SendRawTransactionAsync(SendRawTransactionRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
@@ -857,7 +852,64 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
+         
+        private async Task<ResponseBTC<string>> CreateRawTransactionAsync(CreateSignAndSendRawTransactionViaTxIdRequest model, string changeAddress, decimal changeAmount)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
 
+            //build source objects  
+            JContainer jArrayInput = new JArray();
+            foreach (var item in model.FromTransactions)
+            {
+                JObject jFromTx = new JObject
+                {
+                    { "txid", item.txid},
+                    { "vout", item.vout }
+                };
+                jArrayInput.Add(jFromTx);
+            }
+
+            //build outputs  
+            JContainer jArrayReceive = new JArray();
+
+            //add the receive address and change add.
+            jArrayReceive.Add(new JObject
+                    {
+                        { model.ToAddress.Address , model.ToAddress.Amount },
+                    });
+
+            //add the change address
+            jArrayReceive.Add(new JObject
+                    {
+                        { changeAddress, changeAmount }
+                    });
+             
+            //the string manipulation as below may not be need if the objects are just added without JsonConvert.SerializeObject them
+            object[] @params = { jArrayInput, jArrayReceive };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = RemoveQuotesFromString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var createRawRransactionResponse = JsonConvert.DeserializeObject<ResponseBTC<string>>(result.Content);
+
+            if (createRawRransactionResponse.Error != null)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = createRawRransactionResponse.Error
+                });
+
+            return await Task.FromResult(createRawRransactionResponse);
+        }
 
         public async Task<ResponseBTC<string>> CreateSignAndSendRawTransactAsync(CreateSignAndSendRawTransactionViaTxIdRequest model)
         {
@@ -907,17 +959,7 @@ namespace Bitcoin.Infrastructure
 
                 sendAddresses.Add(getRawJSONTransactionResponseVout.scriptPubKey.address);
             }
-
-            //create change address where the change will be dumped
-            var createChangeNewAddressResponse = await GetNewAddressAsync(new GetNewAddressRequest
-            { });
-
-            if (createChangeNewAddressResponse.Error != null)
-                return await Task.FromResult(new ResponseBTC<string>
-                {
-                    Error = createChangeNewAddressResponse.Error
-                });
-
+             
             //get all unsoent txns on your node and filter by addresses you want to send from
             var listUnspentResponse = await ListUnspentAsync(new ListUnspentRequest
             {
@@ -973,63 +1015,26 @@ namespace Bitcoin.Infrastructure
                     }
                 });
 
-            var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            //create change address where the change will be dumped
+            var createChangeNewAddressResponse = await GetNewAddressAsync(new GetNewAddressRequest
+            { });
 
-            //build source objects  
-            JContainer jArrayInput = new JArray();
-            foreach (var item in model.FromTransactions)
-            {
-                JObject jFromTx = new JObject
+            if (createChangeNewAddressResponse.Error != null)
+                return await Task.FromResult(new ResponseBTC<string>
                 {
-                    { "txid", item.txid},
-                    { "vout", item.vout }
-                };
-                jArrayInput.Add(jFromTx);
-            }
-
-            //build outputs  
-            JContainer jArrayReceive = new JArray();
-
-            //add the receive address and change add.
-            jArrayReceive.Add(new JObject
-                    {
-                        { model.ToAddress.Address , sendAmount },
-                    });
-
-            //add the change address
-            jArrayReceive.Add(new JObject
-                    {
-                        { createChangeNewAddressResponse.Result, changeAmount }
-                    });
-
-            //build the objects
-            //object[] @params = { JsonConvert.SerializeObject(jArrayInput), JsonConvert.SerializeObject(jArrayReceive) };
-
-            //the string manipulation as below may not be need if the objects are just added without JsonConvert.SerializeObject them
-            object[] @params = { jArrayInput, jArrayReceive };
-
-            var writer = new StringWriter();
-            new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
-            writer.Flush();
+                    Error = createChangeNewAddressResponse.Error
+                });
              
-            var body = RemoveQuotesFromString(writer.ToString());
+            //create the raw txn
+            var createRawRransactionResponse = await CreateRawTransactionAsync(model, createChangeNewAddressResponse.Result, changeAmount);
               
-            request.AddParameter("text/plain", body, ParameterType.RequestBody);
-            var result = await client.ExecuteAsync(request);
-
-            var createRawRransactionResponse = JsonConvert.DeserializeObject<ResponseBTC<string>>(result.Content);
-
             if (createRawRransactionResponse.Error != null)
                 return await Task.FromResult(new ResponseBTC<string>
                 {
                     Error = createRawRransactionResponse.Error
                 });
 
-            //sign
+            //sign the raw txn
             var signTransactionResponse = await SignRawTransactionAsync(new SignRawTransactionWithKeysRequest
             {
                 Hex = createRawRransactionResponse.Result,
