@@ -14,6 +14,11 @@ namespace Bitcoin.Core.Models.BitcoinCore
         public List<FromTransaction> FromTransactions { get; set; }
 
         public ReceiveAddressRequest ToAddress { get; set; } 
+
+        /// <summary>
+        /// this is in BTC
+        /// </summary>
+        public decimal? Fees{ get; set; } 
     }
 
     public class FromTransaction

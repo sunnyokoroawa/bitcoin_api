@@ -1003,8 +1003,8 @@ namespace Bitcoin.Infrastructure
             //in * 146 + out * 33 + 10
             //in - number of inputs
             //out - number of outputs
-            var txnFeeInBTC = ((model.FromTransactions.Count * 146) + (2 * 33) + 10)/ 100000000m; 
-            var changeAmount = changeAndMiningFeeAmount - txnFeeInBTC;
+            var txnFeeInBTC = model.Fees.HasValue ? model.Fees : ((model.FromTransactions.Count * 146) + (2 * 33) + 10)/ 100000000m; 
+            var changeAmount = changeAndMiningFeeAmount - txnFeeInBTC; 
 
             if (totalUnspentAmount < (sendAmount + changeAmount))
                 return await Task.FromResult(new ResponseBTC<string>
