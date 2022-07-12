@@ -130,3 +130,12 @@ C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\obj\Debug\
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\obj\Debug\netcoreapp3.1\Bitcoin.API.dll
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\obj\Debug\netcoreapp3.1\Bitcoin.API.pdb
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\obj\Debug\netcoreapp3.1\Bitcoin.API.genruntimeconfig.cache
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\QRCoder.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll

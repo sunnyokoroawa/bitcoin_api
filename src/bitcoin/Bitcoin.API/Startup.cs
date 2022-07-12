@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Core;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -115,6 +117,23 @@ namespace Bitcoin.API
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+             
+
+            //17 3 2021 - this is to allow static files to be plublicly accessible
+            //file path now looks like this https://localhost:5001/Photos/Users/OIG-RKCSS4YWFKBH.png
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(), "Docs")),
+                RequestPath = "/Docs"
+            });
+            //Enable directory browsing
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                            Path.Combine(Directory.GetCurrentDirectory(), "Docs")),
+                RequestPath = "/Docs"
+            });
 
             app.UseDeveloperExceptionPage();
             app.UseSwagger();

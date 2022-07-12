@@ -4,24 +4,31 @@ using Bitcoin.Core.Models.BitcoinCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using QRCoder;
 using RestSharp;
+using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace Bitcoin.Infrastructure
 {
     public class BitcoinCoreClient : IBitcoinCoreClient
     {
         private readonly IConfiguration _config;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BitcoinCoreClient(IConfiguration config)
+        public BitcoinCoreClient(IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
             this._config = config;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<ResponseBTC<string>> GetNewAddressAsync(GetNewAddressRequest model)
@@ -698,7 +705,7 @@ namespace Bitcoin.Infrastructure
                 JObject jToTx = new JObject
                     {
                         { outputs.Address, outputs.Amount }
-                    }; 
+                    };
                 jArrayReceive.Add(jToTx);
             }
 
@@ -709,7 +716,7 @@ namespace Bitcoin.Infrastructure
             new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
-            var body = RemoveQuotesFromString(writer.ToString()); 
+            var body = RemoveQuotesFromString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -772,14 +779,14 @@ namespace Bitcoin.Infrastructure
             request.AddHeader("Content-Type", "text/plain");
 
             //build the objects
-            object[] @params = { model.Hex, JsonConvert.SerializeObject(model.SendAddressPrivateKeys) }; 
+            object[] @params = { model.Hex, JsonConvert.SerializeObject(model.SendAddressPrivateKeys) };
 
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.signrawtransactionwithkey, @params).WriteJSON(writer);
             writer.Flush();
 
             //to remopve unwanted characters in the string 
-            var body = RemoveQuotesFromString(writer.ToString()); 
+            var body = RemoveQuotesFromString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -818,7 +825,7 @@ namespace Bitcoin.Infrastructure
 
             return body;
         }
-         
+
         public async Task<ResponseBTC<string>> SendRawTransactionAsync(SendRawTransactionRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
@@ -833,7 +840,7 @@ namespace Bitcoin.Infrastructure
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.sendrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
-             
+
             var body = RemoveQuotesFromString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
@@ -852,7 +859,7 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
-         
+
         private async Task<ResponseBTC<string>> CreateRawTransactionAsync(CreateSignAndSendRawTransactionViaTxIdRequest model, string changeAddress, decimal changeAmount)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
@@ -887,7 +894,7 @@ namespace Bitcoin.Infrastructure
                     {
                         { changeAddress, changeAmount }
                     });
-             
+
             //the string manipulation as below may not be need if the objects are just added without JsonConvert.SerializeObject them
             object[] @params = { jArrayInput, jArrayReceive };
 
@@ -959,7 +966,7 @@ namespace Bitcoin.Infrastructure
 
                 sendAddresses.Add(getRawJSONTransactionResponseVout.scriptPubKey.address);
             }
-             
+
             //get all unsoent txns on your node and filter by addresses you want to send from
             var listUnspentResponse = await ListUnspentAsync(new ListUnspentRequest
             {
@@ -980,14 +987,14 @@ namespace Bitcoin.Infrastructure
                     {
                         Message = "Declined - Insufficient funds in address"
                     }
-                }); 
+                });
 
             //to get all the txns
-            var unspentTransactions = listUnspentResponse.Result.Where(u => model.FromTransactions.Select(x=>x.txid).Contains(u.txid)).ToList();
+            var unspentTransactions = listUnspentResponse.Result.Where(u => model.FromTransactions.Select(x => x.txid).Contains(u.txid)).ToList();
 
-            var totalUnspentAmount = unspentTransactions.Sum(t=>t.amount);
+            var totalUnspentAmount = unspentTransactions.Sum(t => t.amount);
 
-            if(totalUnspentAmount <= 0)
+            if (totalUnspentAmount <= 0)
                 return await Task.FromResult(new ResponseBTC<string>
                 {
                     Error = new BitcoinError
@@ -1003,8 +1010,8 @@ namespace Bitcoin.Infrastructure
             //in * 146 + out * 33 + 10
             //in - number of inputs
             //out - number of outputs
-            var txnFeeInBTC = model.Fees.HasValue ? model.Fees : ((model.FromTransactions.Count * 146) + (2 * 33) + 10)/ 100000000m; 
-            var changeAmount = changeAndMiningFeeAmount - txnFeeInBTC; 
+            var txnFeeInBTC = model.Fees.HasValue ? model.Fees.Value : ((model.FromTransactions.Count * 146) + (2 * 33) + 10) / 100000000m;
+            var changeAmount = changeAndMiningFeeAmount - txnFeeInBTC;
 
             if (totalUnspentAmount < (sendAmount + changeAmount))
                 return await Task.FromResult(new ResponseBTC<string>
@@ -1024,10 +1031,10 @@ namespace Bitcoin.Infrastructure
                 {
                     Error = createChangeNewAddressResponse.Error
                 });
-             
+
             //create the raw txn
             var createRawRransactionResponse = await CreateRawTransactionAsync(model, createChangeNewAddressResponse.Result, changeAmount);
-              
+
             if (createRawRransactionResponse.Error != null)
                 return await Task.FromResult(new ResponseBTC<string>
                 {
@@ -1102,7 +1109,7 @@ namespace Bitcoin.Infrastructure
         }
 
         public async Task<ResponseBTC<GetBlockchainInfoResponse>> GetBlockchainInfoAsync()
-        { 
+        {
             var client = new RestClient(_config["Bitcoin:URL"]);
             var request = new RestRequest();
             request.Method = Method.Post;
@@ -1110,26 +1117,26 @@ namespace Bitcoin.Infrastructure
             request.AddHeader("Content-Type", "text/plain");
 
             //build the objects
-            object[] @params = {   };
+            object[] @params = { };
 
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.getblockchaininfo, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
-             
+
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
 
             var response = JsonConvert.DeserializeObject<ResponseBTC<GetBlockchainInfoResponse>>(result.Content);
 
-            if(result.StatusCode != HttpStatusCode.OK)
+            if (result.StatusCode != HttpStatusCode.OK)
                 return await Task.FromResult(new ResponseBTC<GetBlockchainInfoResponse>
                 {
                     Error = new BitcoinError
                     {
-                        Message = result.StatusDescription, 
+                        Message = result.StatusDescription,
                     }
                 });
 
@@ -1168,7 +1175,7 @@ namespace Bitcoin.Infrastructure
             var result = await client.ExecuteAsync(request);
 
             var response = JsonConvert.DeserializeObject<ListWalletsResponse>(result.Content);
-             
+
             if (response.Error != null)
                 return await Task.FromResult(new ListWalletsResponse
                 {
@@ -1204,7 +1211,7 @@ namespace Bitcoin.Infrastructure
             var result = await client.ExecuteAsync(request);
 
             var response = JsonConvert.DeserializeObject<ResponseBTC<LoadWalletResponse>>(result.Content);
-              
+
             if (response.Error != null)
                 return await Task.FromResult(new ResponseBTC<LoadWalletResponse>
                 {
@@ -1216,6 +1223,58 @@ namespace Bitcoin.Infrastructure
                 });
 
             return await Task.FromResult(response);
+        }
+
+        public async Task<Response<string>> GenerateQRCodeAsync(GenerateQRCodeRequest model)
+        {
+            var validateAddressResponse = await ValidateAddressAsync(new ValidateAddressRequest
+            {
+                Address = model.BitcoinAddress
+            });
+
+            if (validateAddressResponse.Error != null)
+                return await Task.FromResult(new Response<string>
+                {
+                    Message = validateAddressResponse.Error.Error
+                });
+
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(model.BitcoinAddress, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+
+            // logo path
+            var logopath = Path.Combine(
+                       Directory.GetCurrentDirectory(), $"{"Docs/QR"}", "btclogo.PNG");
+
+            Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile(logopath));
+
+            var fileName = $"{model.BitcoinAddress}.jpg";
+
+            var fileFolder = "Docs/QR";
+
+            var savePhotoPath = Path.Combine(
+                       Directory.GetCurrentDirectory(), $"{fileFolder}", fileName);
+
+            try
+            {
+                qrCodeImage.Save(savePhotoPath);
+            }
+
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, $"Error {ex.Message}");
+            }
+             
+            var request = _httpContextAccessor.HttpContext.Request; 
+
+            var qrImgPath = $"{request.Scheme}://{request.Host}/{fileFolder}/{fileName}";
+
+            return await Task.FromResult(new Response<string>
+            {
+                Success = true,
+                Message = "Request Succesful",
+                Data = qrImgPath
+            });
         }
     }
 }

@@ -300,5 +300,14 @@ namespace Bitcoin.API.Controller
             Log.Information($"LoadWallet response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
+
+        [HttpPost]
+        [Route("generateQRCode")]
+        public async Task<IActionResult> GenerateQRCode(GenerateQRCodeRequest model)
+        {
+            var response = await client.GenerateQRCodeAsync(model);
+            Log.Information($"GenerateQRCode response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
     }
 }

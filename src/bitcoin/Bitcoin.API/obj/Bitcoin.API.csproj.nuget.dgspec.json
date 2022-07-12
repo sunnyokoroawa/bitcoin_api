@@ -55,6 +55,10 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[2.11.0, )"
@@ -154,6 +158,10 @@
               "target": "Package",
               "version": "[1.7.30, )"
             },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[2.11.0, )"
@@ -222,6 +230,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
+            },
             "RestSharp": {
               "target": "Package",
               "version": "[108.0.1, )"

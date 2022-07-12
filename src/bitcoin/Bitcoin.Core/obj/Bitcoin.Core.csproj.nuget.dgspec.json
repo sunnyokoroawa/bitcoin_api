@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[1.7.30, )"
             },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.4.3, )"
+            },
             "Serilog": {
               "target": "Package",
               "version": "[2.11.0, )"

@@ -46,5 +46,6 @@ namespace Bitcoin.Core.Interfaces
         Task<ResponseBTC<GetBlockchainInfoResponse>> GetBlockchainInfoAsync();
         Task<ListWalletsResponse> ListWalletsAsync();
         Task<ResponseBTC<LoadWalletResponse>> LoadWalletAsync(LoadWalletRequest model);
+        Task<Response<string>> GenerateQRCodeAsync(GenerateQRCodeRequest model);
     }
 }
