@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Core;
@@ -17,6 +18,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Bitcoin.API
@@ -29,6 +31,16 @@ namespace Bitcoin.API
         }
 
         public IConfiguration Configuration { get; }
+
+        static string XmlCommentsFilePath
+        {
+            get
+            {
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                return Path.Combine(basePath, fileName);
+            }
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -55,7 +67,7 @@ namespace Bitcoin.API
             //    .CreateLogger();
 
             httpClientHandler.ServerCertificateCustomValidationCallback = (source, certificate, chain, sslPolicyError) => true;
-              
+
             //logging to be injected
             services.AddSingleton(Log.Logger);
 
@@ -73,10 +85,10 @@ namespace Bitcoin.API
             var path = Configuration["Serilog:WriteTo:1:Args:Path"];
             Log.Information(conn);
 
-            services.AddSingleton<IConfiguration>(Configuration); 
+            services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<IBitcoinCoreClient, BitcoinCoreClient>();
-             
-            
+
+
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddDistributedMemoryCache();
@@ -85,10 +97,16 @@ namespace Bitcoin.API
             //HttpContext injection
             services.AddHttpContextAccessor();
 
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bitcoin API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Bitcoin API", Version = "v1" });
+                options.IncludeXmlComments(XmlCommentsFilePath);
             });
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bitcoin API", Version = "v1" });
+            //});
 
             services.AddMvc(o => { o.Filters.Add<GlobalExceptionFilter>(); })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -117,7 +135,7 @@ namespace Bitcoin.API
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-             
+
 
             //17 3 2021 - this is to allow static files to be plublicly accessible
             //file path now looks like this https://localhost:5001/Photos/Users/OIG-RKCSS4YWFKBH.png
@@ -156,7 +174,7 @@ namespace Bitcoin.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name:"default", pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

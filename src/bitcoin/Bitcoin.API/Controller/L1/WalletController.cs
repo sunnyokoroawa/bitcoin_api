@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bitcoin.API.Controller
 {
-    [Route("api/v22/[controller]")]
+    [Route("api/core/v22/[controller]")]
     [ApiController]
     public class WalletController : ControllerBase
     {
@@ -204,11 +204,15 @@ namespace Bitcoin.API.Controller
             return await Task.FromResult(new JsonResult(response));
         }
 
+         
+        /// <remarks>
+        /// address_type: “legacy”, “p2sh-segwit”, and “bech32” and all case sensitive
+        /// </remarks> 
         [HttpPost]
-        [Route("listWalletDir")] //used for change address ONLY
-        public async Task<IActionResult> GetRawChangeAddress()
+        [Route("getRawChangeAddress")] //used for change address ONLY
+        public async Task<IActionResult> GetRawChangeAddress(GetRawChangeAddressRequest model)
         {
-            var response = await client.GetRawChangeAddressAsync();
+            var response = await client.GetRawChangeAddressAsync(model);
             Log.Information($"GetRawChangeAddress response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }

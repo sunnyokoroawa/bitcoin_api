@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bitcoin.API</name>
+    </assembly>
+    <members>
+        <member name="M:Bitcoin.API.Controller.BitcoinController.GetTransaction3rdParty(Bitcoin.Core.Models.BitcoinCore.GetTransaction3rdPartyRequest)">
+            <summary>
+            relies on a 3rd party to get txns
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitcoin.API.Controller.BitcoinController.GetTxOut(Bitcoin.Core.Models.BitcoinCore.GetTxOutRequest)">
+            <summary>
+            this is used to get the value of UTXO in a wallet address
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitcoin.API.Controller.BitcoinController.GetBlock(Bitcoin.Core.Models.BitcoinCore.GetBlockRequest)">
+            <summary>
+            this gets UTXOs by supplying the address
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitcoin.API.Controller.WalletController.GetTransaction(Bitcoin.Core.Models.BitcoinCore.GetTransactionRequest)">
+            <summary>
+            getTransaction only works for txns treated from your own node. The Bitcoin Core desktop
+            wallet does not store the whole txns, it only stores txns done on the node (inflows and outflows) in
+            the system's memory.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitcoin.API.Controller.WalletController.GetRawChangeAddress(Bitcoin.Core.Models.BitcoinCore.GetRawChangeAddressRequest)">
+            <remarks>
+            address_type: “legacy”, “p2sh-segwit”, and “bech32” and all case sensitive
+            </remarks> 
+        </member>
+    </members>
+</doc>

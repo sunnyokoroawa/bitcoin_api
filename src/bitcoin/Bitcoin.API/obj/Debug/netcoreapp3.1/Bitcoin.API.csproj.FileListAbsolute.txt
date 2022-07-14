@@ -139,3 +139,5 @@ C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\Bitcoin.API.xml
+C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll
