@@ -734,8 +734,7 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
-
-
+         
         public async Task<ResponseBTC<DecodeRawTransactionResponse>> DecodeRawTransactionAsync(DecodeRawTransactionRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
@@ -1023,17 +1022,18 @@ namespace Bitcoin.Infrastructure
                 });
 
             //create change address where the change will be dumped
-            var createChangeNewAddressResponse = await GetNewAddressAsync(new GetNewAddressRequest
-            { });
+            var createRawChangeAddressResponse = await GetRawChangeAddressAsync(new GetRawChangeAddressRequest
+            {
+            });
 
-            if (createChangeNewAddressResponse.Error != null)
+            if (createRawChangeAddressResponse.Error != null)
                 return await Task.FromResult(new ResponseBTC<string>
                 {
-                    Error = createChangeNewAddressResponse.Error
+                    Error = createRawChangeAddressResponse.Error
                 });
 
             //create the raw txn
-            var createRawRransactionResponse = await CreateRawTransactionAsync(model, createChangeNewAddressResponse.Result, changeAmount);
+            var createRawRransactionResponse = await CreateRawTransactionAsync(model, createRawChangeAddressResponse.Result, changeAmount);
 
             if (createRawRransactionResponse.Error != null)
                 return await Task.FromResult(new ResponseBTC<string>
@@ -1068,46 +1068,7 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(sendRawTransactionResponse);
         }
-
-        public async Task<ResponseBTC<string>> DumpPrivKeyAsync(DumpPrivKeyRequest model)
-        {
-            var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
-
-            //build the objects
-            object[] @params = { model.Address };
-
-            var writer = new StringWriter();
-            new RPCRequest(RPCOperations.dumpprivkey, @params).WriteJSON(writer);
-            writer.Flush();
-
-            var body = writer.ToString();
-
-            //body = body.Replace(@"\", "");
-            //body = body.Replace("\"[", "[");
-            //body = body.Replace("]\"", "]");
-
-            request.AddParameter("text/plain", body, ParameterType.RequestBody);
-            var result = await client.ExecuteAsync(request);
-
-            var response = JsonConvert.DeserializeObject<ResponseBTC<string>>(result.Content);
-
-            if (response.Error != null)
-                return await Task.FromResult(new ResponseBTC<string>
-                {
-                    Error = new BitcoinError
-                    {
-                        Message = response.Error.Message,
-                        Code = response.Error.Code
-                    }
-                });
-
-            return await Task.FromResult(response);
-        }
-
+         
         public async Task<ResponseBTC<GetBlockchainInfoResponse>> GetBlockchainInfoAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
@@ -1225,21 +1186,21 @@ namespace Bitcoin.Infrastructure
             return await Task.FromResult(response);
         }
 
-        public async Task<Response<string>> GenerateQRCodeAsync(GenerateQRCodeRequest model)
+        public async Task<Response<GenerateQRCodeResponse>> GenerateQRCodeAsync(GenerateQRCodeRequest model)
         {
             var validateAddressResponse = await ValidateAddressAsync(new ValidateAddressRequest
             {
-                Address = model.BitcoinAddress
+                Address = model.Address
             });
 
             if (validateAddressResponse.Error != null)
-                return await Task.FromResult(new Response<string>
+                return await Task.FromResult(new Response<GenerateQRCodeResponse>
                 {
                     Message = validateAddressResponse.Error.Error
                 });
 
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(model.BitcoinAddress, QRCodeGenerator.ECCLevel.Q);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(model.Address, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
 
             // logo path
@@ -1248,7 +1209,7 @@ namespace Bitcoin.Infrastructure
 
             Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile(logopath));
 
-            var fileName = $"{model.BitcoinAddress}.jpg";
+            var fileName = $"{model.Address}.jpg";
 
             var fileFolder = "Docs/QR";
 
@@ -1264,17 +1225,364 @@ namespace Bitcoin.Infrastructure
             {
                 Log.Fatal(ex, $"Error {ex.Message}");
             }
-             
-            var request = _httpContextAccessor.HttpContext.Request; 
 
-            var qrImgPath = $"{request.Scheme}://{request.Host}/{fileFolder}/{fileName}";
+            var request = _httpContextAccessor.HttpContext.Request;
 
-            return await Task.FromResult(new Response<string>
+            var filePath = $"{fileFolder}/{fileName}";
+            var qrImgPath = $"{request.Scheme}://{request.Host}/{filePath}";
+            //var qrImgPath = $"{request.Scheme}://{request.Host}/{fileFolder}/{fileName}";
+
+            return await Task.FromResult(new Response<GenerateQRCodeResponse>
             {
                 Success = true,
                 Message = "Request Succesful",
-                Data = qrImgPath
+                Data = new GenerateQRCodeResponse
+                {
+                    ImageURL = qrImgPath,
+                    Address = model.Address,
+                    ImageBas64String = ConvertToBase64String(filePath)
+                }
             });
+        }
+
+        private string ConvertToBase64String(string imagePath)
+        {
+            using (Image image = Image.FromFile(imagePath))
+            {
+                using (MemoryStream m = new MemoryStream())
+                {
+                    image.Save(m, image.RawFormat);
+                    byte[] imageBytes = m.ToArray();
+
+                    // Convert byte[] to Base64 String
+                    string base64String = Convert.ToBase64String(imageBytes);
+                    return base64String;
+                }
+            }
+        }
+
+        public async Task<ResponseBTC<AbandonTransactionResponse>> AbandonTransactionAsync(AbandonTransactionRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.TxId };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.abandontransaction, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+             
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<AbandonTransactionResponse>>(result.Content);
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<AbandonTransactionResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<string>> DumpPrivKeyAsync(DumpPrivKeyRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.Address };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.dumpprivkey, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<string>>(result.Content);
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<CreateWalletResponse>> CreateWalletAsync(CreateWalletRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.Name };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.createwallet, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<CreateWalletResponse>>(result.Content);
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<CreateWalletResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<DumpWalletResponse>> DumpWalletAsync(DumpWalletRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.FileName };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.dumpwallet, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<DumpWalletResponse>>(result.Content);
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<DumpWalletResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<BumpFeeResponse>> BumpFeeAsync(BumpFeeRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.TxId };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.bumpfee, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<BumpFeeResponse>>(result.Content);
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<BumpFeeResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<GetWalletInfoResponse>> GetWalletInfoAsync()
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.getwalletinfo, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<GetWalletInfoResponse>>(result.Content);
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<GetWalletInfoResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<UnloadWalletResponse>> UnloadwalletAsync(UnloadWalletRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.Name };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.unloadwallet, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<UnloadWalletResponse>>(result.Content);
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<UnloadWalletResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<ListWalletDirResponse>> ListWalletDirAsync()
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = {   };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.listwalletdir, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<ListWalletDirResponse>>(result.Content);
+
+            if (response.Error != null)
+                return await Task.FromResult(new ResponseBTC<ListWalletDirResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<string>> GetRawChangeAddressAsync(GetRawChangeAddressRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.address_type };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.getrawchangeaddress, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+             
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<string>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            if (response.Result == null)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
         }
     }
 }

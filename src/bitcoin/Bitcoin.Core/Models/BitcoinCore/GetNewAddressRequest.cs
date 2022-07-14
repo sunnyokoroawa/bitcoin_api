@@ -134,6 +134,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         savemempool,
 
         listwallets,
+        listwalletdir,
 
     }
 

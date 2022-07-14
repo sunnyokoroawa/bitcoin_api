@@ -22,63 +22,7 @@ namespace Bitcoin.API.Controller
             this.client = client;
         }
 
-        [HttpPost]
-        [Route("getNewAddress")]
-        public async Task<IActionResult> GetNewAddress(GetNewAddressRequest model)
-        {
-            Log.Information($"getNewAddress request {JsonConvert.SerializeObject(model)}");
-            var response = await client.GetNewAddressAsync(model);
-            Log.Information($"getNewAddress response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-        [HttpPost]
-        [Route("getBalance")]
-        public async Task<IActionResult> getBalance()
-        {
-            var response = await client.GetBalanceAsync();
-            Log.Information($"getBalance response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-        [HttpPost]
-        [Route("getBalances")]
-        public async Task<IActionResult> getBalances()
-        {
-            var response = await client.GetBalancesAsync();
-            Log.Information($"getBalances response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-        [HttpPost]
-        [Route("getAddressInfo")]
-        public async Task<IActionResult> GetAddressInfo(GetAddressInfoRequest model)
-        {
-            Log.Information($"getAddressInfo request {JsonConvert.SerializeObject(model)}");
-            var response = await client.GetAddressInfoAsync(model);
-            Log.Information($"getAddressInfo response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-        [HttpPost]
-        [Route("listReceivedByAddress")]
-        public async Task<IActionResult> ListReceivedByAddress()
-        {
-            var response = await client.ListReceivedByAddressAsync();
-            Log.Information($"ListReceivedByAddress response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-        [HttpPost]
-        [Route("getReceivedByAddress")]
-        public async Task<IActionResult> GetReceivedByAddress(GetReceivedByAddressRequest model)
-        {
-            Log.Information($"GetReceivedByAddress request {JsonConvert.SerializeObject(model)}");
-            var response = await client.GetReceivedByAddressAsync(model);
-            Log.Information($"GetReceivedByAddress response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
+        
         [HttpPost]
         [Route("getAddressInfo3rdParty")]
         public async Task<IActionResult> GetAddressInfo3rdParty(GetAddressInfo3rdPartyRequest model)
@@ -107,23 +51,7 @@ namespace Bitcoin.API.Controller
             Log.Information($"GetRecommendedFee response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
-
-        /// <summary>
-        /// getTransaction only works for txns treated from your own node. The Bitcoin Core desktop
-        /// wallet does not store the whole txns, it only stores txns done on the node (inflows and outflows) in
-        /// the system's memory.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("getTransaction")]
-        public async Task<IActionResult> GetTransaction(GetTransactionRequest model)
-        {
-            var response = await client.GetTransactionAsync(model);
-            Log.Information($"getTransaction response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
+         
         /// <summary>
         /// relies on a 3rd party to get txns
         /// </summary>
@@ -166,15 +94,7 @@ namespace Bitcoin.API.Controller
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("listUnspent")]
-        public async Task<IActionResult> ListUnspent(ListUnspentRequest model)
-        {
-            var response = await client.ListUnspentAsync(model);
-            Log.Information($"ListUnspent response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
+       
         [HttpPost]
         [Route("getBlock")]
         public async Task<IActionResult> GetBlock(GetBlockRequest model)
@@ -238,15 +158,7 @@ namespace Bitcoin.API.Controller
             return await Task.FromResult(new JsonResult(response));
         }
          
-        [HttpPost]
-        [Route("signRawTransaction")]
-        public async Task<IActionResult> SignRawTransaction(SignRawTransactionWithKeysRequest model)
-        {
-            var response = await client.SignRawTransactionAsync(model);
-            Log.Information($"SignRawTransaction response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
+       
         [HttpPost]
         [Route("SendRawTransaction")]
         public async Task<IActionResult> SendRawTransaction(SendRawTransactionRequest model)
@@ -265,15 +177,7 @@ namespace Bitcoin.API.Controller
             return await Task.FromResult(new JsonResult(response));
         }
 
-        [HttpPost]
-        [Route("dumpPrivKey")]
-        public async Task<IActionResult> DumpPrivKey(DumpPrivKeyRequest model)
-        {
-            var response = await client.DumpPrivKeyAsync(model);
-            Log.Information($"DumpPrivKey response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
+        
         [HttpPost]
         [Route("getBlockchainInfo")]
         public async Task<IActionResult> GetBlockchainInfo()
@@ -292,15 +196,7 @@ namespace Bitcoin.API.Controller
             return await Task.FromResult(new JsonResult(response));
         }
 
-        [HttpPost]
-        [Route("loadWallet")]
-        public async Task<IActionResult> LoadWallet(LoadWalletRequest model)
-        {
-            var response = await client.LoadWalletAsync(model);
-            Log.Information($"LoadWallet response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
+       
         [HttpPost]
         [Route("generateQRCode")]
         public async Task<IActionResult> GenerateQRCode(GenerateQRCodeRequest model)
