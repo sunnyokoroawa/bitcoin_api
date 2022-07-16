@@ -37,7 +37,12 @@
         <member name="M:Bitcoin.API.Controller.WalletController.GetRawChangeAddress(Bitcoin.Core.Models.BitcoinCore.GetRawChangeAddressRequest)">
             <remarks>
             address_type: “legacy”, “p2sh-segwit”, and “bech32” and all case sensitive
-            </remarks> 
+            
+                {
+                   "address_type": "bech32"
+                }
+                
+            </remarks>
         </member>
     </members>
 </doc>

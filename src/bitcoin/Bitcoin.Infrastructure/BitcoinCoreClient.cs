@@ -1584,5 +1584,215 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
+
+        public async Task<ResponseBTC<BackupWalletResponse>> BackupWalletAsync(BackupWalletRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.Destination};
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.backupwallet, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<BackupWalletResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<BackupWalletResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            if (response.Result == null)
+                return await Task.FromResult(new ResponseBTC<BackupWalletResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<WalletlockResponse>> WalletlockAsync(WalletlockRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.Passphrase };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.walletlock, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<WalletlockResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<WalletlockResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            if (response.Result == null)
+                return await Task.FromResult(new ResponseBTC<WalletlockResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<WalletPassphraseResponse>> WalletPassphraseAsync(WalletPassphraseRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.PassPhrase, model.Timeout };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.walletpassphrase, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<WalletPassphraseResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<WalletPassphraseResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            if (response.Result == null)
+                return await Task.FromResult(new ResponseBTC<WalletPassphraseResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<string>> SignMessageAsync(SignMessageRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.Address, model.Message };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.signmessage, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<string>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            if (response.Result == null)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = response.Error.Message,
+                        Code = response.Error.Code
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<bool>> VerifySignedMessageAsync(VerifySignedMessageRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //build the objects
+            object[] @params = { model.Address, model.Signature, model.Message };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.verifymessage, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<bool>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<bool>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                }); 
+
+            return await Task.FromResult(response);
+        }
     }
 }

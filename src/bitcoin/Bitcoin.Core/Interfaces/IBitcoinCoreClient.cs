@@ -54,7 +54,13 @@ namespace Bitcoin.Core.Interfaces
         Task<ResponseBTC<GetWalletInfoResponse>> GetWalletInfoAsync();
         Task<ResponseBTC<UnloadWalletResponse>> UnloadwalletAsync(UnloadWalletRequest model);
         Task<ResponseBTC<ListWalletDirResponse>> ListWalletDirAsync();
-
         Task<ResponseBTC<string>> GetRawChangeAddressAsync(GetRawChangeAddressRequest model);
+
+        Task<ResponseBTC<BackupWalletResponse>> BackupWalletAsync(BackupWalletRequest model);
+        Task<ResponseBTC<WalletlockResponse>> WalletlockAsync(WalletlockRequest model);
+        Task<ResponseBTC<WalletPassphraseResponse>> WalletPassphraseAsync(WalletPassphraseRequest model);
+        Task<ResponseBTC<string>> SignMessageAsync(SignMessageRequest model);
+        Task<ResponseBTC<bool>> VerifySignedMessageAsync(VerifySignedMessageRequest model); 
+         
     }
 }

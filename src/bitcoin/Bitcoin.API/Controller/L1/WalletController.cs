@@ -16,7 +16,6 @@ namespace Bitcoin.API.Controller
     public class WalletController : ControllerBase
     {
         private readonly IBitcoinCoreClient client;
-
         public WalletController(IBitcoinCoreClient client)
         {
             this.client = client;
@@ -203,11 +202,15 @@ namespace Bitcoin.API.Controller
             Log.Information($"ListWalletDir response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
-
-         
+        
         /// <remarks>
         /// address_type: “legacy”, “p2sh-segwit”, and “bech32” and all case sensitive
-        /// </remarks> 
+        /// 
+        ///     {
+        ///        "address_type": "bech32"
+        ///     }
+        ///     
+        /// </remarks>
         [HttpPost]
         [Route("getRawChangeAddress")] //used for change address ONLY
         public async Task<IActionResult> GetRawChangeAddress(GetRawChangeAddressRequest model)
@@ -216,5 +219,61 @@ namespace Bitcoin.API.Controller
             Log.Information($"GetRawChangeAddress response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
+
+        [HttpPost]
+        [Route("backupWallet")] //used for change address ONLY
+        public async Task<IActionResult> BackupWallet(BackupWalletRequest model)
+        {
+            var response = await client.BackupWalletAsync(model);
+            Log.Information($"backupWallet response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("walletlock")] //used for change address ONLY
+        public async Task<IActionResult> Walletlock(WalletlockRequest model)
+        {
+            var response = await client.WalletlockAsync(model);
+            Log.Information($"Walletlock response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("walletPassphrase")] //used for change address ONLY
+        public async Task<IActionResult> Walletlock(WalletPassphraseRequest model)
+        {
+            var response = await client.WalletPassphraseAsync(model);
+            Log.Information($"WalletPassphrase response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("signMessage")] //used for change address ONLY
+        public async Task<IActionResult> SignMessage(SignMessageRequest model)
+        {
+            var response = await client.SignMessageAsync(model);
+            Log.Information($"SignMessage response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("verifySignedMessage")] //used for change address ONLY
+        public async Task<IActionResult> SignMessage(VerifySignedMessageRequest model)
+        {
+            var response = await client.VerifySignedMessageAsync(model);
+            Log.Information($"VerifySignedMessage response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+
+        [HttpPost]
+        [Route("listWallets")]
+        public async Task<IActionResult> ListWallets()
+        {
+            var response = await client.ListWalletsAsync();
+            Log.Information($"ListWallets response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
     }
 }
