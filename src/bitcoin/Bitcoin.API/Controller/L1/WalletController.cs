@@ -264,8 +264,7 @@ namespace Bitcoin.API.Controller
             Log.Information($"VerifySignedMessage response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
-
-
+          
         [HttpPost]
         [Route("listWallets")]
         public async Task<IActionResult> ListWallets()
