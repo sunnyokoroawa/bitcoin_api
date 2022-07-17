@@ -103,6 +103,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         convertopsbt,
         walletprocesspsbt,
         walletcreatefundedpsbt,
+        utxoupdatepsbt,
 
         getblockcount,
         getblockfilter,
@@ -135,6 +136,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
 
         listwallets,
         listwalletdir,
+        fundrawtransaction,
 
     }
 
@@ -303,9 +305,9 @@ namespace Bitcoin.Core.Models.BitcoinCore
                 }
                 writer.WriteEndArray();
             }
-            //else if (obj is uint256)
+            //else if (obj is int)
             //{
-            //	writer.WriteValue(obj.ToString());
+            //    writer.WriteValue(obj);
             //}
             else
             {

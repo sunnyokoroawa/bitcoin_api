@@ -1,0 +1,2659 @@
+sunfarms@Tentacle:~$ cd .bitcoin/
+sunfarms@Tentacle:~/.bitcoin$ less bitcoin.conf
+sunfarms@Tentacle:~/.bitcoin$ nano bitcoin.conf
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getttransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+{
+  "amount": 0.00020000,
+  "confirmations": 2,
+  "blockhash": "000001562a12214077f4e02a88c5ffc2ab875c0170fd3ccefb6d8b411ccaf8ea",
+  "blockheight": 97269,
+  "blockindex": 83,
+  "blocktime": 1656753291,
+  "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+  "walletconflicts": [
+  ],
+  "time": 1656752738,
+  "timereceived": 1656752738,
+  "bip125-replaceable": "no",
+  "details": [
+    {
+      "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+      "category": "receive",
+      "amount": 0.00020000,
+      "label": "",
+      "vout": 1
+    }
+  ],
+  "hex": "020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100"
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+error code: -5
+error message:
+Invalid or non-wallet transaction id
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+error code: -5
+error message:
+Invalid or non-wallet transaction id
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+error code: -5
+error message:
+Invalid or non-wallet transaction id
+sunfarms@Tentacle:~/.bitcoin$ less bitcoin.conf
+sunfarms@Tentacle:~/.bitcoin$ nano bitcoin.conf
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getbalances
+{
+  "mine": {
+    "trusted": 0.00020000,
+    "untrusted_pending": 0.00000000,
+    "immature": 0.00000000
+  }
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getbalance
+0.00020000
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+{
+  "amount": 0.00020000,
+  "confirmations": 8,
+  "blockhash": "000001562a12214077f4e02a88c5ffc2ab875c0170fd3ccefb6d8b411ccaf8ea",
+  "blockheight": 97269,
+  "blockindex": 83,
+  "blocktime": 1656753291,
+  "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+  "walletconflicts": [
+  ],
+  "time": 1656752738,
+  "timereceived": 1656752738,
+  "bip125-replaceable": "no",
+  "details": [
+    {
+      "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+      "category": "receive",
+      "amount": 0.00020000,
+      "label": "",
+      "vout": 1
+    }
+  ],
+  "hex": "020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100"
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+error code: -5
+error message:
+Invalid or non-wallet transaction id
+sunfarms@Tentacle:~/.bitcoin$ nano bitcoin.conf
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli stop
+Bitcoin Core stopping
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 0,
+  "headers": 10986,
+  "bestblockhash": "00000008819873e925422c1ff0f99f7cc9bbb232af63a077a480a3633bee1ef6",
+  "difficulty": 0.001126515290698186,
+  "mediantime": 1598918400,
+  "verificationprogress": 6.246131047405742e-07,
+  "initialblockdownload": true,
+  "chainwork": "000000000000000000000000000000000000000000000000000000000049d414",
+  "size_on_disk": 4148130,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ nano bitcoin.conf
+sunfarms@Tentacle:~/.bitcoin$ nano bitcoin.conf
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli stop
+Bitcoin Core stopping
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 271,
+  "headers": 40596,
+  "bestblockhash": "000002e234e2ab1afdd7664ae07b38c18e1163193d8ff0d8330cb4d35c836a53",
+  "difficulty": 0.001126515290698186,
+  "mediantime": 1598982257,
+  "verificationprogress": 0.0001698944175763625,
+  "initialblockdownload": true,
+  "chainwork": "000000000000000000000000000000000000000000000000000000004e715540",
+  "size_on_disk": 61794229,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 2863,
+  "headers": 40596,
+  "bestblockhash": "000000f77d59a4be6cab3da6db186b0e8b72aa4d4476697d206e79acc8c82f46",
+  "difficulty": 0.003293189602495658,
+  "mediantime": 1599887400,
+  "verificationprogress": 0.001815741964770056,
+  "initialblockdownload": true,
+  "chainwork": "0000000000000000000000000000000000000000000000000000000510525c10",
+  "size_on_disk": 61965727,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 5950,
+  "headers": 40596,
+  "bestblockhash": "0000006b64f33a366d0dec3a0fd834233ce92bd1736e06b5a62d6afaa5390fe7",
+  "difficulty": 0.003165604364519958,
+  "mediantime": 1601740200,
+  "verificationprogress": 0.003773883362354204,
+  "initialblockdownload": true,
+  "chainwork": "0000000000000000000000000000000000000000000000000000000efc32a70a",
+  "size_on_disk": 62099354,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 15910,
+  "headers": 40596,
+  "bestblockhash": "0000012ab3aecca3ae5030b41be81c785f17a5b1b1d36e5ca7500f25a0eaacdb",
+  "difficulty": 0.002819247092607073,
+  "mediantime": 1607910988,
+  "verificationprogress": 0.01016415020587657,
+  "initialblockdownload": true,
+  "chainwork": "0000000000000000000000000000000000000000000000000000002c69ee951a",
+  "size_on_disk": 62518519,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 16090,
+  "headers": 40596,
+  "bestblockhash": "00000122720dd15bcb851d5092d8af8d7e8fbdb35e05f38fa3674bf6db2c74f4",
+  "difficulty": 0.002819247092607073,
+  "mediantime": 1608011265,
+  "verificationprogress": 0.01027907518105796,
+  "initialblockdownload": true,
+  "chainwork": "0000000000000000000000000000000000000000000000000000002cebd84792",
+  "size_on_disk": 62526024,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 47761,
+  "headers": 97278,
+  "bestblockhash": "0000008b27a336cd62f8a8202420cdb65e155ca2f966f065b73226d09cebc7e2",
+  "difficulty": 0.002798597331999607,
+  "mediantime": 1627021295,
+  "verificationprogress": 0.2476173408722806,
+  "initialblockdownload": true,
+  "chainwork": "00000000000000000000000000000000000000000000000000000086d8432df6",
+  "size_on_disk": 483491948,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli stop
+Bitcoin Core stopping
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 61845,
+  "headers": 97278,
+  "bestblockhash": "0000005a518250eed2193d47b52ead3be50820dbe249af2c3b179a78cb8a0ddb",
+  "difficulty": 0.002848325401108194,
+  "mediantime": 1635442691,
+  "verificationprogress": 0.4088146255735699,
+  "initialblockdownload": true,
+  "chainwork": "000000000000000000000000000000000000000000000000000000ae868de862",
+  "size_on_disk": 494167949,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 62583,
+  "headers": 97278,
+  "bestblockhash": "00000028d7bb177e6241ae73e4f1eecf4d2890ac9a26475b083bca909720110a",
+  "difficulty": 0.002897620674725797,
+  "mediantime": 1635887261,
+  "verificationprogress": 0.4155312393703056,
+  "initialblockdownload": true,
+  "chainwork": "000000000000000000000000000000000000000000000000000000b0a1cd2e88",
+  "size_on_disk": 494340229,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 62878,
+  "headers": 97278,
+  "bestblockhash": "000001156cad190579419590ff23cc9148cdb75200a39a24d72f76a09a307e45",
+  "difficulty": 0.002897620674725797,
+  "mediantime": 1636067473,
+  "verificationprogress": 0.4182806182339431,
+  "initialblockdownload": true,
+  "chainwork": "000000000000000000000000000000000000000000000000000000b17ca214a1",
+  "size_on_disk": 494409429,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 63137,
+  "headers": 97278,
+  "bestblockhash": "0000001d722a1113df09d9ccb3b6cdd05dde203c109e4f45463d8f6463021760",
+  "difficulty": 0.002897620674725797,
+  "mediantime": 1636227540,
+  "verificationprogress": 0.4207583804022257,
+  "initialblockdownload": true,
+  "chainwork": "000000000000000000000000000000000000000000000000000000b23cc287de",
+  "size_on_disk": 494470987,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 77733,
+  "headers": 97278,
+  "bestblockhash": "0000012aeec4f1623859fee02fa6c428e853898392ff301396bda98abb112c2b",
+  "difficulty": 0.002873067874458486,
+  "mediantime": 1644977939,
+  "verificationprogress": 0.7114687806587363,
+  "initialblockdownload": true,
+  "chainwork": "000000000000000000000000000000000000000000000000000000db1fe4a900",
+  "size_on_disk": 519657316,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+error code: -18
+error message:
+No wallet is loaded. Load a wallet using loadwallet or create a new one with createwallet. (Note: A default wallet is no longer automatically created)
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli loadwallet "wallet_signet"
+{
+  "name": "wallet_signet",
+  "warning": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+{
+  "amount": 0.00020000,
+  "confirmations": 0,
+  "trusted": false,
+  "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+  "walletconflicts": [
+  ],
+  "time": 1656752738,
+  "timereceived": 1656752738,
+  "bip125-replaceable": "unknown",
+  "details": [
+    {
+      "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+      "category": "receive",
+      "amount": 0.00020000,
+      "label": "",
+      "vout": 1
+    }
+  ],
+  "hex": "020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100"
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent 0
+[
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+{
+  "amount": 0.00020000,
+  "confirmations": 0,
+  "trusted": false,
+  "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+  "walletconflicts": [
+  ],
+  "time": 1656752738,
+  "timereceived": 1656752738,
+  "bip125-replaceable": "unknown",
+  "details": [
+    {
+      "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+      "category": "receive",
+      "amount": 0.00020000,
+      "label": "",
+      "vout": 1
+    }
+  ],
+  "hex": "020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100"
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getrawtransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100"
+{
+  "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+  "hash": "f24dce162d1128334c309f3e789c690af86428176604dc20360a5b199b55ec32",
+  "version": 2,
+  "size": 222,
+  "vsize": 141,
+  "weight": 561,
+  "locktime": 97267,
+  "vin": [
+    {
+      "txid": "f68ee02fa4774ef96c3bc574fe52cb4ac87a68ebef070721f13c5e6293ecb45c",
+      "vout": 1,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f201",
+        "03d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4c"
+      ],
+      "sequence": 4294967294
+    }
+  ],
+  "vout": [
+    {
+      "value": 69468.22779212,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 02e6f579510300e962d93d9ff80b8d95edaabdfd",
+        "hex": "001402e6f579510300e962d93d9ff80b8d95edaabdfd",
+        "address": "tb1qqtn02723qvqwjcke8k0lszudjhk6400a89q3rx",
+        "type": "witness_v0_keyhash"
+      }
+    },
+    {
+      "value": 0.00020000,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "0 e47c004deafd86c5e40c76be82d8d132c68293fc",
+        "hex": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+        "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent 0
+[
+  {
+    "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+    "vout": 1,
+    "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+    "label": "",
+    "scriptPubKey": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+    "amount": 0.00020000,
+    "confirmations": 18,
+    "spendable": true,
+    "solvable": true,
+    "desc": "wpkh([766ab74f/0'/0'/1']032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344)#vl4h69pq",
+    "safe": true
+  }
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getblockchaininfo
+{
+  "chain": "signet",
+  "blocks": 97286,
+  "headers": 97286,
+  "bestblockhash": "000000d03376c2f417f3a00ecb71d14906f37029830e6fdd566909d7fd3a6304",
+  "difficulty": 0.002826281437340605,
+  "mediantime": 1656757921,
+  "verificationprogress": 0.9999564878977146,
+  "initialblockdownload": false,
+  "chainwork": "0000000000000000000000000000000000000000000000000000011233adaebd",
+  "size_on_disk": 545393575,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip66": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "bip65": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "csv": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "segwit": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    },
+    "taproot": {
+      "type": "bip9",
+      "bip9": {
+        "status": "active",
+        "start_time": -1,
+        "timeout": 9223372036854775807,
+        "since": 0,
+        "min_activation_height": 0
+      },
+      "height": 0,
+      "active": true
+    }
+  },
+  "warnings": ""
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+error code: -5
+error message:
+Invalid or non-wallet transaction id
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction a396623605b2f3c67fc2e534f07aca6dc09fe0e79016dedfbc18aa8020a89c0e
+error code: -5
+error message:
+Invalid or non-wallet transaction id
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getrawtransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+{
+  "amount": 0.00020000,
+  "confirmations": 18,
+  "blockhash": "000001562a12214077f4e02a88c5ffc2ab875c0170fd3ccefb6d8b411ccaf8ea",
+  "blockheight": 97269,
+  "blockindex": 83,
+  "blocktime": 1656753291,
+  "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+  "walletconflicts": [
+  ],
+  "time": 1656752738,
+  "timereceived": 1656752738,
+  "bip125-replaceable": "no",
+  "details": [
+    {
+      "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+      "category": "receive",
+      "amount": 0.00020000,
+      "label": "",
+      "vout": 1
+    }
+  ],
+  "hex": "020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100"
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getrawtransaction 573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe
+020000000001015cb4ec93625e3cf1210707efeb687ac84acb52fe74c53b6cf94e77a42fe08ef60100000000feffffff024c71e76e5106000016001402e6f579510300e962d93d9ff80b8d95edaabdfd204e000000000000160014e47c004deafd86c5e40c76be82d8d132c68293fc0247304402205a23c77960ccfc3cbe81302d8290206c6e4ec50ffbd13cc10ddc7a796fe0ea1102207b59fee459f52fea41fa67660a8564367ed07ce6d58d2f9376712569293322f2012103d1f3b7786b3be7ec89470259e78e2c080584b752d79ee4793943410ed0de2f4cf37b0100
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+error code: -5
+error message:
+Invalid or non-wallet transaction id
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getrawtransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+020000000001013acd8d79f039b9c29c91960b4b2692a72aa18b89a88446bc183599ed2fefcea70000000000feffffff02a086010000000000225120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540bbf33943757060000160014f9b5a5a3b60cd059277e42f45c592028f911f18e02473044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301210300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61cf07b0100
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction bitcoin-cli getrawtransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+error: Error parsing JSON: getrawtransaction
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "020000000001013acd8d79f039b9c29c91960b4b2692a72aa18b89a88446bc183599ed2fefcea70000000000feffffff02a086010000000000225120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540bbf33943757060000160014f9b5a5a3b60cd059277e42f45c592028f911f18e02473044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301210300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61cf07b0100"
+{
+  "txid": "8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5",
+  "hash": "268c186ee30db622b11f40f7392252a87d1746c16db01f6e351efb6c5945d069",
+  "version": 2,
+  "size": 234,
+  "vsize": 153,
+  "weight": 609,
+  "locktime": 97264,
+  "vin": [
+    {
+      "txid": "a7ceef2fed993518bc4684a8898ba12aa792264b0b96919cc2b939f0798dcd3a",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "3044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301",
+        "0300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61c"
+      ],
+      "sequence": 4294967294
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00100000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "1 735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540b",
+        "hex": "5120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540b",
+        "address": "tb1pwddmtlcu94lkekalkwftvd0pcu8ay94eetcnhvulrpgtsn2e2s9sw3g0qu",
+        "type": "witness_v1_taproot"
+      }
+    },
+    {
+      "value": 69716.64380863,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "0 f9b5a5a3b60cd059277e42f45c592028f911f18e",
+        "hex": "0014f9b5a5a3b60cd059277e42f45c592028f911f18e",
+        "address": "tb1qlx66tgakpng9jfm7gt69ckfq9ru3ruvwv35qxm",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "bitcoin-cli getrawtransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5"
+error code: -22
+error message:
+TX decode failed
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "020000000001013acd8d79f039b9c29c91960b4b2692a72aa18b89a88446bc183599ed2fefcea70000000000feffffff02a086010000000000225120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540bbf33943757060000160014f9b5a5a3b60cd059277e42f45c592028f911f18e02473044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301210300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61cf07b0100"
+{
+  "txid": "8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5",
+  "hash": "268c186ee30db622b11f40f7392252a87d1746c16db01f6e351efb6c5945d069",
+  "version": 2,
+  "size": 234,
+  "vsize": 153,
+  "weight": 609,
+  "locktime": 97264,
+  "vin": [
+    {
+      "txid": "a7ceef2fed993518bc4684a8898ba12aa792264b0b96919cc2b939f0798dcd3a",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "3044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301",
+        "0300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61c"
+      ],
+      "sequence": 4294967294
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00100000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "1 735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540b",
+        "hex": "5120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540b",
+        "address": "tb1pwddmtlcu94lkekalkwftvd0pcu8ay94eetcnhvulrpgtsn2e2s9sw3g0qu",
+        "type": "witness_v1_taproot"
+      }
+    },
+    {
+      "value": 69716.64380863,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "0 f9b5a5a3b60cd059277e42f45c592028f911f18e",
+        "hex": "0014f9b5a5a3b60cd059277e42f45c592028f911f18e",
+        "address": "tb1qlx66tgakpng9jfm7gt69ckfq9ru3ruvwv35qxm",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getrawtransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5
+020000000001013acd8d79f039b9c29c91960b4b2692a72aa18b89a88446bc183599ed2fefcea70000000000feffffff02a086010000000000225120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540bbf33943757060000160014f9b5a5a3b60cd059277e42f45c592028f911f18e02473044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301210300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61cf07b0100
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "020000000001013acd8d79f039b9c29c91960b4b2692a72aa18b89a88446bc183599ed2fefcea70000000000feffffff02a086010000000000225120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540bbf33943757060000160014f9b5a5a3b60cd059277e42f45c592028f911f18e02473044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301210300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61cf07b0100"
+{
+  "txid": "8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5",
+  "hash": "268c186ee30db622b11f40f7392252a87d1746c16db01f6e351efb6c5945d069",
+  "version": 2,
+  "size": 234,
+  "vsize": 153,
+  "weight": 609,
+  "locktime": 97264,
+  "vin": [
+    {
+      "txid": "a7ceef2fed993518bc4684a8898ba12aa792264b0b96919cc2b939f0798dcd3a",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "3044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301",
+        "0300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61c"
+      ],
+      "sequence": 4294967294
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00100000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "1 735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540b",
+        "hex": "5120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540b",
+        "address": "tb1pwddmtlcu94lkekalkwftvd0pcu8ay94eetcnhvulrpgtsn2e2s9sw3g0qu",
+        "type": "witness_v1_taproot"
+      }
+    },
+    {
+      "value": 69716.64380863,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "0 f9b5a5a3b60cd059277e42f45c592028f911f18e",
+        "hex": "0014f9b5a5a3b60cd059277e42f45c592028f911f18e",
+        "address": "tb1qlx66tgakpng9jfm7gt69ckfq9ru3ruvwv35qxm",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent
+[
+  {
+    "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+    "vout": 1,
+    "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+    "label": "",
+    "scriptPubKey": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+    "amount": 0.00020000,
+    "confirmations": 20,
+    "spendable": true,
+    "solvable": true,
+    "desc": "wpkh([766ab74f/0'/0'/1']032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344)#vl4h69pq",
+    "safe": true
+  }
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli dumpprivkey tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99
+cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help getrawtransaction
+getrawtransaction "txid" ( verbose "blockhash" )
+
+Return the raw transaction data.
+
+By default this function only works for mempool transactions. When called with a blockhash
+argument, getrawtransaction will return the transaction if the specified block is available and
+the transaction is found in that block. When called without a blockhash argument, getrawtransaction
+will return the transaction if it is in the mempool, or if -txindex is enabled and the transaction
+is in a block in the blockchain.
+
+Hint: Use gettransaction for wallet transactions.
+
+If verbose is 'true', returns an Object with information about 'txid'.
+If verbose is 'false' or omitted, returns a string that is serialized, hex-encoded data for 'txid'.
+
+Arguments:
+1. txid         (string, required) The transaction id
+2. verbose      (boolean, optional, default=false) If false, return a string, otherwise return a json object
+3. blockhash    (string, optional) The block in which to look for the transaction
+
+Result (if verbose is not set or set to false):
+"str"    (string) The serialized, hex-encoded data for 'txid'
+
+Result (if verbose is set to true):
+{                                    (json object)
+  "in_active_chain" : true|false,    (boolean) Whether specified block is in the active chain or not (only present with explicit "blockhash" argument)
+  "hex" : "hex",                     (string) The serialized, hex-encoded data for 'txid'
+  "txid" : "hex",                    (string) The transaction id (same as provided)
+  "hash" : "hex",                    (string) The transaction hash (differs from txid for witness transactions)
+  "size" : n,                        (numeric) The serialized transaction size
+  "vsize" : n,                       (numeric) The virtual transaction size (differs from size for witness transactions)
+  "weight" : n,                      (numeric) The transaction's weight (between vsize*4-3 and vsize*4)
+  "version" : n,                     (numeric) The version
+  "locktime" : xxx,                  (numeric) The lock time
+  "vin" : [                          (json array)
+    {                                (json object)
+      "txid" : "hex",                (string) The transaction id
+      "vout" : n,                    (numeric) The output number
+      "scriptSig" : {                (json object) The script
+        "asm" : "str",               (string) asm
+        "hex" : "hex"                (string) hex
+      },
+      "sequence" : n,                (numeric) The script sequence number
+      "txinwitness" : [              (json array)
+        "hex",                       (string) hex-encoded witness data (if any)
+        ...
+      ]
+    },
+    ...
+  ],
+  "vout" : [                         (json array)
+    {                                (json object)
+      "value" : n,                   (numeric) The value in BTC
+      "n" : n,                       (numeric) index
+      "scriptPubKey" : {             (json object)
+        "asm" : "str",               (string) the asm
+        "hex" : "str",               (string) the hex
+        "reqSigs" : n,               (numeric, optional) (DEPRECATED, returned only if config option -deprecatedrpc=addresses is passed) Number of required signatures
+        "type" : "str",              (string) The type, eg 'pubkeyhash'
+        "address" : "str",           (string, optional) bitcoin address (only if a well-defined address exists)
+        "addresses" : [              (json array, optional) (DEPRECATED, returned only if config option -deprecatedrpc=addresses is passed) Array of bitcoin addresses
+          "str",                     (string) bitcoin address
+          ...
+        ]
+      }
+    },
+    ...
+  ],
+  "blockhash" : "hex",               (string) the block hash
+  "confirmations" : n,               (numeric) The confirmations
+  "blocktime" : xxx,                 (numeric) The block time expressed in UNIX epoch time
+  "time" : n                         (numeric) Same as "blocktime"
+}
+
+Examples:
+> bitcoin-cli getrawtransaction "mytxid"
+> bitcoin-cli getrawtransaction "mytxid" true
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getrawtransaction", "params": ["mytxid", true]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+> bitcoin-cli getrawtransaction "mytxid" false "myblockhash"
+> bitcoin-cli getrawtransaction "mytxid" true "myblockhash"
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getrawtransaction 8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5 1
+{
+  "txid": "8d3255c67ba2a3003a53a507328018b21522fcff731452be01215ff473a625b5",
+  "hash": "268c186ee30db622b11f40f7392252a87d1746c16db01f6e351efb6c5945d069",
+  "version": 2,
+  "size": 234,
+  "vsize": 153,
+  "weight": 609,
+  "locktime": 97264,
+  "vin": [
+    {
+      "txid": "a7ceef2fed993518bc4684a8898ba12aa792264b0b96919cc2b939f0798dcd3a",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "3044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301",
+        "0300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61c"
+      ],
+      "sequence": 4294967294
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00100000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "1 735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540b",
+        "hex": "5120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540b",
+        "address": "tb1pwddmtlcu94lkekalkwftvd0pcu8ay94eetcnhvulrpgtsn2e2s9sw3g0qu",
+        "type": "witness_v1_taproot"
+      }
+    },
+    {
+      "value": 69716.64380863,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "0 f9b5a5a3b60cd059277e42f45c592028f911f18e",
+        "hex": "0014f9b5a5a3b60cd059277e42f45c592028f911f18e",
+        "address": "tb1qlx66tgakpng9jfm7gt69ckfq9ru3ruvwv35qxm",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ],
+  "hex": "020000000001013acd8d79f039b9c29c91960b4b2692a72aa18b89a88446bc183599ed2fefcea70000000000feffffff02a086010000000000225120735bb5ff1c2d7f6cdbbfb392b635e1c70fd216b9caf13bb39f1850b84d59540bbf33943757060000160014f9b5a5a3b60cd059277e42f45c592028f911f18e02473044022042b6686f7aba4f62a9ec4ca65013a058560ab28d51fc85810b0e6d1b079a0ee402206b134dc649682f355f5d03a0ffc977e3cd04d62abea81d313fc5b34d97be6f4301210300db3c1d68b5413f75dba53ad8e3dedaf5be779d8bee4a9969d16fd40836f61cf07b0100",
+  "blockhash": "0000004683f1f6b99258e4fba6e923f5f964ec9c1130e40569ad1ccc127063be",
+  "confirmations": 23,
+  "time": 1656754532,
+  "blocktime": 1656754532
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listaddressgroupings
+[
+  [
+    [
+      "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+      0.00020000,
+      ""
+    ]
+  ]
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getbalance
+0.00020000
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help getbalance
+getbalance ( "dummy" minconf include_watchonly avoid_reuse )
+
+Returns the total available balance.
+The available balance is what the wallet considers currently spendable, and is
+thus affected by options which limit spendability such as -spendzeroconfchange.
+
+Arguments:
+1. dummy                (string, optional) Remains for backward compatibility. Must be excluded or set to "*".
+2. minconf              (numeric, optional, default=0) Only include transactions confirmed at least this many times.
+3. include_watchonly    (boolean, optional, default=true for watch-only wallets, otherwise false) Also include balance in watch-only addresses (see 'importaddress')
+4. avoid_reuse          (boolean, optional, default=true) (only available if avoid_reuse wallet flag is set) Do not include balance in dirty outputs; addresses are considered dirty if they have previously been used in a transaction.
+
+Result:
+n    (numeric) The total amount in BTC received for this wallet.
+
+Examples:
+
+The total amount in the wallet with 0 or more confirmations
+> bitcoin-cli getbalance
+
+The total amount in the wallet with at least 6 confirmations
+> bitcoin-cli getbalance "*" 6
+
+As a JSON-RPC call
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getbalance", "params": ["*", 6]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help listunspent
+listunspent ( minconf maxconf ["address",...] include_unsafe query_options )
+
+Returns array of unspent transaction outputs
+with between minconf and maxconf (inclusive) confirmations.
+Optionally filter to only include txouts paid to specified addresses.
+
+Arguments:
+1. minconf                            (numeric, optional, default=1) The minimum confirmations to filter2. maxconf                            (numeric, optional, default=9999999) The maximum confirmations to filter
+3. addresses                          (json array, optional, default=[]) The bitcoin addresses to filter     [
+       "address",                     (string) bitcoin address
+       ...
+     ]
+4. include_unsafe                     (boolean, optional, default=true) Include outputs that are not safe to spend
+                                      See description of "safe" attribute below.
+5. query_options                      (json object, optional) JSON with query options
+     {
+       "minimumAmount": amount,       (numeric or string, optional, default="0.00") Minimum value of each UTXO in BTC
+       "maximumAmount": amount,       (numeric or string, optional, default=unlimited) Maximum value of each UTXO in BTC
+       "maximumCount": n,             (numeric, optional, default=unlimited) Maximum number of UTXOs
+       "minimumSumAmount": amount,    (numeric or string, optional, default=unlimited) Minimum sum value of all UTXOs in BTC
+     }
+
+Result:
+[                                (json array)
+  {                              (json object)
+    "txid" : "hex",              (string) the transaction id
+    "vout" : n,                  (numeric) the vout value
+    "address" : "str",           (string) the bitcoin address
+    "label" : "str",             (string) The associated label, or "" for the default label
+    "scriptPubKey" : "str",      (string) the script key
+    "amount" : n,                (numeric) the transaction output amount in BTC
+    "confirmations" : n,         (numeric) The number of confirmations
+    "redeemScript" : "hex",      (string) The redeemScript if scriptPubKey is P2SH
+    "witnessScript" : "str",     (string) witnessScript if the scriptPubKey is P2WSH or P2SH-P2WSH
+    "spendable" : true|false,    (boolean) Whether we have the private keys to spend this output
+    "solvable" : true|false,     (boolean) Whether we know how to spend this output, ignoring the lack of keys
+    "reused" : true|false,       (boolean) (only present if avoid_reuse is set) Whether this output is reused/dirty (sent to an address that was previously spent from)
+    "desc" : "str",              (string) (only when solvable) A descriptor for spending this output
+    "safe" : true|false          (boolean) Whether this output is considered safe to spend. Unconfirmed transactions
+                                 from outside keys and unconfirmed replacement transactions are considered unsafe
+                                 and are not eligible for spending by fundrawtransaction and sendtoaddress.
+  },
+  ...
+]
+
+Examples:
+> bitcoin-cli listunspent
+> bitcoin-cli listunspent 6 9999999 "[\"bc1q09vm5lfy0j5reeulh4x5752q25uqqvz34hufdl\",\"bc1q02ad21edsxd23d32dfgqqsz4vv4nmtfzuklhy3\"]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "listunspent", "params": [6, 9999999 "[\"bc1q09vm5lfy0j5reeulh4x5752q25uqqvz34hufdl\",\"bc1q02ad21edsxd23d32dfgqqsz4vv4nmtfzuklhy3\"]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+> bitcoin-cli listunspent 6 9999999 '[]' true '{ "minimumAmount": 0.005 }'
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "listunspent", "params": [6, 9999999, [] , true, { "minimumAmount": 0.005 } ]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent
+[
+  {
+    "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+    "vout": 1,
+    "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+    "label": "",
+    "scriptPubKey": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+    "amount": 0.00020000,
+    "confirmations": 28,
+    "spendable": true,
+    "solvable": true,
+    "desc": "wpkh([766ab74f/0'/0'/1']032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344)#vl4h69pq",
+    "safe": true
+  }
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listaddressgroupings
+[
+  [
+    [
+      "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+      0.00020000,
+      ""
+    ]
+  ]
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getaddressinfo tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99
+{
+  "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+  "scriptPubKey": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+  "ismine": true,
+  "solvable": true,
+  "desc": "wpkh([766ab74f/0'/0'/1']032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344)#vl4h69pq",
+  "iswatchonly": false,
+  "isscript": false,
+  "iswitness": true,
+  "witness_version": 0,
+  "witness_program": "e47c004deafd86c5e40c76be82d8d132c68293fc",
+  "pubkey": "032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344",
+  "ischange": false,
+  "timestamp": 1656683753,
+  "hdkeypath": "m/0'/0'/1'",
+  "hdseedid": "85a693ca816a33866ec7c0b6ef37e7069f4df4da",
+  "hdmasterfingerprint": "766ab74f",
+  "labels": [
+    ""
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help createrawtransaction
+createrawtransaction [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount,...},{"data":"hex"},...] ( locktime replaceable )
+
+Create a transaction spending the given inputs and creating new outputs.
+Outputs can be addresses or data.
+Returns hex-encoded raw transaction.
+Note that the transaction's inputs are not signed, and
+it is not stored in the wallet or transmitted to the network.
+
+Arguments:
+1. inputs                      (json array, required) The inputs
+     [
+       {                       (json object)
+         "txid": "hex",        (string, required) The transaction id
+         "vout": n,            (numeric, required) The output number
+         "sequence": n,        (numeric, optional, default=depends on the value of the 'replaceable' and 'locktime' arguments) The sequence number
+       },
+       ...
+     ]
+2. outputs                     (json array, required) The outputs (key-value pairs), where none of the keys are duplicated.
+                               That is, each address can only appear once and there can only be one 'data' object.
+                               For compatibility reasons, a dictionary, which holds the key-value pairs directly, is also
+                               accepted as second parameter.
+     [
+       {                       (json object)
+         "address": amount,    (numeric or string, required) A key-value pair. The key (string) is the bitcoin address, the value (float or string) is the amount in BTC
+         ...
+       },
+       {                       (json object)
+         "data": "hex",        (string, required) A key-value pair. The key must be "data", the value is hex-encoded data
+       },
+       ...
+     ]
+3. locktime                    (numeric, optional, default=0) Raw locktime. Non-0 value also locktime-activates inputs
+4. replaceable                 (boolean, optional, default=false) Marks this transaction as BIP125-replaceable.
+                               Allows this transaction to be replaced by a transaction with higher fees. If provided, it is an error if explicit sequence numbers are incompatible.
+
+Result:
+"hex"    (string) hex string of the transaction
+
+Examples:
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"address\":0.01}]"
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"data\":\"00010203\"}]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"address\":0.01}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"data\":\"00010203\"}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli walletpassphrase "bitcoincoreC@mmandment1!"
+error code: -1
+error message:
+walletpassphrase "passphrase" timeout
+
+Stores the wallet decryption key in memory for 'timeout' seconds.
+This is needed prior to performing transactions related to private keys such as sending bitcoins
+
+Note:
+Issuing the walletpassphrase command while the wallet is already unlocked will set a new unlock
+time that overrides the old one.
+
+Arguments:
+1. passphrase    (string, required) The wallet passphrase
+2. timeout       (numeric, required) The time to keep the decryption key in seconds; capped at 100000000 (~3 years).
+
+Result:
+null    (json null)
+
+Examples:
+
+Unlock the wallet for 60 seconds
+> bitcoin-cli walletpassphrase "my pass phrase" 60
+
+Lock the wallet again (before 60 seconds)
+> bitcoin-cli walletlock
+
+As a JSON-RPC call
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "walletpassphrase", "params": ["my pass phrase", 60]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli walletpassphrase "bitcoincoreC@mmandment1!" 1200
+error code: -15
+error message:
+Error: running with an unencrypted wallet, but walletpassphrase was called.
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli walletpassphrase "bitcoincoreC@mmandment1!" 1200
+error code: -15
+error message:
+Error: running with an unencrypted wallet, but walletpassphrase was called.
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help createrawtransaction
+createrawtransaction [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount,...},{"data":"hex"},...] ( locktime replaceable )
+
+Create a transaction spending the given inputs and creating new outputs.
+Outputs can be addresses or data.
+Returns hex-encoded raw transaction.
+Note that the transaction's inputs are not signed, and
+it is not stored in the wallet or transmitted to the network.
+
+Arguments:
+1. inputs                      (json array, required) The inputs
+     [
+       {                       (json object)
+         "txid": "hex",        (string, required) The transaction id
+         "vout": n,            (numeric, required) The output number
+         "sequence": n,        (numeric, optional, default=depends on the value of the 'replaceable' and 'locktime' arguments) The sequence number
+       },
+       ...
+     ]
+2. outputs                     (json array, required) The outputs (key-value pairs), where none of the keys are duplicated.
+                               That is, each address can only appear once and there can only be one 'data' object.
+                               For compatibility reasons, a dictionary, which holds the key-value pairs directly, is also
+                               accepted as second parameter.
+     [
+       {                       (json object)
+         "address": amount,    (numeric or string, required) A key-value pair. The key (string) is the bitcoin address, the value (float or string) is the amount in BTC
+         ...
+       },
+       {                       (json object)
+         "data": "hex",        (string, required) A key-value pair. The key must be "data", the value is hex-encoded data
+       },
+       ...
+     ]
+3. locktime                    (numeric, optional, default=0) Raw locktime. Non-0 value also locktime-activates inputs
+4. replaceable                 (boolean, optional, default=false) Marks this transaction as BIP125-replaceable.
+                               Allows this transaction to be replaced by a transaction with higher fees. If provided, it is an error if explicit sequence numbers are incompatible.
+
+Result:
+"hex"    (string) hex string of the transaction
+
+Examples:
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"address\":0.01}]"
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"data\":\"00010203\"}]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"address\":0.01}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"data\":\"00010203\"}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help createrawtransaction
+createrawtransaction [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount,...},{"data":"hex"},...] ( locktime replaceable )
+
+Create a transaction spending the given inputs and creating new outputs.
+Outputs can be addresses or data.
+Returns hex-encoded raw transaction.
+Note that the transaction's inputs are not signed, and
+it is not stored in the wallet or transmitted to the network.
+
+Arguments:
+1. inputs                      (json array, required) The inputs
+     [
+       {                       (json object)
+         "txid": "hex",        (string, required) The transaction id
+         "vout": n,            (numeric, required) The output number
+         "sequence": n,        (numeric, optional, default=depends on the value of the 'replaceable' and 'locktime' arguments) The sequence number
+       },
+       ...
+     ]
+2. outputs                     (json array, required) The outputs (key-value pairs), where none of the keys are duplicated.
+                               That is, each address can only appear once and there can only be one 'data' object.
+                               For compatibility reasons, a dictionary, which holds the key-value pairs directly, is also
+                               accepted as second parameter.
+     [
+       {                       (json object)
+         "address": amount,    (numeric or string, required) A key-value pair. The key (string) is the bitcoin address, the value (float or string) is the amount in BTC
+         ...
+       },
+       {                       (json object)
+         "data": "hex",        (string, required) A key-value pair. The key must be "data", the value is hex-encoded data
+       },
+       ...
+     ]
+3. locktime                    (numeric, optional, default=0) Raw locktime. Non-0 value also locktime-activates inputs
+4. replaceable                 (boolean, optional, default=false) Marks this transaction as BIP125-replaceable.
+                               Allows this transaction to be replaced by a transaction with higher fees. If provided, it is an error if explicit sequence numbers are incompatible.
+
+Result:
+"hex"    (string) hex string of the transaction
+
+Examples:
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"address\":0.01}]"
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"data\":\"00010203\"}]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"address\":0.01}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"data\":\"00010203\"}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent
+[
+  {
+    "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+    "vout": 1,
+    "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+    "label": "",
+    "scriptPubKey": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+    "amount": 0.00020000,
+    "confirmations": 37,
+    "spendable": true,
+    "solvable": true,
+    "desc": "wpkh([766ab74f/0'/0'/1']032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344)#vl4h69pq",
+    "safe": true
+  }
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli dumpprivkey tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99
+cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getnewaddress
+tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent
+[
+  {
+    "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+    "vout": 1,
+    "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+    "label": "",
+    "scriptPubKey": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+    "amount": 0.00020000,
+    "confirmations": 38,
+    "spendable": true,
+    "solvable": true,
+    "desc": "wpkh([766ab74f/0'/0'/1']032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344)#vl4h69pq",
+    "safe": true
+  }
+]
+sunfarms@Tentacle:~/.bitcoin$  bitcoin-cli createrawtransaction '[{"txid":"573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe", "vout":1}]' '{"tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz": 0.0002}'
+0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help signrawtransaction
+help: unknown command: signrawtransaction
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getrawtransaction 0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000
+error code: -8
+error message:
+parameter 1 must be of length 64 (not 164, for '0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000')
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000"
+{
+  "txid": "c8529558c8c348fbe5a948cf34627dc9b42d9c1e2e3dd270fb2b3827b295e39d",
+  "hash": "c8529558c8c348fbe5a948cf34627dc9b42d9c1e2e3dd270fb2b3827b295e39d",
+  "version": 2,
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent
+[
+  {
+    "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+    "vout": 1,
+    "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+    "label": "",73684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+    "scriptPubKey": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+    "amount": 0.00020000,
+    "confirmations": 40,
+    "spendable": true,
+    "solvable": true,
+    "desc": "wpkh([766ab74f/0'/0'/1']032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344)#vl4h69pq",
+    "safe": true
+  },
+] "vout": [
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e67" '["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000" 1
+error code: -3
+error message:
+Expected type bool, got number
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000"
+{
+  "txid": "c8529558c8c348fbe5a948cf34627dc9b42d9c1e2e3dd270fb2b3827b295e39d",
+  "hash": "c8529558c8c348fbe5a948cf34627dc9b42d9c1e2e3dd270fb2b3827b295e39d",
+  "version": 2,
+  "size": 82,
+  "vsize": 82,
+  "weight": 328,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+      "vout": 1,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00020000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help createrawtransaction
+createrawtransaction [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount,...},{"data":"hex"},...] ( locktime replaceable )
+
+Create a transaction spending the given inputs and creating new outputs.
+Outputs can be addresses or data.
+Returns hex-encoded raw transaction.
+Note that the transaction's inputs are not signed, and
+it is not stored in the wallet or transmitted to the network.
+
+Arguments:
+1. inputs                      (json array, required) The inputs
+     [
+       {                       (json object)
+         "txid": "hex",        (string, required) The transaction id
+         "vout": n,            (numeric, required) The output number
+         "sequence": n,        (numeric, optional, default=depends on the value of the 'replaceable' and 'locktime' arguments) The sequence number
+       },
+       ...
+     ]
+2. outputs                     (json array, required) The outputs (key-value pairs), where none of the keys are duplicated.
+                               That is, each address can only appear once and there can only be one 'data' object.
+                               For compatibility reasons, a dictionary, which holds the key-value pairs directly, is also
+                               accepted as second parameter.
+     [
+       {                       (json object)
+         "address": amount,    (numeric or string, required) A key-value pair. The key (string) is the bitcoin address, the value (float or string) is the amount in BTC
+         ...
+       },
+       {                       (json object)
+         "data": "hex",        (string, required) A key-value pair. The key must be "data", the value is hex-encoded data
+       },
+       ...
+     ]
+3. locktime                    (numeric, optional, default=0) Raw locktime. Non-0 value also locktime-activates inputs
+4. replaceable                 (boolean, optional, default=false) Marks this transaction as BIP125-replaceable.
+                               Allows this transaction to be replaced by a transaction with higher fees. If provided, it is an error if explicit sequence numbers are incompatible.
+
+Result:
+"hex"    (string) hex string of the transaction
+
+Examples:
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"address\":0.01}]"
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"data\":\"00010203\"}]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"address\":0.01}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"data\":\"00010203\"}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransaction "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000"
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c988
+8d0e679ffb049be7cb848f34028fbb9c20d500000000"
+error code: -1
+error message:
+signrawtransactionwithkey "hexstring" ["privatekey",...] ( [{"txid":"hex","vout":n,"scriptPubKey":"hex","redeemScript":"hex","witnessScript":"hex","amount":amount},...] "sighashtype" )
+
+Sign inputs for raw transaction (serialized, hex-encoded).
+The second argument is an array of base58-encoded private
+keys that will be the only keys used to sign the transaction.
+The third optional argument (may be null) is an array of previous transaction outputs that
+this transaction depends on but may not yet be in the block chain.
+
+Arguments:
+1. hexstring                        (string, required) The transaction hex string
+2. privkeys                         (json array, required) The base58-encoded private keys for signing
+     [
+       "privatekey",                (string) private key in base58-encoding
+       ...
+     ]
+3. prevtxs                          (json array, optional) The previous dependent transaction outputs
+     [
+       {                            (json object)
+         "txid": "hex",             (string, required) The transaction id
+         "vout": n,                 (numeric, required) The output number
+         "scriptPubKey": "hex",     (string, required) script key
+         "redeemScript": "hex",     (string) (required for P2SH) redeem script
+         "witnessScript": "hex",    (string) (required for P2WSH or P2SH-P2WSH) witness script
+         "amount": amount,          (numeric or string) (required for Segwit inputs) the amount spent
+       },
+       ...
+     ]
+4. sighashtype                      (string, optional, default="DEFAULT") The signature hash type. Must be one of:
+                                    "DEFAULT"
+                                    "ALL"
+                                    "NONE"
+                                    "SINGLE"
+                                    "ALL|ANYONECANPAY"
+                                    "NONE|ANYONECANPAY"
+                                    "SINGLE|ANYONECANPAY"
+
+
+Result:
+{                             (json object)
+  "hex" : "hex",              (string) The hex-encoded raw transaction with signature(s)
+  "complete" : true|false,    (boolean) If the transaction has a complete set of signatures
+  "errors" : [                (json array, optional) Script verification errors (if there are any)
+    {                         (json object)
+      "txid" : "hex",         (string) The hash of the referenced, previous transaction
+      "vout" : n,             (numeric) The index of the output to spent and used as input
+      "scriptSig" : "hex",    (string) The hex-encoded signature script
+      "sequence" : n,         (numeric) Script sequence number
+      "error" : "str"         (string) Verification or signing error related to the input
+    },
+    ...
+  ]
+}
+
+Examples:
+> bitcoin-cli signrawtransactionwithkey "myhex" "[\"key1\",\"key2\"]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "signrawtransactionwithkey", "params": ["myhex", "[\"key1\",\"key2\"]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000"
+error code: -1
+error message:
+signrawtransactionwithkey "hexstring" ["privatekey",...] ( [{"txid":"hex","vout":n,"scriptPubKey":"hex","redeemScript":"hex","witnessScript":"hex","amount":amount},...] "sighashtype" )
+
+Sign inputs for raw transaction (serialized, hex-encoded).
+The second argument is an array of base58-encoded private
+keys that will be the only keys used to sign the transaction.
+The third optional argument (may be null) is an array of previous transaction outputs that
+this transaction depends on but may not yet be in the block chain.
+
+Arguments:
+1. hexstring                        (string, required) The transaction hex string
+2. privkeys                         (json array, required) The base58-encoded private keys for signing
+     [
+       "privatekey",                (string) private key in base58-encoding
+       ...
+     ]
+3. prevtxs                          (json array, optional) The previous dependent transaction outputs
+     [
+       {                            (json object)
+         "txid": "hex",             (string, required) The transaction id
+         "vout": n,                 (numeric, required) The output number
+         "scriptPubKey": "hex",     (string, required) script key
+         "redeemScript": "hex",     (string) (required for P2SH) redeem script
+         "witnessScript": "hex",    (string) (required for P2WSH or P2SH-P2WSH) witness script
+         "amount": amount,          (numeric or string) (required for Segwit inputs) the amount spent
+       },
+       ...
+     ]
+4. sighashtype                      (string, optional, default="DEFAULT") The signature hash type. Must be one of:
+                                    "DEFAULT"
+                                    "ALL"
+                                    "NONE"
+                                    "SINGLE"
+                                    "ALL|ANYONECANPAY"
+                                    "NONE|ANYONECANPAY"
+                                    "SINGLE|ANYONECANPAY"
+
+
+Result:
+{                             (json object)
+  "hex" : "hex",              (string) The hex-encoded raw transaction with signature(s)
+  "complete" : true|false,    (boolean) If the transaction has a complete set of signatures
+  "errors" : [                (json array, optional) Script verification errors (if there are any)
+    {                         (json object)
+      "txid" : "hex",         (string) The hash of the referenced, previous transaction
+      "vout" : n,             (numeric) The index of the output to spent and used as input
+      "scriptSig" : "hex",    (string) The hex-encoded signature script
+      "sequence" : n,         (numeric) Script sequence number
+      "error" : "str"         (string) Verification or signing error related to the input
+    },
+    ...
+  ]
+}
+
+Examples:
+> bitcoin-cli signrawtransactionwithkey "myhex" "[\"key1\",\"key2\"]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "signrawtransactionwithkey", "params": ["myhex", "[\"key1\",\"key2\"]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000" ["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]
+error: Error parsing JSON: [cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000" '["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+{
+  "hex": "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402204ce93e9d1392bce722ceadcff051b67cd4acdba331f96919e9c6d06b74eaebf502203e27b9f98a4f685f2bdfad3f94bfed7ad92b1f8143229ad03b815ebb8bcced390121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000",
+  "complete": true
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402204ce93e9d1392bce722ceadcff051b67cd4acdba331f96919e9c6d06b74eaebf502203e27b9f98a4f685f2bdfad3f94bfed7ad92b1f8143229ad03b815ebb8bcced390121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+{
+  "txid": "c8529558c8c348fbe5a948cf34627dc9b42d9c1e2e3dd270fb2b3827b295e39d",
+  "hash": "e8d88c4537b9d5ae3ecfaa773da53484591e8656d84f87bf703df7ba3ab382fb",
+  "version": 2,
+  "size": 191,
+  "vsize": 110,
+  "weight": 437,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+      "vout": 1,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "304402204ce93e9d1392bce722ceadcff051b67cd4acdba331f96919e9c6d06b74eaebf502203e27b9f98a4f685f2bdfad3f94bfed7ad92b1f8143229ad03b815ebb8bcced3901",
+        "032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344"
+      ],
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00020000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli sendrawtransaction "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402204ce93e9d1392bce722ceadcff051b67cd4acdba331f96919e9c6d06b74eaebf502203e27b9f98a4f685f2bdfad3f94bfed7ad92b1f8143229ad03b815ebb8bcced390121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+error code: -26
+error message:
+min relay fee not met, 0 < 110
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent
+[
+  {
+    "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+    "vout": 1,
+    "address": "tb1qu37qqn02lkrvteqvw6lg9kx3xtrg9ylu7p2s99",
+    "label": "",
+    "scriptPubKey": "0014e47c004deafd86c5e40c76be82d8d132c68293fc",
+    "amount": 0.00020000,
+    "confirmations": 39,
+    "spendable": true,
+    "solvable": true,
+    "desc": "wpkh([766ab74f/0'/0'/1']032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344)#vl4h69pq",
+    "safe": true
+  }
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli createrawtransaction '[{"txid":"573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe", "vout":1}]' '{"tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz": 0.00015}'
+0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtrawtransaction 0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction 0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e67
+9ffb049be7cb848f34028fbb9c20d500000000
+{
+  "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+  "hash": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+  "version": 2,
+  "size": 82,
+  "vsize": 82,
+  "weight": 328,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+      "vout": 1,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00015000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransaction 0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e67
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransaction "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e67"
+
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransaction "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e67"'["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c988
+8d0e67"'["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+error code: -1
+error message:
+signrawtransactionwithkey "hexstring" ["privatekey",...] ( [{"txid":"hex","vout":n,"scriptPubKey":"hex","redeemScript":"hex","witnessScript":"hex","amount":amount},...] "sighashtype" )
+
+Sign inputs for raw transaction (serialized, hex-encoded).
+The second argument is an array of base58-encoded private
+keys that will be the only keys used to sign the transaction.
+The third optional argument (may be null) is an array of previous transaction outputs that
+this transaction depends on but may not yet be in the block chain.
+
+Arguments:
+1. hexstring                        (string, required) The transaction hex string
+2. privkeys                         (json array, required) The base58-encoded private keys for signing
+     [
+       "privatekey",                (string) private key in base58-encoding
+       ...
+     ]
+3. prevtxs                          (json array, optional) The previous dependent transaction outputs
+     [
+       {                            (json object)
+         "txid": "hex",             (string, required) The transaction id
+         "vout": n,                 (numeric, required) The output number
+         "scriptPubKey": "hex",     (string, required) script key
+         "redeemScript": "hex",     (string) (required for P2SH) redeem script
+         "witnessScript": "hex",    (string) (required for P2WSH or P2SH-P2WSH) witness script
+         "amount": amount,          (numeric or string) (required for Segwit inputs) the amount spent
+       },
+       ...
+     ]
+4. sighashtype                      (string, optional, default="DEFAULT") The signature hash type. Must be one of:
+                                    "DEFAULT"
+                                    "ALL"
+                                    "NONE"
+                                    "SINGLE"
+                                    "ALL|ANYONECANPAY"
+                                    "NONE|ANYONECANPAY"
+                                    "SINGLE|ANYONECANPAY"
+
+
+Result:
+{                             (json object)
+  "hex" : "hex",              (string) The hex-encoded raw transaction with signature(s)
+  "complete" : true|false,    (boolean) If the transaction has a complete set of signatures
+  "errors" : [                (json array, optional) Script verification errors (if there are any)
+    {                         (json object)
+      "txid" : "hex",         (string) The hash of the referenced, previous transaction
+      "vout" : n,             (numeric) The index of the output to spent and used as input
+      "scriptSig" : "hex",    (string) The hex-encoded signature script
+      "sequence" : n,         (numeric) Script sequence number
+      "error" : "str"         (string) Verification or signing error related to the input
+    },
+    ...
+  ]
+}
+
+Examples:
+> bitcoin-cli signrawtransactionwithkey "myhex" "[\"key1\",\"key2\"]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "signrawtransactionwithkey", "params": ["myhex", "[\"key1\",\"key2\"]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e67" '["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+error code: -22
+error message:
+TX decode failed. Make sure the tx has at least one input.
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction 0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000
+{
+  "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+  "hash": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+  "version": 2,
+  "size": 82,
+  "vsize": 82,
+  "weight": 328,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+      "vout": 1,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00015000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c988
+8d0e67" '["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+error code: -22
+error message:
+TX decode failed. Make sure the tx has at least one input.
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e67" '["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sunfarms@Tentacle:~/.bitcoin$
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli sendrawtransaction "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01204e000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402204ce93e9d1392bce722ceadcff051b67cd4acdba331f96919e9c6d06b74eaebf502203e27b9f98a4f685f2bdfad3f94bfed7ad92b1f8143229ad03b815ebb8bcced390121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+error code: -26
+error message:
+min relay fee not met, 0 < 110
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli createrawtransaction '[{"txid":"573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe", "vout":1}]' '{"tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz": 0.00015}'
+0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000"
+{
+  "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+  "hash": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+  "version": 2,
+  "size": 82,
+  "vsize": 82,
+  "weight": 328,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+      "vout": 1,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00015000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help signrawtransactionwithkey
+signrawtransactionwithkey "hexstring" ["privatekey",...] ( [{"txid":"hex","vout":n,"scriptPubKey":"hex","redeemScript":"hex","witnessScript":"hex","amount":amount},...] "sighashtype" )
+
+Sign inputs for raw transaction (serialized, hex-encoded).
+The second argument is an array of base58-encoded private
+keys that will be the only keys used to sign the transaction.
+The third optional argument (may be null) is an array of previous transaction outputs that
+this transaction depends on but may not yet be in the block chain.
+
+Arguments:
+1. hexstring                        (string, required) The transaction hex string
+2. privkeys                         (json array, required) The base58-encoded private keys for signing
+     [
+       "privatekey",                (string) private key in base58-encoding
+       ...
+     ]
+3. prevtxs                          (json array, optional) The previous dependent transaction outputs
+     [
+       {                            (json object)
+         "txid": "hex",             (string, required) The transaction id
+         "vout": n,                 (numeric, required) The output number
+         "scriptPubKey": "hex",     (string, required) script key
+         "redeemScript": "hex",     (string) (required for P2SH) redeem script
+         "witnessScript": "hex",    (string) (required for P2WSH or P2SH-P2WSH) witness script
+         "amount": amount,          (numeric or string) (required for Segwit inputs) the amount spent
+       },
+       ...
+     ]
+4. sighashtype                      (string, optional, default="DEFAULT") The signature hash type. Must be one of:
+                                    "DEFAULT"
+                                    "ALL"
+                                    "NONE"
+                                    "SINGLE"
+                                    "ALL|ANYONECANPAY"
+                                    "NONE|ANYONECANPAY"
+                                    "SINGLE|ANYONECANPAY"
+
+
+Result:
+{                             (json object)
+  "hex" : "hex",              (string) The hex-encoded raw transaction with signature(s)
+  "complete" : true|false,    (boolean) If the transaction has a complete set of signatures
+  "errors" : [                (json array, optional) Script verification errors (if there are any)
+    {                         (json object)
+      "txid" : "hex",         (string) The hash of the referenced, previous transaction
+      "vout" : n,             (numeric) The index of the output to spent and used as input
+      "scriptSig" : "hex",    (string) The hex-encoded signature script
+      "sequence" : n,         (numeric) Script sequence number
+      "error" : "str"         (string) Verification or signing error related to the input
+    },
+    ...
+  ]
+}
+
+Examples:
+> bitcoin-cli signrawtransactionwithkey "myhex" "[\"key1\",\"key2\"]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "signrawtransactionwithkey", "params": ["myhex", "[\"key1\",\"key2\"]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000" '["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "0200000001fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c988
+8d0e679ffb049be7cb848f34028fbb9c20d500000000" '["cTUmaYf2yQ8H5ZAS4UhU6DBFMjfUqkxvmWu3CGXUGVUF93qJtT7R"]'
+{
+  "hex": "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000",
+  "complete": true
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction ""02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+>
+> bitcoin-cli decoderawtransaction "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fb
+b9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd4
+1c54d1e16d082c55897a4b188a8f834400000000"
+
+>
+>
+>
+> ^C
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+{
+  "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+  "hash": "a0354d65362ab696d7567caf8f8e74211ac4da1e7dcbca96579d9c945f8a110d",
+  "version": 2,
+  "size": 191,
+  "vsize": 110,
+  "weight": 437,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "573684f23dd4ae4b9f6c4bb70bcd71ed69fd44e2c6a5e0c77193dd01006421fe",
+      "vout": 1,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a01",
+        "032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f8344"
+      ],
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00015000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help sendtransaction
+help: unknown command: sendtransaction
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help sendrawtransaction
+sendrawtransaction "hexstring" ( maxfeerate )
+
+Submit a raw transaction (serialized, hex-encoded) to local node and network.
+
+The transaction will be sent unconditionally to all peers, so using sendrawtransaction
+for manual rebroadcast may degrade privacy by leaking the transaction's origin, as
+nodes will normally not rebroadcast non-wallet transactions already in their mempool.
+
+A specific exception, RPC_TRANSACTION_ALREADY_IN_CHAIN, may throw if the transaction cannot be added to the mempool.
+
+Related RPCs: createrawtransaction, signrawtransactionwithkey
+
+Arguments:
+1. hexstring     (string, required) The hex string of the raw transaction
+2. maxfeerate    (numeric or string, optional, default="0.10") Reject transactions whose fee rate is higher than the specified value, expressed in BTC/kvB.
+                 Set to 0 to accept any fee rate.
+
+
+Result:
+"hex"    (string) The transaction hash in hex
+
+Examples:
+
+Create a transaction
+> bitcoin-cli createrawtransaction "[{\"txid\" : \"mytxid\",\"vout\":0}]" "{\"myaddress\":0.01}"
+Sign the transaction, and get back the hex
+> bitcoin-cli signrawtransactionwithwallet "myhex"
+
+Send the transaction (signed hex)
+> bitcoin-cli sendrawtransaction "signedhex"
+
+As a JSON-RPC call
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "sendrawtransaction", "params": ["signedhex"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli sendrawtransaction "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli gettransaction c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b
+{
+  "amount": 0.00000000,
+  "fee": -0.00005000,
+  "confirmations": 0,
+  "trusted": true,
+  "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+  "walletconflicts": [
+  ],
+  "time": 1656778091,
+  "timereceived": 1656778091,
+  "bip125-replaceable": "no",
+  "details": [
+    {
+      "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+      "category": "send",
+      "amount": -0.00015000,
+      "label": "",
+      "vout": 0,
+      "fee": -0.00005000,
+      "abandoned": false
+    },
+    {
+      "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+      "category": "receive",
+      "amount": 0.00015000,
+      "label": "",
+      "vout": 0
+    }
+  ],
+  "hex": "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli sendrawtransaction "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+error code: -27
+error message:
+Transaction already in block chain
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction ""02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+
+bitcoin-cli decoderawtransaction "02000000000101fe21640001dd9371c7e0a5c6e244fd69ed71cd0bb74b6c9f4baed43df28436570100000000ffffffff01983a000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402203f5a3d49df6be6a01eaf6a6b274456dd9a864dcece54bece06816e071ee1a107022056c8ac00985022670e90e654960d914d2f80034ac3bd0c20ef6c6f5c32138d8a0121032d59358ee075aeb28368fd67074a1bd41c54d1e16d082c55897a4b188a8f834400000000"
+
+
+
+>
+>
+> ^C
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli listunspent
+[
+  {
+    "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+    "vout": 0,
+    "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+    "label": "",
+    "scriptPubKey": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+    "amount": 0.00015000,
+    "confirmations": 1,
+    "spendable": true,
+    "solvable": true,
+    "desc": "wpkh([766ab74f/0'/0'/2']026d54c5dcd35997054e5b033a907a70b4b238934c4a59e452349112a27e364fc8)#mrdk9fej",
+    "safe": true
+  }
+]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli dumprivkey tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli dumpprivkey tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz
+cTqpYYLJXv1gzC7AsQibvdNb29AvrrbmkFTYeRrUYoGZnQRtbp67
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help createrawtransaction
+createrawtransaction [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount,...},{"data":"hex"},...] ( locktime replaceable )
+
+Create a transaction spending the given inputs and creating new outputs.
+Outputs can be addresses or data.
+Returns hex-encoded raw transaction.
+Note that the transaction's inputs are not signed, and
+it is not stored in the wallet or transmitted to the network.
+
+Arguments:
+1. inputs                      (json array, required) The inputs
+     [
+       {                       (json object)
+         "txid": "hex",        (string, required) The transaction id
+         "vout": n,            (numeric, required) The output number
+         "sequence": n,        (numeric, optional, default=depends on the value of the 'replaceable' and 'locktime' arguments) The sequence number
+       },
+       ...
+     ]
+2. outputs                     (json array, required) The outputs (key-value pairs), where none of the keys are duplicated.
+                               That is, each address can only appear once and there can only be one 'data' object.
+                               For compatibility reasons, a dictionary, which holds the key-value pairs directly, is also
+                               accepted as second parameter.
+     [
+       {                       (json object)
+         "address": amount,    (numeric or string, required) A key-value pair. The key (string) is the bitcoin address, the value (float or string) is the amount in BTC
+         ...
+       },
+       {                       (json object)
+         "data": "hex",        (string, required) A key-value pair. The key must be "data", the value is hex-encoded data
+       },
+       ...
+     ]
+3. locktime                    (numeric, optional, default=0) Raw locktime. Non-0 value also locktime-activates inputs
+4. replaceable                 (boolean, optional, default=false) Marks this transaction as BIP125-replaceable.
+                               Allows this transaction to be replaced by a transaction with higher fees. If provided, it is an error if explicit sequence numbers are incompatible.
+
+Result:
+"hex"    (string) hex string of the transaction
+
+Examples:
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"address\":0.01}]"
+> bitcoin-cli createrawtransaction "[{\"txid\":\"myid\",\"vout\":0}]" "[{\"data\":\"00010203\"}]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"address\":0.01}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "createrawtransaction", "params": ["[{\"txid\":\"myid\",\"vout\":0}]", "[{\"data\":\"00010203\"}]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli createwartransaction '[{"txid":"c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b", "vout":0}]'
+error code: -32601
+error message:
+Method not found
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getnewaddress
+tb1qqlmnuzxwm6y8j8h2tfegt3rnxfkveucprrnxd8
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli createrawtransaction '[{"txid":"c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b", "vout":0}]' '[{"tb1qqlmnuzxwm6y8j8h2tfegt3rnxfkveucprrnxd8": 0.00013}, "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz":0.0000]'
+error: Error parsing JSON: [{"tb1qqlmnuzxwm6y8j8h2tfegt3rnxfkveucprrnxd8": 0.00013}, "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz":0.0000]
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli createrawtransaction '[{"txid":"c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b", "vout":0}]' '[{"tb1qqlmnuzxwm6y8j8h2tfegt3rnxfkveucprrnxd8": 0.00013}, {"tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz":0.0000}]'
+02000000013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf3010000000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "02000000013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf3010000000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000"
+{
+  "txid": "a094ce19baee4303eb65899c62839c903bc9bf1dfd63c3e04e4d2508c4aa8719",
+  "hash": "a094ce19baee4303eb65899c62839c903bc9bf1dfd63c3e04e4d2508c4aa8719",
+  "version": 2,
+  "size": 113,
+  "vsize": 113,
+  "weight": 452,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00013000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 07f73e08cede88791eea5a7285c473326cccf301",
+        "hex": "001407f73e08cede88791eea5a7285c473326cccf301",
+        "address": "tb1qqlmnuzxwm6y8j8h2tfegt3rnxfkveucprrnxd8",
+        "type": "witness_v0_keyhash"
+      }
+    },
+    {
+      "value": 0.00000000,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli createrawtransaction '[{"txid":"c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b", "vout":0}]' '[{"tb1qqlmnuzxwm6y8j8h2tfegt3rnxfkveucprrnxd8": 0.00013}, {"tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz":0.00001}]'
+02000000013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf301e803000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "02000000013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf301e803000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000"
+{
+  "txid": "84c54c0d91f5846dba5a10e296488c6a73fd84f04d89dce3e28b6e32338e9555",
+  "hash": "84c54c0d91f5846dba5a10e296488c6a73fd84f04d89dce3e28b6e32338e9555",
+  "version": 2,
+  "size": 113,
+  "vsize": 113,
+  "weight": 452,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00013000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 07f73e08cede88791eea5a7285c473326cccf301",
+        "hex": "001407f73e08cede88791eea5a7285c473326cccf301",
+        "address": "tb1qqlmnuzxwm6y8j8h2tfegt3rnxfkveucprrnxd8",
+        "type": "witness_v0_keyhash"
+      }
+    },
+    {
+      "value": 0.00001000,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help signrawtransaction
+help: unknown command: signrawtransaction
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli help signrawtransactionwithkey
+signrawtransactionwithkey "hexstring" ["privatekey",...] ( [{"txid":"hex","vout":n,"scriptPubKey":"hex","redeemScript":"hex","witnessScript":"hex","amount":amount},...] "sighashtype" )
+
+Sign inputs for raw transaction (serialized, hex-encoded).
+The second argument is an array of base58-encoded private
+keys that will be the only keys used to sign the transaction.
+The third optional argument (may be null) is an array of previous transaction outputs that
+this transaction depends on but may not yet be in the block chain.
+
+Arguments:
+1. hexstring                        (string, required) The transaction hex string
+2. privkeys                         (json array, required) The base58-encoded private keys for signing
+     [
+       "privatekey",                (string) private key in base58-encoding
+       ...
+     ]
+3. prevtxs                          (json array, optional) The previous dependent transaction outputs
+     [
+       {                            (json object)
+         "txid": "hex",             (string, required) The transaction id
+         "vout": n,                 (numeric, required) The output number
+         "scriptPubKey": "hex",     (string, required) script key
+         "redeemScript": "hex",     (string) (required for P2SH) redeem script
+         "witnessScript": "hex",    (string) (required for P2WSH or P2SH-P2WSH) witness script
+         "amount": amount,          (numeric or string) (required for Segwit inputs) the amount spent
+       },
+       ...
+     ]
+4. sighashtype                      (string, optional, default="DEFAULT") The signature hash type. Must be one of:
+                                    "DEFAULT"
+                                    "ALL"
+                                    "NONE"
+                                    "SINGLE"
+                                    "ALL|ANYONECANPAY"
+                                    "NONE|ANYONECANPAY"
+                                    "SINGLE|ANYONECANPAY"
+
+
+Result:
+{                             (json object)
+  "hex" : "hex",              (string) The hex-encoded raw transaction with signature(s)
+  "complete" : true|false,    (boolean) If the transaction has a complete set of signatures
+  "errors" : [                (json array, optional) Script verification errors (if there are any)
+    {                         (json object)
+      "txid" : "hex",         (string) The hash of the referenced, previous transaction
+      "vout" : n,             (numeric) The index of the output to spent and used as input
+      "scriptSig" : "hex",    (string) The hex-encoded signature script
+      "sequence" : n,         (numeric) Script sequence number
+      "error" : "str"         (string) Verification or signing error related to the input
+    },
+    ...
+  ]
+}
+
+Examples:
+> bitcoin-cli signrawtransactionwithkey "myhex" "[\"key1\",\"key2\"]"
+> curl --user myusername --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "signrawtransactionwithkey", "params": ["myhex", "[\"key1\",\"key2\"]"]}' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli signrawtransactionwithkey "02000000013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf301e803000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d500000000" '["cTqpYYLJXv1gzC7AsQibvdNb29AvrrbmkFTYeRrUYoGZnQRtbp67"]'
+{
+  "hex": "020000000001013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf301e803000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402206921324d086ce9d771784eb86a16ad633433af5b719e149716671fef0c06fff002204bd190789f006b6466cf955646863b525a317f6c040d0f2c5fc5aa129bd55d260121026d54c5dcd35997054e5b033a907a70b4b238934c4a59e452349112a27e364fc800000000",
+  "complete": true
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "020000000001013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf301e803000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402206921324d086ce9d771784eb86a16ad633433af5b719e149716671fef0c06fff002204bd190789f006b6466cf955646863b525a317f6c040d0f2c5fc5aa129bd55d260121026d54c5dcd35997054e5b033a907a70b4b238934c4a59e452349112a27e364fc800000000"
+{
+  "txid": "84c54c0d91f5846dba5a10e296488c6a73fd84f04d89dce3e28b6e32338e9555",
+  "hash": "c9c7e960a991c9b9ebf4a4940607e9f99b97e624f2f215ae9fae5fa8824457e3",
+  "version": 2,
+  "size": 222,
+  "vsize": 141,
+  "weight": 561,
+  "locktime": 0,
+  "vin": [
+    {
+      "txid": "c5fd78866d04d767a0556df4bc382ac1bd2209064854b286cc28bf992d9a403b",
+      "vout": 0,
+      "scriptSig": {
+        "asm": "",
+        "hex": ""
+      },
+      "txinwitness": [
+        "304402206921324d086ce9d771784eb86a16ad633433af5b719e149716671fef0c06fff002204bd190789f006b6466cf955646863b525a317f6c040d0f2c5fc5aa129bd55d2601",
+        "026d54c5dcd35997054e5b033a907a70b4b238934c4a59e452349112a27e364fc8"
+      ],
+      "sequence": 4294967295
+    }
+  ],
+  "vout": [
+    {
+      "value": 0.00013000,
+      "n": 0,
+      "scriptPubKey": {
+        "asm": "0 07f73e08cede88791eea5a7285c473326cccf301",
+        "hex": "001407f73e08cede88791eea5a7285c473326cccf301",
+        "address": "tb1qqlmnuzxwm6y8j8h2tfegt3rnxfkveucprrnxd8",
+        "type": "witness_v0_keyhash"
+      }
+    },
+    {
+      "value": 0.00001000,
+      "n": 1,
+      "scriptPubKey": {
+        "asm": "0 c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "hex": "0014c9888d0e679ffb049be7cb848f34028fbb9c20d5",
+        "address": "tb1qexyg6rn8nlasfxl8ewzg7dqz37aecgx43r8kyz",
+        "type": "witness_v0_keyhash"
+      }
+    }
+  ]
+}
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli sendrawtransaction "020000000001013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf301e803000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402206921324d086ce9d771784eb86a16ad633433af5b719e149716671fef0c06fff002204bd190789f006b6466cf955646863b525a317f6c040d0f2c5fc5aa129bd55d260121026d54c5dcd35997054e5b033a907a70b4b238934c4a59e452349112a27e364fc800000000"
+84c54c0d91f5846dba5a10e296488c6a73fd84f04d89dce3e28b6e32338e9555
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli decoderawtransaction "020000000001013b409a2d99bf28cc86b25448060922bdc12a38bcf46d55a067d7046d8678fdc50000000000ffffffff02c83200000000000016001407f73e08cede88791eea5a7285c473326cccf301e803000000000000160014c9888d0e679ffb049be7cb848f34028fbb9c20d50247304402206921324d086ce9d771784eb86a16ad633433af5b719e149716671fef0c06fff002204bd190789f006b6466cf955646863b525a317f6c040d0f2c5fc5aa129bd55d260121026d54c5dcd35997054e5b033a907a70b4b238934c4a59e452349112a27e364fc800000000"

@@ -4,14 +4,12 @@
         <name>Bitcoin.API</name>
     </assembly>
     <members>
-        <member name="M:Bitcoin.API.Controller.BitcoinController.GetTransaction3rdParty(Bitcoin.Core.Models.BitcoinCore.GetTransaction3rdPartyRequest)">
+        <member name="M:Bitcoin.API.Controller.BitcoinController.GetTxOut(Bitcoin.Core.Models.BitcoinCore.GetTxOutRequest)">
             <summary>
             relies on a 3rd party to get txns
             </summary>
             <param name="model"></param>
             <returns></returns>
-        </member>
-        <member name="M:Bitcoin.API.Controller.BitcoinController.GetTxOut(Bitcoin.Core.Models.BitcoinCore.GetTxOutRequest)">
             <summary>
             this is used to get the value of UTXO in a wallet address
             </summary>
@@ -22,6 +20,15 @@
             <summary>
             this gets UTXOs by supplying the address
             </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitcoin.API.Controller.RawTransactionController.FundRawtransaction(Bitcoin.Core.Models.BitcoinCore.FundRawtransactionRequest)">
+            <remarks>
+            options is optional.
+            Used to add inputs to a txn until its big enough to meet the value of all its output.
+            https://chainquery.com/bitcoin-cli/fundrawtransaction
+            </remarks>
             <param name="model"></param>
             <returns></returns>
         </member>
@@ -43,6 +50,24 @@
                 }
                 
             </remarks>
+        </member>
+        <member name="M:Bitcoin.API.Controller.WalletController.AddMultisigAddress(Bitcoin.Core.Models.BitcoinCore.AddMultisigAddressRequest)">
+            <remarks>
+            this is also similar to createmultisig. they both return a multisig address with their redeemscript
+            </remarks>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bitcoin.API.Controller.WalletController.ImportAddress(Bitcoin.Core.Models.BitcoinCore.ImportAddressRequest)">
+             <remarks>
+             Arguments:
+            1. address(string, required) The Bitcoin address(or hex-encoded script)
+            2. label(string, optional, default="") An optional label
+            3. rescan(boolean, optional, default=true) Rescan the wallet for transactions
+            4. p2sh(boolean, optional, default=false) Add the P2SH version of the script as well
+             </remarks>
+             <param name="model"></param>
+             <returns></returns>
         </member>
     </members>
 </doc>

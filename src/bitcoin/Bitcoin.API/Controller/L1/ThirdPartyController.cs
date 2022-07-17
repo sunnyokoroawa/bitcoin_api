@@ -14,10 +14,10 @@ namespace Bitcoin.API.Controller.L1
     [Route("api/v1/[controller]")]
     [ApiController]
     public class ThirdPartyController : ControllerBase
-    { 
+    {
         private readonly IBitcoinCoreClient client;
 
-    public ThirdPartyController(IBitcoinCoreClient client)
+        public ThirdPartyController(IBitcoinCoreClient client)
         {
             this.client = client;
         }

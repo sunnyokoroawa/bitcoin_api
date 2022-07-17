@@ -11,6 +11,11 @@ namespace Bitcoin.Core.Models.BitcoinCore
      
     public class GetAddressInfoResponse
     {
+        public GetAddressInfoResponse()
+        {
+            labels = new List<string>();
+        }
+
         public string address { get; set; }
         public string scriptPubKey { get; set; }
         public bool ismine { get; set; }
@@ -28,7 +33,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         public string hdkeypath { get; set; }
         public string hdseedid { get; set; }
         public string hdmasterfingerprint { get; set; }
-        public string[] labels { get; set; }
+        public List<string> labels { get; set; }
     }
 
 }

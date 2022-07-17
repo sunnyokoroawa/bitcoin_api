@@ -1,0 +1,98 @@
+
+1. createmultisig
+2. addmultisigaddress (confirm this)
+3. importaddress
+4. walletprocesspsbt (update also)
+5. finalizepsbt
+
+
+//createmultisig
+{
+  "signatoriesToApprove": 2,
+  "signatories": 3,
+  "address_type": "legacy"
+}
+{
+  "id": "1",
+  "error": null,
+  "result": {
+    "nAddressesInfo": [
+      {
+        "address": "mkrsZ7zgdnotMsxpvqoqDnCB8x3xJNnhar",
+        "pubkey": "0202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e"
+      },
+      {
+        "address": "mv3WKcDEw9uDptVjo1t3u8wvJgRn4TWXaQ",
+        "pubkey": "039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf"
+      },
+      {
+        "address": "mz4dDNYkeSrBnNX3Paz7muPiGZdZsVS9Hf",
+        "pubkey": "028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e325"
+      }
+    ],
+    "multisigAddress": {
+      "address": "2Mx6kudjZPw2on6oVEVYJMhLQAjjGP4utK3",
+      "redeemScript": "52210202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e21039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf21028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e32553ae",
+      "descriptor": "sh(multi(2,0202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e,039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf,028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e325))#hn4tq3ru"
+    }
+  }
+}
+
+//addmultisigaddress
+{
+  "signatories": 2,
+  "publicKeysOrAddresses": [
+    "0202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e",
+	"039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf",
+	"028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e325",
+  ],
+  "label": "",
+  "address_type": "legacy"
+}
+{
+  "id": "1",
+  "error": null,
+  "result": {
+    "address": "2Mx6kudjZPw2on6oVEVYJMhLQAjjGP4utK3",
+    "redeemScript": "52210202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e21039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf21028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e32553ae",
+    "descriptor": "sh(multi(2,[766ab74f/0'/0'/73']0202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e,[766ab74f/0'/0'/74']039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf,[766ab74f/0'/0'/75']028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e325))#pwcm4fu3"
+  }
+}
+
+//importaddress
+{
+  "address": "2Mx6kudjZPw2on6oVEVYJMhLQAjjGP4utK3",
+  "label": "",
+  "rescan": true
+}
+{
+  "id": "1",
+  "error": null,
+  "result": null
+}
+
+Once  "solvable": true, then the bitcoin in the address can be spent
+sunfarms@Tentacle:~/.bitcoin$ bitcoin-cli getaddressinfo 2Mx6kudjZPw2on6oVEVYJMhLQAjjGP4utK3
+{
+  "address": "2Mx6kudjZPw2on6oVEVYJMhLQAjjGP4utK3",
+  "scriptPubKey": "a914353eb2227059b31f43d1be50c4e0d90f4ab319f787",
+  "ismine": true,
+  "solvable": true,
+  "desc": "sh(multi(2,[766ab74f/0'/0'/73']0202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e,[766ab74f/0'/0'/74']039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf,[766ab74f/0'/0'/75']028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e325))#pwcm4fu3",
+  "iswatchonly": false,
+  "isscript": true,
+  "iswitness": false,
+  "script": "multisig",
+  "hex": "52210202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e21039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf21028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e32553ae",
+  "sigsrequired": 2,
+  "pubkeys": [
+    "0202d1e83594afea8c2050047ad7e7aadca920a7fe7480a8b439e11d971df35e6e",
+    "039b72471bf0136dd9de1d0243e43a4976f7b59717c84efc834c9e9692e6f20abf",
+    "028043ead2af1e58b6250edc0be576652daab10eeeab488717447b6e350676e325"
+  ],
+  "ischange": false,
+  "timestamp": 1,
+  "labels": [
+    ""
+  ]
+}

@@ -25,7 +25,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
     public class ReceiveAddressRequest
     { 
         public  string  Address{ get; set; }
-        public  decimal Amount { get; set; }
+        public  decimal Amount { get; set; } 
     }
 
 

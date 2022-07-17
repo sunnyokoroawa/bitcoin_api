@@ -19,6 +19,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         /// this is in BTC
         /// </summary>
         public decimal? Fees{ get; set; } 
+        public string FeeType{ get; set; } //indicates who is to pay the fees
     }
 
     public class FromTransaction

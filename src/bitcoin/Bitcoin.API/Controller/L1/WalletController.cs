@@ -148,7 +148,7 @@ namespace Bitcoin.API.Controller
         [HttpPost]
         [Route("getWalletInfo")]
         public async Task<IActionResult> GetWalletInfo()
-        { 
+        {
             var response = await client.GetWalletInfoAsync();
             Log.Information($"GetWalletInfo response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
@@ -197,12 +197,12 @@ namespace Bitcoin.API.Controller
         [HttpPost]
         [Route("listWalletDir")]
         public async Task<IActionResult> ListWalletDir()
-        { 
+        {
             var response = await client.ListWalletDirAsync();
             Log.Information($"ListWalletDir response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
-        
+
         /// <remarks>
         /// address_type: “legacy”, “p2sh-segwit”, and “bech32” and all case sensitive
         /// 
@@ -264,7 +264,7 @@ namespace Bitcoin.API.Controller
             Log.Information($"VerifySignedMessage response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
-          
+
         [HttpPost]
         [Route("listWallets")]
         public async Task<IActionResult> ListWallets()
@@ -274,5 +274,38 @@ namespace Bitcoin.API.Controller
             return await Task.FromResult(new JsonResult(response));
         }
 
+        /// <remarks>
+        /// this is also similar to createmultisig. they both return a multisig address with their redeemscript
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("addMultisigAddress")]
+        public async Task<IActionResult> AddMultisigAddress(AddMultisigAddressRequest model)
+        {
+            Log.Information($"AddMultisigAddress request {JsonConvert.SerializeObject(model)}");
+            var response = await client.AddMultisigAddressAsync(model);
+            Log.Information($"AddMultisigAddress response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        /// <remarks>
+        /// Arguments:
+        ///1. address(string, required) The Bitcoin address(or hex-encoded script)
+        ///2. label(string, optional, default="") An optional label
+        ///3. rescan(boolean, optional, default=true) Rescan the wallet for transactions
+        ///4. p2sh(boolean, optional, default=false) Add the P2SH version of the script as well
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("importAddress")]
+        public async Task<IActionResult> ImportAddress(ImportAddressRequest model)
+        {
+            Log.Information($"ImportAddress request {JsonConvert.SerializeObject(model)}");
+            var response = await client.ImportAddressAsync(model);
+            Log.Information($"ImportAddress response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
     }
 }

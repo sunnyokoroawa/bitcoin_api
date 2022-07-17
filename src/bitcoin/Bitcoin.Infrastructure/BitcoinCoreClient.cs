@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http;
+using Bitcoin.Core;
 
 namespace Bitcoin.Infrastructure
 {
@@ -34,10 +35,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<string>> GetNewAddressAsync(GetNewAddressRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.label, model.address_type };
@@ -79,10 +77,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<decimal>> GetBalanceAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { };
@@ -114,10 +109,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<GetBalancesResponse>> GetBalancesAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { };
@@ -148,10 +140,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<GetAddressInfoResponse>> GetAddressInfoAsync(GetAddressInfoRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Address };
@@ -182,10 +171,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<List<ListReceivedByAddressResponse>>> ListReceivedByAddressAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { };
@@ -216,10 +202,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<decimal>> GetReceivedByAddressAsync(GetReceivedByAddressRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Address };
@@ -280,10 +263,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ValidateResponseBTC<ValidateAddressResponse>> ValidateAddressAsync(ValidateAddressRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Address };
@@ -342,10 +322,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<GetTransactionResponse>> GetTransactionAsync(GetTransactionRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.TxId };
@@ -381,10 +358,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<GetTxOutResponse>> GetTxOutAsync(GetTxOutRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.TxId, model.n, model.include_mempool };
@@ -415,10 +389,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<GetTxOutsetInfoResponse>> GetTxOutSetInfoAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { };
@@ -449,10 +420,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<List<ListUnspentResponse>>> ListUnspentAsync(ListUnspentRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.NumberOfConfirmations };
@@ -491,10 +459,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<GetBlockResponse>> GetBlockAsync(GetBlockRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.BlockHash };
@@ -647,10 +612,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<GetRawTransactionAsJSONResponse>> GetRawTransactionAsJSONAsync(GetRawTransactionAsJSONRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.TxId, 1 };
@@ -681,10 +643,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<string>> CreateRawTransactionAsync(CreateRawTransactionRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects  
             JContainer jArrayInput = new JArray();
@@ -716,7 +675,7 @@ namespace Bitcoin.Infrastructure
             new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
-            var body = RemoveQuotesFromString(writer.ToString());
+            var body = PruneAsJSONString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -734,14 +693,11 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
-         
+
         public async Task<ResponseBTC<DecodeRawTransactionResponse>> DecodeRawTransactionAsync(DecodeRawTransactionRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Hex };
@@ -772,10 +728,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<SignRawTransactionWithKeysResponse>> SignRawTransactionAsync(SignRawTransactionWithKeysRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Hex, JsonConvert.SerializeObject(model.SendAddressPrivateKeys) };
@@ -785,7 +738,7 @@ namespace Bitcoin.Infrastructure
             writer.Flush();
 
             //to remopve unwanted characters in the string 
-            var body = RemoveQuotesFromString(writer.ToString());
+            var body = PruneAsJSONString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -815,12 +768,18 @@ namespace Bitcoin.Infrastructure
             return await Task.FromResult(response);
         }
 
-
-        private string RemoveQuotesFromString(string body)
+        /// <summary>
+        /// mainly used when the param is a complex object hence adds some extra characters to the json string after conversion
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        private string PruneAsJSONString(string body)
         {
             body = body.Replace(@"\", "");
             body = body.Replace("\"[", "[");
             body = body.Replace("]\"", "]");
+            body = body.Replace("\"{", "{");
+            body = body.Replace("}\"", "}");
 
             return body;
         }
@@ -828,10 +787,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<string>> SendRawTransactionAsync(SendRawTransactionRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Hex };
@@ -840,7 +796,7 @@ namespace Bitcoin.Infrastructure
             new RPCRequest(RPCOperations.sendrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
-            var body = RemoveQuotesFromString(writer.ToString());
+            var body = PruneAsJSONString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -859,13 +815,22 @@ namespace Bitcoin.Infrastructure
             return await Task.FromResult(response);
         }
 
-        private async Task<ResponseBTC<string>> CreateRawTransactionAsync(CreateSignAndSendRawTransactionViaTxIdRequest model, string changeAddress, decimal changeAmount)
+        private RestRequest CreateRestClientRequest()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
             var request = new RestRequest();
             request.Method = Method.Post;
             request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
             request.AddHeader("Content-Type", "text/plain");
+
+            return request;
+
+        }
+        private async Task<ResponseBTC<string>> CreateRawTransactionAsync(CreateSignAndSendRawTransactionViaTxIdRequest model,
+            string changeAddress, decimal changeAmount)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
 
             //build source objects  
             JContainer jArrayInput = new JArray();
@@ -888,8 +853,10 @@ namespace Bitcoin.Infrastructure
                         { model.ToAddress.Address , model.ToAddress.Amount },
                     });
 
-            //add the change address
-            jArrayReceive.Add(new JObject
+            //if change address is not specifired, dont include it. Only include if its defined
+            if (!string.IsNullOrEmpty(changeAddress) || changeAmount > 0)
+                //add the change address
+                jArrayReceive.Add(new JObject
                     {
                         { changeAddress, changeAmount }
                     });
@@ -901,7 +868,7 @@ namespace Bitcoin.Infrastructure
             new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
-            var body = RemoveQuotesFromString(writer.ToString());
+            var body = PruneAsJSONString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -917,8 +884,17 @@ namespace Bitcoin.Infrastructure
             return await Task.FromResult(createRawRransactionResponse);
         }
 
-        public async Task<ResponseBTC<string>> CreateSignAndSendRawTransactAsync(CreateSignAndSendRawTransactionViaTxIdRequest model)
+        public async Task<ResponseBTC<string>> CreateSignAndSendRawTransactionAsync(CreateSignAndSendRawTransactionViaTxIdRequest model)
         {
+            if (string.IsNullOrEmpty(model.FeeType))
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "Kindly indicate who is to pay for the transaction fees, sender or receiver"
+                    }
+                });
+
             //validate receive address
             var validateAddressResponse = await ValidateAddressAsync(new ValidateAddressRequest
             {
@@ -991,9 +967,9 @@ namespace Bitcoin.Infrastructure
             //to get all the txns
             var unspentTransactions = listUnspentResponse.Result.Where(u => model.FromTransactions.Select(x => x.txid).Contains(u.txid)).ToList();
 
-            var totalUnspentAmount = unspentTransactions.Sum(t => t.amount);
+            var unspentAmount = unspentTransactions.Sum(t => t.amount);
 
-            if (totalUnspentAmount <= 0)
+            if (unspentAmount <= 0 || model.ToAddress.Amount > unspentAmount)
                 return await Task.FromResult(new ResponseBTC<string>
                 {
                     Error = new BitcoinError
@@ -1001,39 +977,82 @@ namespace Bitcoin.Infrastructure
                         Message = "Declined - Insufficient balance "
                     }
                 });
-
-            var sendAmount = model.ToAddress.Amount;
-            var changeAndMiningFeeAmount = totalUnspentAmount - sendAmount;
-
+             
             //calculating fees
             //in * 146 + out * 33 + 10
             //in - number of inputs
             //out - number of outputs
-            var txnFeeInBTC = model.Fees.HasValue ? model.Fees.Value : ((model.FromTransactions.Count * 146) + (2 * 33) + 10) / 100000000m;
-            var changeAmount = changeAndMiningFeeAmount - txnFeeInBTC;
+            var fee = model.Fees.HasValue ? model.Fees.Value : ((model.FromTransactions.Count * 146) + (2 * 33) + 10) / 100000000m;
 
-            if (totalUnspentAmount < (sendAmount + changeAmount))
+            var changeBalance = unspentAmount - (model.ToAddress.Amount + fee);
+
+            //balance cannot cater for fees
+            //if (unspentAmount < (model.ToAddress.Amount + fee)) //if the bala
+            if (changeBalance < 0) //if cannot handle the fee, the fee should be taken from the receieve amount
+            {
+                model.ToAddress.Amount = model.ToAddress.Amount - fee;
+                changeBalance = 0m;
+            } 
+
+            if (model.ToAddress.Amount < 0)
                 return await Task.FromResult(new ResponseBTC<string>
                 {
                     Error = new BitcoinError
                     {
-                        Message = $"Declined - Insufficient balance to pull of this transaction"
+                        Message = $"Declined - Error processing the payment."
                     }
                 });
+              
+            //var changeAmount = changeValue;
 
-            //create change address where the change will be dumped
-            var createRawChangeAddressResponse = await GetRawChangeAddressAsync(new GetRawChangeAddressRequest
+            //if (changeValue == 0) //he is spending everything in the account //12 6 1
+            //    changeAmount = 0m; //no change, the person wants to spend everything in the wallet
+
+            //else //he is not spending everything in the account 
+            //    changeAmount = unspentAmount - (model.ToAddress.Amount + fee);
+
+            //if (changeAmount < 0)
+            //    return await Task.FromResult(new ResponseBTC<string>
+            //    {
+            //        Error = new BitcoinError
+            //        {
+            //            Message = $"Declined - Insufficient balance to handle transaction fees."
+            //        }
+            //    });
+
+            //if (changeAmount == 0 && model.FeeType == Constant.FEE_TYPE_SENDER_PAYS)
+            //    return await Task.FromResult(new ResponseBTC<string>
+            //    {
+            //        Error = new BitcoinError
+            //        {
+            //            Message = $"Declined - Insufficient balance to handle transaction fees as the feetype indicated is sender."
+            //        }
+            //    });
+
+            //if (changeAmount == 0 && model.FeeType == Constant.FEE_TYPE_RECEIVER_PAYS)
+            //    model.ToAddress.Amount = model.ToAddress.Amount - fee;
+
+            ResponseBTC<string> createRawChangeAddressResponse = null;
+
+            var changeAdress = "";
+            if (changeBalance > 0) //there is change so create change address
             {
-            });
-
-            if (createRawChangeAddressResponse.Error != null)
-                return await Task.FromResult(new ResponseBTC<string>
+                //create change address where the change will be dumped
+                createRawChangeAddressResponse = await GetRawChangeAddressAsync(new GetRawChangeAddressRequest
                 {
-                    Error = createRawChangeAddressResponse.Error
                 });
 
+                if (createRawChangeAddressResponse.Error != null)
+                    return await Task.FromResult(new ResponseBTC<string>
+                    {
+                        Error = createRawChangeAddressResponse.Error
+                    });
+
+                changeAdress = createRawChangeAddressResponse.Result;
+            }
+
             //create the raw txn
-            var createRawRransactionResponse = await CreateRawTransactionAsync(model, createRawChangeAddressResponse.Result, changeAmount);
+            var createRawRransactionResponse = await CreateRawTransactionAsync(model, changeAdress, changeBalance);
 
             if (createRawRransactionResponse.Error != null)
                 return await Task.FromResult(new ResponseBTC<string>
@@ -1068,14 +1087,11 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(sendRawTransactionResponse);
         }
-         
+
         public async Task<ResponseBTC<GetBlockchainInfoResponse>> GetBlockchainInfoAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { };
@@ -1117,10 +1133,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ListWalletsResponse> ListWalletsAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { };
@@ -1153,10 +1166,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<LoadWalletResponse>> LoadWalletAsync(LoadWalletRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Name };
@@ -1264,10 +1274,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<AbandonTransactionResponse>> AbandonTransactionAsync(AbandonTransactionRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.TxId };
@@ -1277,7 +1284,7 @@ namespace Bitcoin.Infrastructure
             writer.Flush();
 
             var body = writer.ToString();
-             
+
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
 
@@ -1299,10 +1306,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<string>> DumpPrivKeyAsync(DumpPrivKeyRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Address };
@@ -1334,10 +1338,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<CreateWalletResponse>> CreateWalletAsync(CreateWalletRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Name };
@@ -1369,10 +1370,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<DumpWalletResponse>> DumpWalletAsync(DumpWalletRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.FileName };
@@ -1404,10 +1402,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<BumpFeeResponse>> BumpFeeAsync(BumpFeeRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.TxId };
@@ -1439,10 +1434,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<GetWalletInfoResponse>> GetWalletInfoAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { };
@@ -1474,10 +1466,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<UnloadWalletResponse>> UnloadwalletAsync(UnloadWalletRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Name };
@@ -1509,13 +1498,10 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<ListWalletDirResponse>> ListWalletDirAsync()
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
-            object[] @params = {   };
+            object[] @params = { };
 
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.listwalletdir, @params).WriteJSON(writer);
@@ -1544,10 +1530,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<string>> GetRawChangeAddressAsync(GetRawChangeAddressRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.address_type };
@@ -1557,7 +1540,7 @@ namespace Bitcoin.Infrastructure
             writer.Flush();
 
             var body = writer.ToString();
-             
+
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
 
@@ -1588,13 +1571,10 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<BackupWalletResponse>> BackupWalletAsync(BackupWalletRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
-            object[] @params = { model.Destination};
+            object[] @params = { model.Destination };
 
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.backupwallet, @params).WriteJSON(writer);
@@ -1632,10 +1612,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<WalletlockResponse>> WalletlockAsync(WalletlockRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Passphrase };
@@ -1676,10 +1653,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<WalletPassphraseResponse>> WalletPassphraseAsync(WalletPassphraseRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.PassPhrase, model.Timeout };
@@ -1720,10 +1694,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<string>> SignMessageAsync(SignMessageRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Address, model.Message };
@@ -1764,10 +1735,7 @@ namespace Bitcoin.Infrastructure
         public async Task<ResponseBTC<bool>> VerifySignedMessageAsync(VerifySignedMessageRequest model)
         {
             var client = new RestClient(_config["Bitcoin:URL"]);
-            var request = new RestRequest();
-            request.Method = Method.Post;
-            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
-            request.AddHeader("Content-Type", "text/plain");
+            var request = CreateRestClientRequest();
 
             //build the objects
             object[] @params = { model.Address, model.Signature, model.Message };
@@ -1776,7 +1744,7 @@ namespace Bitcoin.Infrastructure
             new RPCRequest(RPCOperations.verifymessage, @params).WriteJSON(writer);
             writer.Flush();
 
-            var body = writer.ToString();
+            var body = PruneAsJSONString(writer.ToString());
 
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
@@ -1790,7 +1758,519 @@ namespace Bitcoin.Infrastructure
                     {
                         Message = "No response from API"
                     }
-                }); 
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<FundRawtransactionResponse>> FundRawtransactionAsync(FundRawtransactionRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.HexString, model.options };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.fundrawtransaction, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<FundRawtransactionResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<FundRawtransactionResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<WalletCreateFundedPsbtResponse>> WalletCreateFundedPSBTAsync(WalletCreateFundedPsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects  
+            JContainer jArrayInput = new JArray();
+            foreach (var item in model.Inputs)
+            {
+                JObject jFromTx = new JObject
+                {
+                    { "txid", item.txid},
+                    { "vout", item.vout }
+                };
+                jArrayInput.Add(jFromTx);
+            }
+
+            //build outputs  
+            JContainer jArrayReceive = new JArray();
+            foreach (var outputs in model.Outputs)
+            {
+                //add address info
+                JObject jToTxAddressAmount = new JObject
+                    {
+                        { outputs.Address, outputs.Amount }
+                    };
+                jArrayReceive.Add(jToTxAddressAmount);
+
+                ////add data
+                //JObject jToTxData = new JObject
+                //    {
+                //        { "data", "" }
+                //    };
+                //jArrayReceive.Add(jToTxData);
+            }
+
+            //build the objects
+            //object[] @params = { jArrayInput, jArrayReceive, model.Locktime, model.Options };
+            //object[] @params = { jArrayInput, jArrayReceive, model.Locktime, JsonConvert.SerializeObject(model.Options), model.Bip32derivs };
+            object[] @params = { jArrayInput, jArrayReceive, model.Locktime, JsonConvert.SerializeObject(model.Options), model.Bip32derivs };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.walletcreatefundedpsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<WalletCreateFundedPsbtResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<WalletCreateFundedPsbtResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<DecodePsbtResponse>> DecodePSBTAsync(DecodePsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.Hex };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.decodepsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<DecodePsbtResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<DecodePsbtResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<CreateMultiSigResponse>> CreateMultisigAsync(CreateMultisigRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.nrequired, JsonConvert.SerializeObject(model.PublicKeys.ToArray()), model.address_type };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.createmultisig, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<CreateMultiSigResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<CreateMultiSigResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<CreateMultisigAddressResponse>> CreateMultiSigAddressAsync(CreateMultisigAddressRequest model)
+        {
+            if (model.Signatories <= 0)
+                return await Task.FromResult(new ResponseBTC<CreateMultisigAddressResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "Declined - Specify the number of signatories to the address."
+                    }
+                });
+
+            if (model.Signatories < model.SignatoriesToApprove)
+                return await Task.FromResult(new ResponseBTC<CreateMultisigAddressResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "Declined - Required Signatories to approve transaction must be less than or equal to account signatories."
+                    }
+                });
+
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = new RestRequest();
+            request.Method = Method.Post;
+            request.AddHeader("Authorization", $"Basic {_config["Bitcoin:authKey"]}");
+            request.AddHeader("Content-Type", "text/plain");
+
+            //create n number of addresses
+            var response = new CreateMultisigAddressResponse
+            {
+                NAddressesInfo = new List<AddressInfo>()
+            };
+
+            for (int i = 0; i < model.Signatories; i++)
+            {
+                //create an address
+                var getNewAddressResponse = await GetNewAddressAsync(new GetNewAddressRequest
+                {
+                    address_type = model.address_type
+                });
+
+                if (getNewAddressResponse.Error != null)
+                    return await Task.FromResult(new ResponseBTC<CreateMultisigAddressResponse>
+                    {
+                        Error = new BitcoinError
+                        {
+                            Message = getNewAddressResponse.Error.Message
+                        }
+                    });
+
+                //get the public key of the address created
+                var getAddressInfo = await GetAddressInfoAsync(new GetAddressInfoRequest
+                {
+                    Address = getNewAddressResponse.Result
+                });
+
+                if (getAddressInfo.Error != null)
+                    return await Task.FromResult(new ResponseBTC<CreateMultisigAddressResponse>
+                    {
+                        Error = new BitcoinError
+                        {
+                            Message = getAddressInfo.Error.Message
+                        }
+                    });
+
+                response.NAddressesInfo.Add(new AddressInfo
+                {
+                    Address = getNewAddressResponse.Result,
+                    Pubkey = getAddressInfo.Result.pubkey
+                });
+            }
+
+            var addressPublicKeys = response.NAddressesInfo.Select(x => x.Pubkey).ToArray();
+
+            //build the objects
+            object[] @params = { model.SignatoriesToApprove, JsonConvert.SerializeObject(addressPublicKeys), model.address_type };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.createmultisig, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var multisigAddressResult = JsonConvert.DeserializeObject<ResponseBTC<MultiSigAddress>>(result.Content);
+
+            if (multisigAddressResult == null)
+                return await Task.FromResult(new ResponseBTC<CreateMultisigAddressResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            if (multisigAddressResult.Error != null)
+                return await Task.FromResult(new ResponseBTC<CreateMultisigAddressResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = multisigAddressResult.Error.Message
+                    }
+                });
+
+            response.MultisigAddress = multisigAddressResult.Result;
+
+            return await Task.FromResult(new ResponseBTC<CreateMultisigAddressResponse>
+            {
+                Result = response,
+                Id = multisigAddressResult.Id,
+                Error = multisigAddressResult.Error
+            });
+        }
+
+        public async Task<ResponseBTC<string>> CreatePsbtAsync(CreatePsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects  
+            JContainer jArrayInput = new JArray();
+            foreach (var item in model.Inputs)
+            {
+                JObject jFromTx = new JObject
+                {
+                    { "txid", item.txid},
+                    { "vout", item.vout }
+                };
+                jArrayInput.Add(jFromTx);
+            }
+
+            //build outputs  
+            JContainer jArrayReceive = new JArray();
+            foreach (var outputs in model.Outputs)
+            {
+                //add address info
+                JObject jToTxAddressAmount = new JObject
+                    {
+                        { outputs.Address, outputs.Amount }
+                    };
+                jArrayReceive.Add(jToTxAddressAmount);
+            }
+
+            object[] @params = { jArrayInput, jArrayReceive, model.Locktime, model.Replaceable };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.createpsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<string>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<WalletProcessPsbtResponse>> WalletProcessPsbtAsync(WalletProcessPsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]); 
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.Psbt };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.walletprocesspsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<WalletProcessPsbtResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<WalletProcessPsbtResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<FinalizePsbtResponse>> FinalizePsbtAsync(FinalizePsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.Psbt };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.finalizepsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<FinalizePsbtResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<FinalizePsbtResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<string>> UtxoUpdatePsbtAsync(UtxoUpdatePsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.Psbt };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.utxoupdatepsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<string>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<string>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<ConvertToPsbtResponse>> ConvertToPsbtAsync(ConvertToPsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.hexstring, model.permitsigdata, model.iswitness };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.convertopsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<ConvertToPsbtResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<ConvertToPsbtResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<AddMultisigAddressResponse>> AddMultisigAddressAsync(AddMultisigAddressRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.Signatories, JsonConvert.SerializeObject(model.PublicKeysOrAddresses.ToArray()), model.label, model.address_type };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.addmultisigaddress, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<AddMultisigAddressResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<AddMultisigAddressResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<ImportAddressResponse>> ImportAddressAsync(ImportAddressRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.address, model.label,  };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.importaddress, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<ImportAddressResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<ImportAddressResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
 
             return await Task.FromResult(response);
         }

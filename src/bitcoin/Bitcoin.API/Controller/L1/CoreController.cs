@@ -82,53 +82,6 @@ namespace Bitcoin.API.Controller
 
 
         [HttpPost]
-        [Route("getRawJSONTransaction")]
-        public async Task<IActionResult> GetRawJSONTransaction(GetRawTransactionAsJSONRequest model)
-        {
-            var response = await client.GetRawTransactionAsJSONAsync(model);
-            Log.Information($"getRawJSONTransaction response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-        [HttpPost]
-        [Route("createRawTransaction")]
-        public async Task<IActionResult> CreateRawTransactionAsync(CreateRawTransactionRequest model)
-        {
-            var response = await client.CreateRawTransactionAsync(model);
-            Log.Information($"CreateRawTransaction response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-        [HttpPost]
-        [Route("decodeRawTransaction")]
-        public async Task<IActionResult> DecodeRawTransactionAsync(DecodeRawTransactionRequest model)
-        {
-            var response = await client.DecodeRawTransactionAsync(model);
-            Log.Information($"DecodeRawTransaction response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-
-        [HttpPost]
-        [Route("SendRawTransaction")]
-        public async Task<IActionResult> SendRawTransaction(SendRawTransactionRequest model)
-        {
-            var response = await client.SendRawTransactionAsync(model);
-            Log.Information($"SendRawTransaction response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-        [HttpPost]
-        [Route("postRawTransaction")]
-        public async Task<IActionResult> CreateSignAndSendRawTransact(CreateSignAndSendRawTransactionViaTxIdRequest model)
-        {
-            var response = await client.CreateSignAndSendRawTransactAsync(model);
-            Log.Information($"CreateSignAndSendRawTransact response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
-
-
-        [HttpPost]
         [Route("getBlockchainInfo")]
         public async Task<IActionResult> GetBlockchainInfo()
         {

@@ -1,0 +1,86 @@
+1. createmultisig
+2. addmultisigaddress (confirm this)
+3. importaddress
+4. walletprocesspsbt (update also)
+5. finalizepsbt
+
+
+{
+  "id": "1",
+  "error": null,
+  "result": {
+    "nAddressesInfo": [
+      {
+        "address": "n253FRwjRCfmQp1Snu4N6wiyVtcAp16efZ",
+        "pubkey": "0228f2b1c4c4dd0e55b7afc83eccb89be0d18bdf7ca9c8d21c88e5a55f867b852d"
+      },
+      {
+        "address": "mgpLMcoKftUxG3AWuEhGQVSxK7mbv721K6",
+        "pubkey": "023cebbe9dd9ef7e5849d83f0d3e45fde5f30502a8e1340f15d3c8fe9ed3e77b3c"
+      },
+      {
+        "address": "mwmkoAwfErfHynnongpcVbJJicnwLquQHY",
+        "pubkey": "027834721678a982c5527a6a05aa4c7efc91d01dc8ec00ca876da9dbda8dc5f8b8"
+      }
+    ],
+    "multisigAddress": {
+      "address": "2MvSzXB3RR8xcJ5cTgRMmJMt3ktvUvaE1x2",
+      "redeemScript": "52210228f2b1c4c4dd0e55b7afc83eccb89be0d18bdf7ca9c8d21c88e5a55f867b852d21023cebbe9dd9ef7e5849d83f0d3e45fde5f30502a8e1340f15d3c8fe9ed3e77b3c21027834721678a982c5527a6a05aa4c7efc91d01dc8ec00ca876da9dbda8dc5f8b853ae",
+      "descriptor": "sh(multi(2,0228f2b1c4c4dd0e55b7afc83eccb89be0d18bdf7ca9c8d21c88e5a55f867b852d,023cebbe9dd9ef7e5849d83f0d3e45fde5f30502a8e1340f15d3c8fe9ed3e77b3c,027834721678a982c5527a6a05aa4c7efc91d01dc8ec00ca876da9dbda8dc5f8b8))#nm89d94u"
+    }
+  }
+}
+
+addmultisigaddress
+{
+  "address": "tb1qqjtxuj9al2jqk4dptcqddqcs9ydsttuu9ktue7wx2k82h7feus3stzyy0g",
+  "redeemScript": "52210228f2b1c4c4dd0e55b7afc83eccb89be0d18bdf7ca9c8d21c88e5a55f867b852d21023cebbe9dd9ef7e5849d83f0d3e45fde5f30502a8e1340f15d3c8fe9ed3e77b3c21027834721678a982c5527a6a05aa4c7efc91d01dc8ec00ca876da9dbda8dc5f8b853ae",
+  "descriptor": "wsh(multi(2,[766ab74f/0'/0'/64']0228f2b1c4c4dd0e55b7afc83eccb89be0d18bdf7ca9c8d21c88e5a55f867b852d,[766ab74f/0'/0'/65']023cebbe9dd9ef7e5849d83f0d3e45fde5f30502a8e1340f15d3c8fe9ed3e77b3c,[766ab74f/0'/0'/66']027834721678a982c5527a6a05aa4c7efc91d01dc8ec00ca876da9dbda8dc5f8b8))#j4ahfk55"
+}
+
+
+create multisig outside node
+gitbook/repo for cli cmds
+
+
+{
+  "inputs": [
+    {
+      "txid": "ba167300ebf470e391cb611b5e14036484ce95ebbe86b59cd6e6aeaec19ca0bf",
+      "vout": 1,
+      "sequence": 0
+    }
+  ],
+  "outputs": [
+    {
+      "address": "tb1qs7wj72g86qfmg8jugw5stpeh6309vdenr6qxnq",
+      "amount": 0.0007
+    }
+  ],
+  "locktime": 0,
+  "options": {
+    "includeWatching": true
+  },
+  "bip32derivs": true
+}
+
+
+{
+  "fromTransactions": [
+    {
+      "txid": "dfc2b803a2d340ba952532a5a04bd8164ebb8c24e0e0fbffb4346d8befc79c59",
+      "vout": 0,
+      "addressPrivateKey": "cMyH6LXJ9HYJSrTP2AfDmCYDXVcaUBGozCRPvv2N64C9KbSVpunu"
+    },
+	{
+      "txid": "082b226278aefd60c75ec4cdf0ea8ffdde7b2849101d4ed1fcd2c6875edb596b",
+      "vout": 1,
+      "addressPrivateKey": "cMyH6LXJ9HYJSrTP2AfDmCYDXVcaUBGozCRPvv2N64C9KbSVpunu"
+    } 
+  ],
+  "toAddress": {
+    "address": "tb1q9zwfksnxf67rsyd85clu5rnfd7as0xqwtuwlng",
+    "amount": 0.00411222
+  },
+  "fees": null
+}
