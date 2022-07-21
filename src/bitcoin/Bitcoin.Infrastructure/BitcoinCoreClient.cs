@@ -2274,5 +2274,98 @@ namespace Bitcoin.Infrastructure
 
             return await Task.FromResult(response);
         }
+
+        public async Task<ResponseBTC<CombinePsbResponse>> CombinePsbtAsync(CombinePsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { JsonConvert.SerializeObject(model.Psbts) };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.combinepsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<CombinePsbResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<CombinePsbResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<AnalyzePsbtResponse>> AnalyzePsbtAsync(AnalyzePsbtRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { JsonConvert.SerializeObject(model.Psbt) };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.analyzepsbt, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<AnalyzePsbtResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<AnalyzePsbtResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<DecodeScriptResponse>> DecodeScriptAsync(DecodeScriptRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { JsonConvert.SerializeObject(model.ReceemScript) };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.decodescript, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<DecodeScriptResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<DecodeScriptResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
     }
 }

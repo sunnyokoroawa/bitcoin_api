@@ -63,7 +63,10 @@ namespace Bitcoin.Core.Interfaces
         Task<ResponseBTC<ConvertToPsbtResponse>> ConvertToPsbtAsync(ConvertToPsbtRequest model);
         Task<ResponseBTC<AddMultisigAddressResponse>> AddMultisigAddressAsync(AddMultisigAddressRequest model);
         Task<ResponseBTC<ImportAddressResponse>> ImportAddressAsync(ImportAddressRequest model);
+        Task<ResponseBTC<CombinePsbResponse>> CombinePsbtAsync(CombinePsbtRequest model);
+        Task<ResponseBTC<AnalyzePsbtResponse>> AnalyzePsbtAsync(AnalyzePsbtRequest model);
+        Task<ResponseBTC<DecodeScriptResponse>> DecodeScriptAsync(DecodeScriptRequest model);
 
-        
+
     }
 }

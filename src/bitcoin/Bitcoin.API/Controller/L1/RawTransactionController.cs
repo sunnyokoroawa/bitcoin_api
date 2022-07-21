@@ -157,5 +157,35 @@ namespace Bitcoin.API.Controller
             Log.Information($"ConvertToPsbt response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
+
+        [HttpPost]
+        [Route("combinePsbt")]
+        public async Task<IActionResult> CombinePsbt(CombinePsbtRequest model)
+        {
+            Log.Information($"CombinePsbt request {JsonConvert.SerializeObject(model)}");
+            var response = await client.CombinePsbtAsync(model);
+            Log.Information($"CombinePsbt response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("analyzePsbt")]
+        public async Task<IActionResult> AnalyzePsbt(AnalyzePsbtRequest model)
+        {
+            Log.Information($"AnalyzePsbt request {JsonConvert.SerializeObject(model)}");
+            var response = await client.AnalyzePsbtAsync(model);
+            Log.Information($"AnalyzePsbt response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("decodeScript")]
+        public async Task<IActionResult> DecodeScript(DecodeScriptRequest model)
+        {
+            Log.Information($"DecodeScript request {JsonConvert.SerializeObject(model)}");
+            var response = await client.DecodeScriptAsync(model);
+            Log.Information($"DecodeScript response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
     }
 }
