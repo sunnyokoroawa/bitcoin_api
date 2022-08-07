@@ -65,8 +65,14 @@ namespace Bitcoin.Core.Interfaces
         Task<ResponseBTC<ImportAddressResponse>> ImportAddressAsync(ImportAddressRequest model);
         Task<ResponseBTC<CombinePsbResponse>> CombinePsbtAsync(CombinePsbtRequest model);
         Task<ResponseBTC<AnalyzePsbtResponse>> AnalyzePsbtAsync(AnalyzePsbtRequest model);
-        Task<ResponseBTC<DecodeScriptResponse>> DecodeScriptAsync(DecodeScriptRequest model);
+        Task<ResponseBTC<DecodeScriptResponse>> DecodeScriptAsync(DecodeScriptRequest model);  
+        Task<ResponseBTC<DeriveAddressesResponse>> DeriveAddressesAsync(DeriveAddressesRequest model);
+        Task<ResponseBTC<GetDescriptorinfoResponse>> GetDescriptorinfoAsync(GetDescriptorinfoRequest model);
 
+        Task<ResponseBTC<List<string>>> GenerateBlockAsync(GenerateBlockRequest model);
+        Task<ResponseBTC<EstimatesMartfeeResponse>> EstimatesMartfeeAsync(EstimatesMartfeeRequest model);
+
+        //Task<ResponseBTC<ImportDescriptorsResponse>> ImportDescriptorsAsync(List<ImportDescriptorsRequest> model);
 
     }
 }

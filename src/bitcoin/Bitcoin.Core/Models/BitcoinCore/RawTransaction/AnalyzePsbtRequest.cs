@@ -34,7 +34,12 @@ namespace Bitcoin.Core.Models.BitcoinCore
 
     public class AnalyzePsbtMissing
     {
-        public string[] signatures { get; set; }
+        public AnalyzePsbtMissing()
+        {
+            signatures = new List<string>();
+        }
+
+        public List<string> signatures { get; set; }
     }
 
 }

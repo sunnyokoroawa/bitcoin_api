@@ -137,7 +137,10 @@ namespace Bitcoin.Core.Models.BitcoinCore
         listwallets,
         listwalletdir,
         fundrawtransaction,
-        analyzepsbt,  
+        analyzepsbt,
+        deriveaddresses,
+        getdescriptorinfo,
+        importdescriptors, 
     }
 
     public class RPCRequest

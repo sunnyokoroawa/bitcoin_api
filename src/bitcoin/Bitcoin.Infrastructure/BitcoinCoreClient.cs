@@ -2343,7 +2343,7 @@ namespace Bitcoin.Infrastructure
             var request = CreateRestClientRequest();
 
             //build the objects
-            object[] @params = { JsonConvert.SerializeObject(model.ReceemScript) };
+            object[] @params = { model.ReceemScript };
 
             var writer = new StringWriter();
             new RPCRequest(RPCOperations.decodescript, @params).WriteJSON(writer);
@@ -2358,6 +2358,130 @@ namespace Bitcoin.Infrastructure
 
             if (response == null)
                 return await Task.FromResult(new ResponseBTC<DecodeScriptResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<DeriveAddressesResponse>> DeriveAddressesAsync(DeriveAddressesRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.Descriptor };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.deriveaddresses, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<DeriveAddressesResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<DeriveAddressesResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<GetDescriptorinfoResponse>> GetDescriptorinfoAsync(GetDescriptorinfoRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.descriptor };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.getdescriptorinfo, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<GetDescriptorinfoResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<GetDescriptorinfoResponse>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<List<string>>> GenerateBlockAsync(GenerateBlockRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.NumberOfBlocks };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.generate, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<List<string>>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<List<string>>
+                {
+                    Error = new BitcoinError
+                    {
+                        Message = "No response from API"
+                    }
+                });
+
+            return await Task.FromResult(response);
+        }
+
+        public async Task<ResponseBTC<EstimatesMartfeeResponse>> EstimatesMartfeeAsync(EstimatesMartfeeRequest model)
+        {
+            var client = new RestClient(_config["Bitcoin:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.conf_target, model.estimate_mode };
+
+            var writer = new StringWriter();
+            new RPCRequest(RPCOperations.estimatesmartfee, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = PruneAsJSONString(writer.ToString());
+
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+
+            var response = JsonConvert.DeserializeObject<ResponseBTC<EstimatesMartfeeResponse>>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseBTC<EstimatesMartfeeResponse>
                 {
                     Error = new BitcoinError
                     {

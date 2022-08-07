@@ -307,5 +307,15 @@ namespace Bitcoin.API.Controller
             Log.Information($"ImportAddress response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
+
+        [HttpPost]
+        [Route("deriveAddresses")]
+        public async Task<IActionResult> DeriveAddresses(DeriveAddressesRequest model)
+        {
+            Log.Information($"DeriveAddresses request {JsonConvert.SerializeObject(model)}");
+            var response = await client.DeriveAddressesAsync(model);
+            Log.Information($"DeriveAddresses response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
     }
 }

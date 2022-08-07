@@ -11,7 +11,5 @@ namespace Bitcoin.Core.Models.BitcoinCore
 
     public class AbandonTransactionResponse
     {
-        public string Id { get; set; }
-        public BitcoinError Error { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Bitcoin.API.Controller
             this.client = client;
         }
 
-        
+
         [HttpPost]
         [Route("createRawTransaction")]
         public async Task<IActionResult> CreateRawTransactionAsync(CreateRawTransactionRequest model)
@@ -168,6 +168,31 @@ namespace Bitcoin.API.Controller
             return await Task.FromResult(new JsonResult(response));
         }
 
+        /// <remarks>
+        /// Response: it tells you the stage of the multisig txn
+        /// { 
+        ///  "inputs": [
+        ///    {
+        ///      "has_utxo": true,
+        ///      "is_final": false,
+        ///      "next": "signer",
+        ///      "missing": {
+        ///        "signatures": [
+        ///          "46651ff1ba122a0b5a5271b4d41e6486607dd0e1",
+        ///          "9f5212ef00d43bd69bbea239a54b9dece1f54036",
+        ///          "581025b59cf5739b1b34dfe80edd1a49aa8ae62c"
+        ///        ]
+        ///    }
+        ///}
+        ///  ],
+        ///  "estimated_vsize": 177,
+        ///  "estimated_feerate": 0.00001000,
+        ///  "fee": 0.00000177,
+        ///  "next": "signer"
+        ///}
+        /// </remarks>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("analyzePsbt")]
         public async Task<IActionResult> AnalyzePsbt(AnalyzePsbtRequest model)
@@ -178,6 +203,23 @@ namespace Bitcoin.API.Controller
             return await Task.FromResult(new JsonResult(response));
         }
 
+        /// <summary>
+        /// Response: The redeemScript is called when you createmultisig txn
+        /// {
+        ///  "asm": "2 02e494d8511bd695482c1dd0ac306c976168473df24972fb9b988105bb9bf7d8cd 03fa068d09dbd8ce9f996d965b6251ed56b23314db3ce6d7da7cc4ab4adc843454 02b4c3ab0d87ce53dd6107312100b0a4ec9ae73f40aa9787d0256a099d7b68aa24 3 OP_CHECKMULTISIG",
+        ///  "type": "multisig",
+        ///  "p2sh": "2NBoSMTcXT9Z4KS9aXPDSrk6gxDiKRigQCY",
+        ///  "segwit": {
+        ///    "asm": "0 a7e3af14fdfda450488a4233c8389fdc91670985fa2f701f73f193b19160efc2",
+        ///    "hex": "0020a7e3af14fdfda450488a4233c8389fdc91670985fa2f701f73f193b19160efc2",
+        ///    "address": "tb1q5l36798alkj9qjy2ggeuswylmjgkwzv9lghhq8mn7xfmrytqalpqrjc582",
+        ///    "type": "witness_v0_scripthash",
+        ///    "p2sh-segwit": "2N5NSZb72e3Htjj2DP2GnoEv7kfZ2rSiE8M"
+        ///  }
+        ///}
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("decodeScript")]
         public async Task<IActionResult> DecodeScript(DecodeScriptRequest model)
@@ -185,6 +227,26 @@ namespace Bitcoin.API.Controller
             Log.Information($"DecodeScript request {JsonConvert.SerializeObject(model)}");
             var response = await client.DecodeScriptAsync(model);
             Log.Information($"DecodeScript response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("getDescriptorinfo")]
+        public async Task<IActionResult> GetDescriptorinfo(GetDescriptorinfoRequest model)
+        {
+            Log.Information($"getDescriptorinfo request {JsonConvert.SerializeObject(model)}");
+            var response = await client.GetDescriptorinfoAsync(model);
+            Log.Information($"getDescriptorinfo response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("generateBlock")]
+        public async Task<IActionResult> GenerateBlock(GenerateBlockRequest model)
+        {
+            Log.Information($"GenerateBlock request {JsonConvert.SerializeObject(model)}");
+            var response = await client.GenerateBlockAsync(model);
+            Log.Information($"GenerateBlock response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
     }

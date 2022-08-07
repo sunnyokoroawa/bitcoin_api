@@ -20,4 +20,6 @@ namespace Bitcoin.Core.Models
         //public string method { get; set; }
         //public List<string> @params { get; set; }
     }
+
+  
 }
