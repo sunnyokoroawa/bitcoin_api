@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitcoin.API.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/L1/v22/[controller]")]
     [ApiController]
     public class ZmqController : ControllerBase
     {

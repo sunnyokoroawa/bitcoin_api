@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bitcoin.API.Controller.L1
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/L1/v22/[controller]")]
     [ApiController]
     public class ThirdPartyController : ControllerBase
     {
@@ -69,10 +69,10 @@ namespace Bitcoin.API.Controller.L1
         }
 
         [HttpPost]
-        [Route("generateQRCode")]
-        public async Task<IActionResult> GenerateQRCode(GenerateQRCodeRequest model)
+        [Route("generateAddressQRCode")]
+        public async Task<IActionResult> GenerateAddressQRCodeCode(GenerateAddressQRCodeRequest model)
         {
-            var response = await client.GenerateQRCodeAsync(model);
+            var response = await client.GenerateAddressQRCodeAsync(model);
             Log.Information($"GenerateQRCode response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }

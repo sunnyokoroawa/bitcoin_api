@@ -1,0 +1,97 @@
+Sparko plugin
+
+>> What is your dev stack - nodejs
+
+>> From my readup, lnbits is just a non custodial bitcoin wallet, right?
+
+>> I have a bitcoin RESTFUL API that I want to use for my application, it needs a bitcoin node to run, 
+would you recommend I use umbrel and point my URL to my umbrel node over Tor or setup a bitcoin full node on
+a PC and expose the bitcoin node over the internet for my API which will be running on Azure to interact with.
+
+>> You said you make use of Umbrel node, I believe you are interacting with it over Tor, how did you achieve that
+cos I was unsuccessful with using the Tor username and password.
+
+>> Are you able to edit the bitcoin.conf file of your umbrel node, I couldnt find such, from my readup, I was told I 
+need to create the file myself.
+
+>> Can you walk me through your bitcoin LN setup once again.
+Bitcoin Full Node + Sparko Plugin
+
+>> Can you talk a little bit more on the LN URL, how you achieved that.
+
+>>    
+
+
+https://github.com/fiatjaf/lnurl-rfc/
+https://github.com/andrerfneves/lightning-address/blob/master/README.md
+vpn
+
+lightning loop
+
+
+https://github.com/fiatjaf/lnurl-rfc/
+Kgothatso Ngako7:09 PM
+https://github.com/andrerfneves/lightning-address/blob/master/README.md
+Kgothatso Ngako7:24 PM
+https://api.lightning.community/
+Kgothatso Ngako7:27 PM
+https://github.com/lnbook/lnbook
+
+{"jsonrpc":"1.0","id":1,"method":"getinfo","params":[]}
+
+
+{
+    "type": "lightning",
+    "name": "LightningError",
+    "message": "Unknown command 'gestinfddo'",
+    "code": -32601,
+    "fullType": "lightning",
+    "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "gestinfddo",
+        "params": []
+    }
+}
+
+{
+    "id": "02b876988a7b83ed72c26593df8aad36b6de53d5be4285e309fca76cd05ffd0f8b",
+    "alias": "sunfarms",
+    "color": "32a854",
+    "num_peers": 0,
+    "num_pending_channels": 0,
+    "num_active_channels": 0,
+    "num_inactive_channels": 0,
+    "address": [],
+    "binding": [
+        {
+            "type": "ipv4",
+            "address": "127.0.0.1",
+            "port": 9735
+        },
+        {
+            "type": "ipv6",
+            "address": "::",
+            "port": 39735
+        },
+        {
+            "type": "ipv4",
+            "address": "0.0.0.0",
+            "port": 39735
+        }
+    ],
+    "version": "v0.11.2",
+    "blockheight": 104479,
+    "network": "signet",
+    "msatoshi_fees_collected": 0,
+    "fees_collected_msat": "0msat",
+    "lightning-dir": "/home/sunfarms/.lightning/signet",
+    "our_features": {
+        "init": "080269a2",
+        "node": "800000080269a2",
+        "channel": "",
+        "invoice": "02000000024100"
+    }
+}
+
+

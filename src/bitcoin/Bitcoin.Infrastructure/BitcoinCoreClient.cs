@@ -41,7 +41,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.label, model.address_type };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getnewaddress, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getnewaddress, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -83,7 +83,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getbalance, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getbalance, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -115,7 +115,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getbalances, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getbalances, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -146,7 +146,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Address };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getaddressinfo, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getaddressinfo, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -177,7 +177,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.listreceivedbyaddress, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.listreceivedbyaddress, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -208,7 +208,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Address };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getreceivedbyaddress, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getreceivedbyaddress, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -269,7 +269,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Address };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.validateaddress, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.validateaddress, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -328,7 +328,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.TxId };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.gettransaction, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.gettransaction, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -364,7 +364,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.TxId, model.n, model.include_mempool };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.gettxout, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.gettxout, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -395,7 +395,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.gettxoutsetinfo, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.gettxoutsetinfo, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -426,7 +426,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.NumberOfConfirmations };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.listunspent, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.listunspent, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -465,7 +465,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.BlockHash };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getblock, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getblock, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -618,7 +618,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.TxId, 1 };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getrawtransaction, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -672,7 +672,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { jArrayInput, jArrayReceive };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.createrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -703,7 +703,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Hex };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.decoderawtransaction, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.decoderawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -734,7 +734,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Hex, JsonConvert.SerializeObject(model.SendAddressPrivateKeys) };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.signrawtransactionwithkey, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.signrawtransactionwithkey, @params).WriteJSON(writer);
             writer.Flush();
 
             //to remopve unwanted characters in the string 
@@ -793,7 +793,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Hex };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.sendrawtransaction, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.sendrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -865,7 +865,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { jArrayInput, jArrayReceive };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.createrawtransaction, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.createrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -1097,7 +1097,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getblockchaininfo, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getblockchaininfo, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1139,7 +1139,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.listwallets, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.listwallets, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1172,7 +1172,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Name };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.loadwallet, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.loadwallet, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1196,7 +1196,7 @@ namespace Bitcoin.Infrastructure
             return await Task.FromResult(response);
         }
 
-        public async Task<Response<GenerateQRCodeResponse>> GenerateQRCodeAsync(GenerateQRCodeRequest model)
+        public async Task<Response<GenerateAddressQRCodeResponse>> GenerateAddressQRCodeAsync(GenerateAddressQRCodeRequest model)
         {
             var validateAddressResponse = await ValidateAddressAsync(new ValidateAddressRequest
             {
@@ -1204,7 +1204,7 @@ namespace Bitcoin.Infrastructure
             });
 
             if (validateAddressResponse.Error != null)
-                return await Task.FromResult(new Response<GenerateQRCodeResponse>
+                return await Task.FromResult(new Response<GenerateAddressQRCodeResponse>
                 {
                     Message = validateAddressResponse.Error.Error
                 });
@@ -1242,11 +1242,11 @@ namespace Bitcoin.Infrastructure
             var qrImgPath = $"{request.Scheme}://{request.Host}/{filePath}";
             //var qrImgPath = $"{request.Scheme}://{request.Host}/{fileFolder}/{fileName}";
 
-            return await Task.FromResult(new Response<GenerateQRCodeResponse>
+            return await Task.FromResult(new Response<GenerateAddressQRCodeResponse>
             {
                 Success = true,
                 Message = "Request Succesful",
-                Data = new GenerateQRCodeResponse
+                Data = new GenerateAddressQRCodeResponse
                 {
                     ImageURL = qrImgPath,
                     Address = model.Address,
@@ -1280,7 +1280,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.TxId };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.abandontransaction, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.abandontransaction, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1312,7 +1312,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Address };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.dumpprivkey, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.dumpprivkey, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1344,7 +1344,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Name };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.createwallet, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.createwallet, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1376,7 +1376,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.FileName };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.dumpwallet, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.dumpwallet, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1408,7 +1408,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.TxId };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.bumpfee, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.bumpfee, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1440,7 +1440,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getwalletinfo, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getwalletinfo, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1472,7 +1472,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Name };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.unloadwallet, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.unloadwallet, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1504,7 +1504,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.listwalletdir, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.listwalletdir, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1536,7 +1536,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.address_type };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getrawchangeaddress, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getrawchangeaddress, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1577,7 +1577,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Destination };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.backupwallet, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.backupwallet, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1618,7 +1618,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Passphrase };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.walletlock, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.walletlock, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1659,7 +1659,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.PassPhrase, model.Timeout };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.walletpassphrase, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.walletpassphrase, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1700,7 +1700,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Address, model.Message };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.signmessage, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.signmessage, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1741,7 +1741,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Address, model.Signature, model.Message };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.verifymessage, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.verifymessage, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -1772,7 +1772,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.HexString, model.options };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.fundrawtransaction, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.fundrawtransaction, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -1836,7 +1836,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { jArrayInput, jArrayReceive, model.Locktime, JsonConvert.SerializeObject(model.Options), model.Bip32derivs };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.walletcreatefundedpsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.walletcreatefundedpsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -1867,7 +1867,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Hex };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.decodepsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.decodepsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = writer.ToString();
@@ -1898,7 +1898,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.nrequired, JsonConvert.SerializeObject(model.PublicKeys.ToArray()), model.address_type };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.createmultisig, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.createmultisig, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -1997,7 +1997,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.SignatoriesToApprove, JsonConvert.SerializeObject(addressPublicKeys), model.address_type };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.createmultisig, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.createmultisig, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2067,7 +2067,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { jArrayInput, jArrayReceive, model.Locktime, model.Replaceable };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.createpsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.createpsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2098,7 +2098,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Psbt };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.walletprocesspsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.walletprocesspsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2129,7 +2129,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Psbt };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.finalizepsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.finalizepsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2160,7 +2160,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Psbt };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.utxoupdatepsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.utxoupdatepsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2191,7 +2191,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.hexstring, model.permitsigdata, model.iswitness };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.convertopsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.convertopsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2222,7 +2222,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Signatories, JsonConvert.SerializeObject(model.PublicKeysOrAddresses.ToArray()), model.label, model.address_type };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.addmultisigaddress, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.addmultisigaddress, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2253,7 +2253,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.address, model.label,  };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.importaddress, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.importaddress, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2284,7 +2284,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { JsonConvert.SerializeObject(model.Psbts) };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.combinepsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.combinepsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2315,7 +2315,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { JsonConvert.SerializeObject(model.Psbt) };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.analyzepsbt, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.analyzepsbt, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2346,7 +2346,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.ReceemScript };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.decodescript, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.decodescript, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2377,7 +2377,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.Descriptor };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.deriveaddresses, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.deriveaddresses, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2408,7 +2408,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.descriptor };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.getdescriptorinfo, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.getdescriptorinfo, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2439,7 +2439,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.NumberOfBlocks };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.generate, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.generate, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());
@@ -2470,7 +2470,7 @@ namespace Bitcoin.Infrastructure
             object[] @params = { model.conf_target, model.estimate_mode };
 
             var writer = new StringWriter();
-            new RPCRequest(RPCOperations.estimatesmartfee, @params).WriteJSON(writer);
+            new BTCRPCRequest(BTCRPCOperations.estimatesmartfee, @params).WriteJSON(writer);
             writer.Flush();
 
             var body = PruneAsJSONString(writer.ToString());

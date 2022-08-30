@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bitcoin.API.Controller
 {
-    [Route("api/[controller]")]
+    [Route("api/L1/V22/[controller]")]
     [ApiController]
     public class GeneratingController : ControllerBase
     {

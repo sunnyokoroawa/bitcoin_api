@@ -1,5 +1,6 @@
 using Bitcoin.API.Filters;
 using Bitcoin.Core.Interfaces;
+using Bitcoin.Core.Services;
 using Bitcoin.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -87,8 +88,9 @@ namespace Bitcoin.API
 
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<IBitcoinCoreClient, BitcoinCoreClient>();
-
-
+            services.AddTransient<ICoreLightningClient, CoreLightningClient>();
+             
+            services.AddScoped(typeof(UtilityService));
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddDistributedMemoryCache();

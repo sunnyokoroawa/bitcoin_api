@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bitcoin.API.Controller
 {
-    [Route("api/core/v22/[controller]")]
+    [Route("api/L1/v22/[controller]")]
     [ApiController]
     public class WalletController : ControllerBase
     {

@@ -9,8 +9,26 @@ namespace Bitcoin.Core.Interfaces
 {
     public interface ICoreLightningClient
     {
-        Task<ResponseCLN<GetInfoResponse>> GetInfoAsync(GetInfoRequest model);
+        Task<ResponseCLN<GetInfoResponse>> GetInfoAsync();
         Task<ResponseCLN<NewAddrResponse>> NewAddrAsync(NewAddrRequest model);
+        Task<ResponseCLN<ListfundsResponse>> ListFundsAsync();
+        Task<ResponseCLN<ListpeersResponse>> ListpeersAsync();
+        Task<ResponseCLN<InvoiceResponse>> InvoiceAsync(InvoiceRequest model);
+        Task<ResponseCLN<ListInvoicesResponse>> ListInvoicesAsync();
+        Task<ResponseCLN<ListInvoiceResponse>> ListInvoiceAsync(ListInvoiceRequest model);
+        Task<ResponseCLN<GenerateInvoiceQRCodeResponse>> GenerateInvoiceQRCodeAsync(GenerateInvoiceQRCodeRequest model);
+        Task<ResponseCLN<ConnectResponse>> ConnectAsync(ConnectRequest model);
+        Task<ResponseCLN<DisconnectResponse>> DisconnectAsync(DisconnectRequest model);
+        Task<ResponseCLN<FundChannelResponse>> FundChannelAsync(FundChannelRequest model);
+        Task<ResponseCLN<ListNodesResponse>> ListNodesAsync();
+        Task<ResponseCLN<ListChannelsResponse>> ListChannelsAsync();
+        Task<ResponseCLN<PayResponse>> PayAsync(PayRequest model);
+        Task<ResponseCLN<DecodeInvoiceResponse>> DecodeInvoiceAsync(DecodeInvoiceRequest model);
+        Task<ResponseCLN<DeleteInvoiceResponse>> DelInvoiceAsync(DeleteInvoiceRequest model);
+        Task<ResponseCLN<DelexpiredinvoiceResponse>> DelexpiredinvoiceAsync();
+        Task<ResponseCLN<DecodePayResponse>> DecodePayAsync(DecodePayRequest model);
+        Task<ResponseCLN<PaystatusResponse>> PaystatusAsync();
+
 
     }
 }

@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Bitcoin.Core.Models.BitcoinCore
 {
-    public class GenerateQRCodeRequest
+    public class GenerateAddressQRCodeRequest
     {
         public string Address { get; set; }
     }
 
-    public class GenerateQRCodeResponse
+    public class GenerateAddressQRCodeResponse
     {
         public string ImageURL { get; set; }
         public string Address { get; set; }

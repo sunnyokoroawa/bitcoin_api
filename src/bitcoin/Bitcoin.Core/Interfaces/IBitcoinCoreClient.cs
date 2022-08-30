@@ -37,7 +37,7 @@ namespace Bitcoin.Core.Interfaces
         Task<ResponseBTC<GetBlockchainInfoResponse>> GetBlockchainInfoAsync();
         Task<ListWalletsResponse> ListWalletsAsync();
         Task<ResponseBTC<LoadWalletResponse>> LoadWalletAsync(LoadWalletRequest model);
-        Task<Response<GenerateQRCodeResponse>> GenerateQRCodeAsync(GenerateQRCodeRequest model);
+        Task<Response<GenerateAddressQRCodeResponse>> GenerateAddressQRCodeAsync(GenerateAddressQRCodeRequest model);
         Task<ResponseBTC<AbandonTransactionResponse>> AbandonTransactionAsync(AbandonTransactionRequest model);
         Task<ResponseBTC<CreateWalletResponse>> CreateWalletAsync(CreateWalletRequest model);
         Task<ResponseBTC<DumpWalletResponse>> DumpWalletAsync(DumpWalletRequest model);
