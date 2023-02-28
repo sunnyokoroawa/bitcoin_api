@@ -15,13 +15,14 @@ namespace Bitcoin.Core.Models.CoreLightning
         listpeers,
         invoice,
         listinvoices,
-        connect, 
+        connect,
         disconnect,
         fundchannel,
         decode,
         delinvoice,
-        delexpiredinvoice, 
+        delexpiredinvoice,
         paystatus,
+        offer,
 
         //undone
         listpays,
@@ -37,6 +38,7 @@ namespace Bitcoin.Core.Models.CoreLightning
         pay, //searches for pay route and then makes payment. its shower than sendpay
         getroute,
         sendpay, //expects the payment route as a param
+        withdraw
 
     }
     public class LNRPCRequest
@@ -147,7 +149,7 @@ namespace Bitcoin.Core.Models.CoreLightning
         internal void WriteJSONData(JsonTextWriter writer)
         {
             writer.WriteStartObject();
-             
+
             if (Params != null)
             {
                 writer.WriteStartArray();

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Deployments\bitcoinapi_v2</_PublishTargetUrl>
+    <History>True|2022-10-28T13:12:36.7739828Z;True|2022-10-27T14:03:43.4912760+01:00;True|2022-10-27T14:03:23.3180294+01:00;</History>
+  </PropertyGroup>
+</Project>

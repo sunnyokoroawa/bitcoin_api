@@ -1,4 +1,5 @@
-﻿using Bitcoin.Core.Interfaces;
+﻿using Bitcoin.API.Services.L1;
+using Bitcoin.Core.Interfaces;
 using Bitcoin.Core.Models.BitcoinCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -315,6 +316,36 @@ namespace Bitcoin.API.Controller
             Log.Information($"DeriveAddresses request {JsonConvert.SerializeObject(model)}");
             var response = await client.DeriveAddressesAsync(model);
             Log.Information($"DeriveAddresses response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+         
+        [HttpPost]
+        [Route("getNewAddressQRCode")]
+        public async Task<IActionResult> GetNewAddressQRCode(GetNewAddressQRCodeRequest model)
+        {
+            Log.Information($"GetNewAddressQRCode request {JsonConvert.SerializeObject(model)}");
+            var response = await client.GetNewAddressQRCodeAsync(model);
+            Log.Information($"GetNewAddressQRCode response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("getAddressFromXPUB")]
+        public async Task<IActionResult> GetAddressFromXPUB(GetAddressFromXPUBKeyRequest model)
+        {
+            Log.Information($"GetAddressFromXPUB response {JsonConvert.SerializeObject(model)}");
+            var response = await client.GetAddressFromXPUBAsync(model);
+            Log.Information($"GetAddressFromXPUB response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("getUnspentBalance")]
+        public async Task<IActionResult> GetUnspentBalance(GetUnspentBalanceRequest model)
+        {
+            Log.Information($"GetUnspentBalance response {JsonConvert.SerializeObject(model)}");
+            var response = await client.GetUnspentBalanceAsync(model);
+            Log.Information($"GetUnspentBalance response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
     }

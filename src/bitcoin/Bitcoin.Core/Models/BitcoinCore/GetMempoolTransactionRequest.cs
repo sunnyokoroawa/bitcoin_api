@@ -19,8 +19,8 @@ namespace Bitcoin.Core.Models.BitcoinCore
         }
 
         public string txid { get; set; }
-        public int version { get; set; }
-        public int locktime { get; set; }
+        public long version { get; set; }
+        public long locktime { get; set; }
         public List<Vin> vin { get; set; }
         public List<Vout> vout { get; set; }
         public int size { get; set; }
@@ -37,7 +37,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
     public class Vin
     {
         public string txid { get; set; }
-        public int vout { get; set; }
+        public long vout { get; set; }
         public Prevout prevout { get; set; }
         public string scriptsig { get; set; }
         public string scriptsig_asm { get; set; }
@@ -52,7 +52,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         public string scriptpubkey_asm { get; set; }
         public string scriptpubkey_type { get; set; }
         public string scriptpubkey_address { get; set; }
-        public int value { get; set; }
+        public long value { get; set; }
     }
 
     public class Vout
@@ -61,7 +61,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         public string scriptpubkey_asm { get; set; }
         public string scriptpubkey_type { get; set; }
         public string scriptpubkey_address { get; set; }
-        public int value { get; set; }
+        public long value { get; set; }
     }
 
 }

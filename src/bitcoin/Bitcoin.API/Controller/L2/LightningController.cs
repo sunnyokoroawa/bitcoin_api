@@ -1,5 +1,7 @@
 ﻿using Bitcoin.Core.Interfaces;
 using Bitcoin.Core.Models.CoreLightning;
+using Bitcoin.Core.Models.CoreLightning.Invoices;
+using Bitcoin.Core.Models.CoreLightning.Withdraw;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -50,6 +52,11 @@ namespace Bitcoin.API.Controller.L2
             return await Task.FromResult(new JsonResult(response));
         }
 
+        /// <summary>
+        /// It is possible to generate an invoice without specifyng any amount. 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("invoice")]
         public async Task<IActionResult> Invoice(InvoiceRequest model)
@@ -90,6 +97,16 @@ namespace Bitcoin.API.Controller.L2
         }
 
         [HttpPost]
+        [Route("getInvoiceStatus")]
+        public async Task<IActionResult> GetInvoiceStatus(GetInvoiceStatusRequest model)
+        {
+            Log.Information($"GetInvoiceStatus request {JsonConvert.SerializeObject(model)}");
+            var response = await _client.GetInvoiceStatusAsync(model);
+            Log.Information($"GetInvoiceStatus response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
         [Route("generateInvoiceQRCode")]
         public async Task<IActionResult> GenerateInvoiceQRCode(GenerateInvoiceQRCodeRequest model)
         {
@@ -119,14 +136,6 @@ namespace Bitcoin.API.Controller.L2
             return await Task.FromResult(new JsonResult(response));
         }
 
-        [HttpPost]
-        [Route("listPeers")]
-        public async Task<IActionResult> Listpeers()
-        { 
-            var response = await _client.ListpeersAsync();
-            Log.Information($"Listpeers response {JsonConvert.SerializeObject(response)}");
-            return await Task.FromResult(new JsonResult(response));
-        }
 
         [HttpPost]
         [Route("fundChannel")]
@@ -135,6 +144,16 @@ namespace Bitcoin.API.Controller.L2
             Log.Information($"FundChannel request {JsonConvert.SerializeObject(model)}");
             var response = await _client.FundChannelAsync(model);
             Log.Information($"FundChannel response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+
+        [HttpPost]
+        [Route("listPeers")]
+        public async Task<IActionResult> Listpeers()
+        {
+            var response = await _client.ListpeersAsync();
+            Log.Information($"Listpeers response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
 
@@ -204,5 +223,34 @@ namespace Bitcoin.API.Controller.L2
             return await Task.FromResult(new JsonResult(response));
         }
 
+        [HttpPost]
+        [Route("offer")]
+        public async Task<IActionResult> Offer(OfferRequest model)
+        {
+            Log.Information($"Offer response {JsonConvert.SerializeObject(model)}");
+            var response = await _client.OfferAsync(model);
+            Log.Information($"Offer response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("decodeOffer")]
+        public async Task<IActionResult> DecodeOffer(DecodeOfferRequest model)
+        {
+            Log.Information($"DecodeOffer response {JsonConvert.SerializeObject(model)}");
+            var response = await _client.DecodeOfferAsync(model);
+            Log.Information($"DecodeOffer response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
+
+        [HttpPost]
+        [Route("withdraw")]
+        public async Task<IActionResult> Withdraw(WithdrawRequest model)
+        {
+            Log.Information($"Withdraw response {JsonConvert.SerializeObject(model)}");
+            var response = await _client.WithdrawAsync(model);
+            Log.Information($"Withdraw response {JsonConvert.SerializeObject(response)}");
+            return await Task.FromResult(new JsonResult(response));
+        }
     }
 }

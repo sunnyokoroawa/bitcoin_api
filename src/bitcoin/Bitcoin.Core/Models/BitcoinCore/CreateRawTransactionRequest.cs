@@ -13,12 +13,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         }
 
         public List<CreateRawTransactionInputListRequest> SendTransactions  { get; set; }
-
-        /// <summary>
-        /// Addresses and the amount of Bitcoin to send
-        /// </summary>
-        //public List<Dictionary<string, decimal>> Outputs { get; set; }
-
+         
         public List<ReceiveAddressRequest> ReceiveAddresses { get; set; }  
     }
 

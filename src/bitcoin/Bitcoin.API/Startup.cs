@@ -48,31 +48,27 @@ namespace Bitcoin.API
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            //var seqUrl = Configuration["Seq:Url"];
-            //var seqKey = Configuration["Seq:Key"];
-            //Log.Information(seqUrl);
-            //Log.Information(seqKey);
+            //serilog configuration
+            var seqUrl = Configuration["Seq:Url"];
+            var seqKey = Configuration["Seq:Key"]; 
             var levelSwitch = new LoggingLevelSwitch();
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             httpClientHandler.ServerCertificateCustomValidationCallback = (source, certificate, chain, sslPolicyError) => true;
 
-            //Log.Logger = new LoggerConfiguration()
-            //     .ReadFrom.Configuration(Configuration)
-            //      .MinimumLevel.Debug()
-            //     .ReadFrom.Configuration(Configuration)
-            //      .MinimumLevel.Information()
-            //    .WriteTo.Seq(seqUrl,
-            //                 apiKey: seqKey,
-            //                 controlLevelSwitch: levelSwitch,
-            //                    messageHandler: httpClientHandler)
-            //    .CreateLogger();
-
-            httpClientHandler.ServerCertificateCustomValidationCallback = (source, certificate, chain, sslPolicyError) => true;
+            Log.Logger = new LoggerConfiguration()
+                 .ReadFrom.Configuration(Configuration)
+                  .MinimumLevel.Debug()
+                 .ReadFrom.Configuration(Configuration)
+                  .MinimumLevel.Information()
+                .WriteTo.Seq(seqUrl,
+                             apiKey: seqKey,
+                             controlLevelSwitch: levelSwitch,
+                                messageHandler: httpClientHandler)
+                .CreateLogger(); 
 
             //logging to be injected
             services.AddSingleton(Log.Logger);
-
-
+             
             //Auto Mapper Configurations
             //var mappingConfig = new MapperConfiguration(mc =>
             //{
@@ -91,6 +87,8 @@ namespace Bitcoin.API
             services.AddTransient<ICoreLightningClient, CoreLightningClient>();
              
             services.AddScoped(typeof(UtilityService));
+            //services.AddScoped(typeof(Services.CustomService));
+            
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddDistributedMemoryCache();
@@ -102,7 +100,7 @@ namespace Bitcoin.API
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Bitcoin API", Version = "v1" });
-                options.IncludeXmlComments(XmlCommentsFilePath);
+                //options.IncludeXmlComments(XmlCommentsFilePath);
             });
 
             //services.AddSwaggerGen(c =>
@@ -161,7 +159,6 @@ namespace Bitcoin.API
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bitcoin API (v1)");
             });
-
 
             app.UseRouting();
 

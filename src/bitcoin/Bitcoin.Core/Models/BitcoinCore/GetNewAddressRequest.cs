@@ -11,6 +11,8 @@ namespace Bitcoin.Core.Models.BitcoinCore
     {
         public string address_type { get; set; }
         public string label { get; set; }
-    } 
+    }
 
+    
+    
 }

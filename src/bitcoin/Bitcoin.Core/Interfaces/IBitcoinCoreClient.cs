@@ -1,4 +1,5 @@
-﻿using Bitcoin.Core.Models;
+﻿using Bitcoin.API.Services.L1;
+using Bitcoin.Core.Models;
 using Bitcoin.Core.Models.BitcoinCore;
 using System;
 using System.Collections.Generic;
@@ -74,5 +75,11 @@ namespace Bitcoin.Core.Interfaces
 
         //Task<ResponseBTC<ImportDescriptorsResponse>> ImportDescriptorsAsync(List<ImportDescriptorsRequest> model);
 
+
+        Task<ResponseBTC<GetNewAddressQRCodeResponse>> GetNewAddressQRCodeAsync(GetNewAddressQRCodeRequest model);
+
+        //xpub
+        Task<Response<string>> GetAddressFromXPUBAsync(GetAddressFromXPUBKeyRequest model);
+        Task<Response<decimal>> GetUnspentBalanceAsync(GetUnspentBalanceRequest model);
     }
 }

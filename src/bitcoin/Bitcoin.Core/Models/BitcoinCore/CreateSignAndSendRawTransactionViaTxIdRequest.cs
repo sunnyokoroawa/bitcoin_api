@@ -20,6 +20,9 @@ namespace Bitcoin.Core.Models.BitcoinCore
         /// </summary>
         public decimal? Fees{ get; set; } 
         public string FeeType{ get; set; } //indicates who is to pay the fees
+
+        public string ChangeAddress { get; set; }  
+
     }
 
     public class FromTransaction
@@ -28,9 +31,11 @@ namespace Bitcoin.Core.Models.BitcoinCore
         public int vout { get; set; }
         public string addressPrivateKey { get; set; }
     }
+     
 
     public class CreateSignAndSendRawTransactionViaTxIdResponse
     {
-
+        public string  TxId { get; set; }
+        public int TxIdVOut { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Bitcoin.Core.Models.BitcoinCore
         public int NumberOfConfirmations { get; set; }
         //public string Address { get; set; }
         public List<string> Addresses { get; set; }
+        public string TxId { get; set; }
     }
 
      

@@ -21,8 +21,7 @@ namespace Bitcoin.API.Controller
         {
             this.client = client;
         }
-
-
+         
         [HttpPost]
         [Route("createRawTransaction")]
         public async Task<IActionResult> CreateRawTransactionAsync(CreateRawTransactionRequest model)
@@ -40,8 +39,7 @@ namespace Bitcoin.API.Controller
             Log.Information($"DecodeRawTransaction response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
-
-
+        
         [HttpPost]
         [Route("sendRawTransaction")]
         public async Task<IActionResult> SendRawTransaction(SendRawTransactionRequest model)
@@ -52,7 +50,7 @@ namespace Bitcoin.API.Controller
         }
 
         [HttpPost]
-        [Route("createSignAndSendRawTransaction")]
+        [Route("createSignSendRawTransaction")]
         public async Task<IActionResult> CreateSignAndSendRawTransact(CreateSignAndSendRawTransactionViaTxIdRequest model)
         {
             Log.Information($"CreateSignAndSendRawTransact request {JsonConvert.SerializeObject(model)}");
@@ -77,12 +75,12 @@ namespace Bitcoin.API.Controller
             Log.Information($"FundRawtransaction response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));
         }
-
-
+         
         [HttpPost]
         [Route("getRawJSONTransaction")]
         public async Task<IActionResult> GetRawJSONTransaction(GetRawTransactionAsJSONRequest model)
         {
+            Log.Information($"getRawJSONTransaction request {JsonConvert.SerializeObject(model)}");
             var response = await client.GetRawTransactionAsJSONAsync(model);
             Log.Information($"getRawJSONTransaction response {JsonConvert.SerializeObject(response)}");
             return await Task.FromResult(new JsonResult(response));

@@ -22,11 +22,11 @@ namespace Bitcoin.Core.Models.BitcoinCore
         public string symbol { get; set; }
         public int rank { get; set; }
         public float price { get; set; }
-        public int priceBtc { get; set; }
+        public float priceBtc { get; set; }
         public float volume { get; set; }
         public float marketCap { get; set; }
-        public int availableSupply { get; set; }
-        public int totalSupply { get; set; }
+        public float availableSupply { get; set; }
+        public float totalSupply { get; set; }
         public float priceChange1h { get; set; }
         public float priceChange1d { get; set; }
         public float priceChange1w { get; set; }

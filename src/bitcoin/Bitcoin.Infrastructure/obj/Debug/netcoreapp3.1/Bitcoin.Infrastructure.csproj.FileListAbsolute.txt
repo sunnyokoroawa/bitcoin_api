@@ -24,3 +24,16 @@ C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.csproj.CopyComplete
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.dll
 C:\Users\Admin\Documents\projects\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.pdb
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Infrastructure.deps.json
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Infrastructure.dll
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Infrastructure.pdb
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Core.dll
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\bin\Debug\netcoreapp3.1\Bitcoin.Core.pdb
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.AssemblyInfo.cs
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.csproj.CopyComplete
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.dll
+C:\Users\Administrator\Documents\projects\bitcoin_api\bitcoin_api\src\bitcoin\Bitcoin.Infrastructure\obj\Debug\netcoreapp3.1\Bitcoin.Infrastructure.pdb

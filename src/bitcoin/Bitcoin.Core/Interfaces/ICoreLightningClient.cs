@@ -1,5 +1,7 @@
 ﻿using Bitcoin.Core.Models; 
 using Bitcoin.Core.Models.CoreLightning;
+using Bitcoin.Core.Models.CoreLightning.Invoices;
+using Bitcoin.Core.Models.CoreLightning.Withdraw;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,6 +30,16 @@ namespace Bitcoin.Core.Interfaces
         Task<ResponseCLN<DelexpiredinvoiceResponse>> DelexpiredinvoiceAsync();
         Task<ResponseCLN<DecodePayResponse>> DecodePayAsync(DecodePayRequest model);
         Task<ResponseCLN<PaystatusResponse>> PaystatusAsync();
+
+        //offer for static invoices
+        Task<ResponseCLN<OfferResponse>> OfferAsync(OfferRequest model);
+        Task<ResponseCLN<FetchInvoiceResponse>> FetchInvoiceAsync(FetchInvoiceRequest model);
+        Task<ResponseCLN<DecodeOfferResponse>> DecodeOfferAsync(DecodeOfferRequest model);
+        Task<ResponseCLN<GetInvoiceStatusResponse>> GetInvoiceStatusAsync(GetInvoiceStatusRequest model);
+
+        Task<ResponseCLN<ListPaysResponse>> ListPaysAsync();
+
+        Task<ResponseCLN<WithdrawResponse>> WithdrawAsync(WithdrawRequest model);
 
 
     }

@@ -2,6 +2,8 @@
 using Bitcoin.Core.Models;
 using Bitcoin.Core.Models.BitcoinCore;
 using Bitcoin.Core.Models.CoreLightning;
+using Bitcoin.Core.Models.CoreLightning.Invoices;
+using Bitcoin.Core.Models.CoreLightning.Withdraw;
 using Bitcoin.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -56,21 +58,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"GetInfoAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"GetInfoAsync Response: {result.Content}");
+
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<GetInfoResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<GetInfoResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"GetInfo Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<GetInfoResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "GetInfo Error",
+                        Type = "GetInfo"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<GetInfoResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "GetInfo Error",
+                        Type = "GetInfo"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<GetInfoResponse>(result.Content);
@@ -87,7 +119,6 @@ namespace Bitcoin.Infrastructure
             });
         }
 
-
         public async Task<ResponseCLN<NewAddrResponse>> NewAddrAsync(NewAddrRequest model)
         {
             var client = new RestClient(_config["Lightning:Sparko:URL"]);
@@ -102,21 +133,52 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"NewAddrAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"NewAddrAsync Response: {result.Content}");
 
+
+            //check for error object  
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<NewAddrResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<NewAddrResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"NewAddr Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<NewAddrResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "NewAddr Error",
+                        Type = "Invoice"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<NewAddrResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "NewAddr Error",
+                        Type = "NewAddr"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<NewAddrResponse>(result.Content);
@@ -147,21 +209,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"ListFundsAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"ListFundsAsync Response: {result.Content}");
+
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<ListfundsResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<ListfundsResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"ListFunds Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<ListfundsResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "ListFunds Error",
+                        Type = "ListFunds"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<ListfundsResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "ListFunds Error",
+                        Type = "ListFunds"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<ListfundsResponse>(result.Content);
@@ -192,21 +284,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"ListpeersAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"ListpeersAsync Response: {result.Content}");
+
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<ListpeersResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<ListpeersResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"Listpeers Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<ListpeersResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Listpeers Error",
+                        Type = "Listpeers"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<ListpeersResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Listpeers Error",
+                        Type = "Listpeers"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<ListpeersResponse>(result.Content);
@@ -223,13 +345,20 @@ namespace Bitcoin.Infrastructure
             });
         }
 
+        /// <summary>
+        /// any applies when no amount is specified.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task<ResponseCLN<InvoiceResponse>> InvoiceAsync(InvoiceRequest model)
         {
             var client = new RestClient(_config["Lightning:Sparko:URL"]);
             var request = CreateRestClientRequest();
 
             //build the objects
-            object[] @params = { model.mSatoshi, model.labelReference, model.description, model.expiryInSeconds };
+            object[] @params = { string.IsNullOrEmpty(model.AmountInSATs) ? "any" : model.AmountInSATs,
+                !string.IsNullOrEmpty(model.label) ? model.label : Guid.NewGuid().ToString(),
+                model.description, model.expiryInSeconds };
 
             var writer = new StringWriter();
             new LNRPCRequest(LNRPCOperations.invoice, @params).WriteJSON(writer);
@@ -237,21 +366,50 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"InvoiceAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"InvoiceAsync Response: {result.Content}");
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<InvoiceResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<InvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"Invoice Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<InvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Invoice Error",
+                        Type = "Invoice"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<InvoiceResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Invoice Error",
+                        Type = "Invoice"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<InvoiceResponse>(result.Content);
@@ -261,6 +419,14 @@ namespace Bitcoin.Infrastructure
                 {
                     Message = "No response from API"
                 });
+
+            //generate invoice image
+            var gerenateQRInvoice = await GenerateInvoiceQRCodeAsync(new GenerateInvoiceQRCodeRequest
+            {
+                Invoice = response.bolt11
+            });
+
+            response.imageBas64String = gerenateQRInvoice.Code >= 0 ? gerenateQRInvoice.Result.ImageBas64String : string.Empty;
 
             return await Task.FromResult(new ResponseCLN<InvoiceResponse>
             {
@@ -282,21 +448,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"ListInvoicesAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"ListInvoicesAsync Response: {result.Content}");
+
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<ListInvoicesResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<ListInvoicesResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"ListInvoices Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<ListInvoicesResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "ListInvoices Error",
+                        Type = "ListInvoices"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<ListInvoicesResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "ListInvoices Error",
+                        Type = "Invoice"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<ListInvoicesResponse>(result.Content);
@@ -355,6 +551,57 @@ namespace Bitcoin.Infrastructure
             });
         }
 
+        public async Task<ResponseCLN<GetInvoiceStatusResponse>> GetInvoiceStatusAsync(GetInvoiceStatusRequest model)
+        {
+            var listInvoicesResponse = await ListInvoicesAsync();
+
+            //if no error
+            if (listInvoicesResponse.Code != 0)
+                return await Task.FromResult(new ResponseCLN<GetInvoiceStatusResponse>
+                {
+                    Code = listInvoicesResponse.Code,
+                    Message = listInvoicesResponse.Message,
+                    Name = listInvoicesResponse.Name,
+                    Type = listInvoicesResponse.Type
+                });
+
+            if (!string.IsNullOrEmpty(model.Address))
+                listInvoicesResponse.Result.invoices = listInvoicesResponse.Result.invoices.Where(x => x.bolt11 == model.Address)
+                    .ToList();
+
+            if (!string.IsNullOrEmpty(model.Label))
+                listInvoicesResponse.Result.invoices = listInvoicesResponse.Result.invoices.Where(x => x.label == model.Label)
+                    .ToList();
+
+            //was a success
+            var actualResult = listInvoicesResponse.Result.invoices.FirstOrDefault();
+
+            if (actualResult == null)
+                return await Task.FromResult(new ResponseCLN<GetInvoiceStatusResponse>
+                {
+                    Code = -1,
+                    Message = $"No record found for invoice with label/reference {model.Label} Address: {model.Address}"
+                });
+
+            return await Task.FromResult(new ResponseCLN<GetInvoiceStatusResponse>
+            {
+                Result = new GetInvoiceStatusResponse
+                {
+                    amount_msat = actualResult.amount_msat,
+                    label = actualResult.label,
+                    bolt11 = actualResult.bolt11,
+                    bolt12 = actualResult.bolt12,
+                    description = actualResult.description,
+                    expires_at = actualResult.expires_at,
+                    msatoshi = actualResult.msatoshi,
+                    payment_hash = actualResult.payment_hash,
+                    status = actualResult.status
+                },
+                Message = "Request Successful",
+                Code = 0
+            });
+        }
+
         public async Task<ResponseCLN<GenerateInvoiceQRCodeResponse>> GenerateInvoiceQRCodeAsync(GenerateInvoiceQRCodeRequest model)
         {
             if (string.IsNullOrEmpty(model.Invoice))
@@ -372,38 +619,22 @@ namespace Bitcoin.Infrastructure
             var logopath = Path.Combine(
                        Directory.GetCurrentDirectory(), $"{"Docs/Invoice"}", "lnlogo.JPG");
 
-            Bitmap qrCodeImage = qrCode.GetGraphic(20, Color.Black, Color.White, (Bitmap)Bitmap.FromFile(logopath));
+            var generateQRCodeResponse = _utilityService.GenerateQRCodeAsync(model.Invoice, logopath);
 
-            var fileName = $"{Guid.NewGuid()}.jpg";
-
-            var fileFolder = "Docs/Invoice";
-
-            var savePhotoPath = Path.Combine(
-                       Directory.GetCurrentDirectory(), $"{fileFolder}", fileName);
-
-            try
-            {
-                qrCodeImage.Save(savePhotoPath);
-            }
-
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, $"Error {ex.Message}");
-            }
-
-            var request = _httpContextAccessor.HttpContext.Request;
-
-            var filePath = $"{fileFolder}/{fileName}";
-            var qrImgPath = $"{request.Scheme}://{request.Host}/{filePath}";
+            if (!generateQRCodeResponse.Success)
+                return await Task.FromResult(new ResponseCLN<GenerateInvoiceQRCodeResponse>
+                {
+                    Message = generateQRCodeResponse.Message
+                });
 
             return await Task.FromResult(new ResponseCLN<GenerateInvoiceQRCodeResponse>
             {
                 Message = "Request Succesful",
                 Result = new GenerateInvoiceQRCodeResponse
                 {
-                    ImageURL = qrImgPath,
+                    ImageURL = string.Empty,
                     Invoice = model.Invoice,
-                    ImageBas64String = _utilityService.ConvertToBase64String(filePath)
+                    ImageBas64String = generateQRCodeResponse.Data// _utilityService.ConvertToBase64String(filePath)
                 }
             });
         }
@@ -422,21 +653,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"ConnectAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"ConnectAsync Response: {result.Content}");
+
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<ConnectResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<ConnectResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"Connect Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<ConnectResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Connect Error",
+                        Type = "Connect"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<ConnectResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Connect Error",
+                        Type = "Connect"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<ConnectResponse>(result.Content);
@@ -468,21 +729,52 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"FundChannelAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"FundChannelAsync Response: {result.Content}");
+
+
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<FundChannelResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<FundChannelResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"FundChannel Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<FundChannelResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "FundChannel Error",
+                        Type = "FundChannel"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<FundChannelResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "FundChannel Error",
+                        Type = "FundChannel"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<FundChannelResponse>(result.Content);
@@ -514,21 +806,52 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"ListNodesAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"ListNodesAsync Response: {result.Content}");
+
+
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<ListNodesResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<ListNodesResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"ListNodes Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<ListNodesResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "ListNodes Error",
+                        Type = "ListNodes"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<ListNodesResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "ListNodes Error",
+                        Type = "ListNodes"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<ListNodesResponse>(result.Content);
@@ -560,21 +883,52 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"ListChannelsAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"ListChannelsAsync Response: {result.Content}");
+
+
 
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<ListChannelsResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<ListChannelsResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"ListChannels Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<ListChannelsResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "ListChannels Error",
+                        Type = "ListChannels"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<ListChannelsResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "ListChannels Error",
+                        Type = "ListChannels"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<ListChannelsResponse>(result.Content);
@@ -599,7 +953,7 @@ namespace Bitcoin.Infrastructure
 
             //build the objects
             //object[] @params = { model.bolt11, model.msatoshi, model.label };
-            object[] @params = { model.bolt11 };
+            object[] @params = { model.bolt11}; //no need specifying amts as invoice are generated with the sats amount specified
 
             var writer = new StringWriter();
             new LNRPCRequest(LNRPCOperations.pay, @params).WriteJSON(writer);
@@ -607,21 +961,52 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+
+            Log.Information($"PayAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"PayAsync Response: {result.Content}");
 
+            //check for error object  
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<PayResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<PayResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"Pay Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<PayResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Pay Error",
+                        Type = "Pay"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<PayResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Pay Error",
+                        Type = "Pay"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<PayResponse>(result.Content);
@@ -653,21 +1038,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"DisconnectAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"DisconnectAsync Response: {result.Content}");
 
+            //check for error object  
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<DisconnectResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<DisconnectResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"Disconnect Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<DisconnectResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Disconnect Error",
+                        Type = "Disconnect"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<DisconnectResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Disconnect Error",
+                        Type = "Disconnect"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<DisconnectResponse>(result.Content);
@@ -699,21 +1114,52 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"DecodeInvoiceAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"DecodeInvoiceAsync Response: {result.Content}");
 
+
+            //check for error object  
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<DecodeInvoiceResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<DecodeInvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"DecodeInvoice Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<DecodeInvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "DecodeInvoice Error",
+                        Type = "DecodeInvoice"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<DecodeInvoiceResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "DecodeInvoice Error",
+                        Type = "DecodeInvoice"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<DecodeInvoiceResponse>(result.Content);
@@ -745,21 +1191,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"DelInvoiceAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"DelInvoiceAsync Response: {result.Content}");
 
+            //check for error object  
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<DeleteInvoiceResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<DeleteInvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"DelInvoice Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<DeleteInvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "DelInvoice Error",
+                        Type = "DelInvoice"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<DeleteInvoiceResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "DelInvoice Error",
+                        Type = "DelInvoice"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<DeleteInvoiceResponse>(result.Content);
@@ -777,7 +1253,7 @@ namespace Bitcoin.Infrastructure
             });
         }
 
-        public  async Task<ResponseCLN<DelexpiredinvoiceResponse>> DelexpiredinvoiceAsync()
+        public async Task<ResponseCLN<DelexpiredinvoiceResponse>> DelexpiredinvoiceAsync()
         {
             var client = new RestClient(_config["Lightning:Sparko:URL"]);
             var request = CreateRestClientRequest();
@@ -791,21 +1267,48 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            Log.Information($"DelexpiredinvoiceAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"DelexpiredinvoiceAsync Response: {result.Content}");
 
+            //check for error object  
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<DelexpiredinvoiceResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<DelexpiredinvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"Delexpiredinvoice Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<DelexpiredinvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Delexpiredinvoice Error",
+                        Type = "Delexpiredinvoice"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<DelexpiredinvoiceResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Delexpiredinvoice Error",
+                        Type = "Delexpiredinvoice"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<DelexpiredinvoiceResponse>(result.Content);
@@ -837,21 +1340,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"DecodePayAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"DecodePayAsync Response: {result.Content}");
 
+            //check for error object  
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<DecodePayResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<DecodePayResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"Delexpiredinvoice Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<DecodePayResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "DecodePay Error",
+                        Type = "DecodePay"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<DecodePayResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "DecodePay Error",
+                        Type = "DecodePay"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<DecodePayResponse>(result.Content);
@@ -883,21 +1416,51 @@ namespace Bitcoin.Infrastructure
 
             var body = writer.ToString();
 
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"PaystatusAsync Request: {body}");
             request.AddParameter("text/plain", body, ParameterType.RequestBody);
             var result = await client.ExecuteAsync(request);
+            Log.Information($"PaystatusAsync Response: {result.Content}");
 
+            //check for error object  
             if (result.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 //check for error object
                 var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
 
-                return await Task.FromResult(new ResponseCLN<PaystatusResponse>
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<PaystatusResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
                 {
-                    Message = errorResponse.Message,
-                    Code = errorResponse.Code,
-                    Name = errorResponse.Name,
-                    Type = errorResponse.Type
-                });
+                    Log.Error(result.ErrorException, $"Paystatus Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<PaystatusResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Paystatus Error",
+                        Type = "Paystatus"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<PaystatusResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Paystatus Error",
+                        Type = "Paystatus"
+                    });
             }
 
             var response = JsonConvert.DeserializeObject<PaystatusResponse>(result.Content);
@@ -909,6 +1472,389 @@ namespace Bitcoin.Infrastructure
                 });
 
             return await Task.FromResult(new ResponseCLN<PaystatusResponse>
+            {
+                Result = response,
+                Message = "Request Successful",
+            });
+        }
+
+        public async Task<ResponseCLN<OfferResponse>> OfferAsync(OfferRequest model)
+        {
+            var client = new RestClient(_config["Lightning:Sparko:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { !string.IsNullOrEmpty(model.amountInSats) ? model.amountInSats : "any",
+                model.description, model.issuer, model.label };
+
+            var writer = new StringWriter();
+            new LNRPCRequest(LNRPCOperations.offer, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+
+            Log.Information($"OfferAsync Request: {body}");
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+            Log.Information($"OfferAsync Response: {result.Content}");
+
+            //check for error object  
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                //check for error object
+                var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
+
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<OfferResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
+                {
+                    Log.Error(result.ErrorException, $"Paystatus Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<OfferResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Offer Error",
+                        Type = "Offer"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<OfferResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Offer Error",
+                        Type = "Offer"
+                    });
+            }
+
+            var response = JsonConvert.DeserializeObject<OfferResponse>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseCLN<OfferResponse>
+                {
+                    Message = "No response from API"
+                });
+
+            return await Task.FromResult(new ResponseCLN<OfferResponse>
+            {
+                Result = response,
+                Message = "Request Successful",
+            });
+        }
+
+        public async Task<ResponseCLN<FetchInvoiceResponse>> FetchInvoiceAsync(FetchInvoiceRequest model)
+        {
+            var client = new RestClient(_config["Lightning:Sparko:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.bolt12 };
+
+            var writer = new StringWriter();
+            new LNRPCRequest(LNRPCOperations.fetchinvoice, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"FetchInvoiceAsync Request: {body}");
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+            Log.Information($"FetchInvoiceAsync Response: {result.Content}");
+
+            //check for error object  
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                //check for error object
+                var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
+
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<FetchInvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
+                {
+                    Log.Error(result.ErrorException, $"Paystatus Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<FetchInvoiceResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Offer Error",
+                        Type = "Offer"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<FetchInvoiceResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Offer Error",
+                        Type = "Offer"
+                    });
+            }
+
+            var response = JsonConvert.DeserializeObject<FetchInvoiceResponse>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseCLN<FetchInvoiceResponse>
+                {
+                    Message = "No response from API"
+                });
+
+            return await Task.FromResult(new ResponseCLN<FetchInvoiceResponse>
+            {
+                Result = response,
+                Message = "Request Successful",
+            });
+        }
+
+        public async Task<ResponseCLN<DecodeOfferResponse>> DecodeOfferAsync(DecodeOfferRequest model)
+        {
+            var client = new RestClient(_config["Lightning:Sparko:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.bolt12 };
+
+            var writer = new StringWriter();
+            new LNRPCRequest(LNRPCOperations.decode, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"DecodeOfferAsync Request: {body}");
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+            Log.Information($"DecodeOfferAsync Response: {result.Content}");
+
+            //check for error object  
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                //check for error object
+                var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
+
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<DecodeOfferResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
+                {
+                    Log.Error(result.ErrorException, $"DecodeOffer Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<DecodeOfferResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "DecodeOffer Error",
+                        Type = "DecodeOffer"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<DecodeOfferResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "DecodeOffer Error",
+                        Type = "DecodeOffer"
+                    });
+            }
+
+            var response = JsonConvert.DeserializeObject<DecodeOfferResponse>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseCLN<DecodeOfferResponse>
+                {
+                    Message = "No response from API"
+                });
+
+            return await Task.FromResult(new ResponseCLN<DecodeOfferResponse>
+            {
+                Result = response,
+                Message = "Request Successful",
+            });
+        }
+
+        public async Task<ResponseCLN<ListPaysResponse>> ListPaysAsync()
+        {
+            var client = new RestClient(_config["Lightning:Sparko:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { };
+
+            var writer = new StringWriter();
+            new LNRPCRequest(LNRPCOperations.listpays, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"ListPays Request: {body}");
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+            Log.Information($"ListPays Response: {result.Content}");
+
+
+
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                //check for error object
+                var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
+
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<ListPaysResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
+                {
+                    Log.Error(result.ErrorException, $"ListPays Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<ListPaysResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "ListPays Error",
+                        Type = "ListPays"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<ListPaysResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "ListPays Error",
+                        Type = "ListPays"
+                    });
+            }
+
+            var response = JsonConvert.DeserializeObject<ListPaysResponse>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseCLN<ListPaysResponse>
+                {
+                    Message = "No response from API"
+                });
+
+            return await Task.FromResult(new ResponseCLN<ListPaysResponse>
+            {
+                Result = response,
+                Message = "Request Successful",
+            });
+        }
+
+        public async Task<ResponseCLN<WithdrawResponse>> WithdrawAsync(WithdrawRequest model)
+        {
+            var client = new RestClient(_config["Lightning:Sparko:URL"]);
+            var request = CreateRestClientRequest();
+
+            //build the objects
+            object[] @params = { model.ReceiveAddress, model.AmountInSats };
+
+            var writer = new StringWriter();
+            new LNRPCRequest(LNRPCOperations.withdraw, @params).WriteJSON(writer);
+            writer.Flush();
+
+            var body = writer.ToString();
+
+            //request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            //var result = await client.ExecuteAsync(request);
+
+            Log.Information($"Withdraw Request: {body}");
+            request.AddParameter("text/plain", body, ParameterType.RequestBody);
+            var result = await client.ExecuteAsync(request);
+            Log.Information($"Withdraw Response: {result.Content}");
+
+            //check for error object  
+            if (result.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                //check for error object
+                var errorResponse = JsonConvert.DeserializeObject<LNError>(result.Content);
+
+                if (errorResponse != null)
+                    return await Task.FromResult(new ResponseCLN<WithdrawResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = errorResponse.Code,
+                        Name = errorResponse.Name,
+                        Type = errorResponse.Type
+                    });
+
+                if (result.ErrorException != null)
+                {
+                    Log.Error(result.ErrorException, $"Withdraw Error:: {result.ErrorException.Message}");
+
+                    //check for error object  
+                    return await Task.FromResult(new ResponseCLN<WithdrawResponse>
+                    {
+                        Message = errorResponse.Message,
+                        Code = 1,
+                        Name = "Withdraw Error",
+                        Type = "Withdraw"
+                    });
+                }
+
+                else
+                    return await Task.FromResult(new ResponseCLN<WithdrawResponse>
+                    {
+                        Message = "There was an error",
+                        Code = 1,
+                        Name = "Withdraw Error",
+                        Type = "Withdraw"
+                    });
+            }
+
+            var response = JsonConvert.DeserializeObject<WithdrawResponse>(result.Content);
+
+            if (response == null)
+                return await Task.FromResult(new ResponseCLN<WithdrawResponse>
+                {
+                    Message = "No response from API"
+                });
+
+            return await Task.FromResult(new ResponseCLN<WithdrawResponse>
             {
                 Result = response,
                 Message = "Request Successful",

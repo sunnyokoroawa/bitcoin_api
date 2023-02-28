@@ -115,5 +115,12 @@
              <param name="model"></param>
              <returns></returns>
         </member>
+        <member name="M:Bitcoin.API.Controller.L2.LightningController.Invoice(Bitcoin.Core.Models.CoreLightning.InvoiceRequest)">
+            <summary>
+            It is possible to generate an invoice without specifyng any amount. 
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
